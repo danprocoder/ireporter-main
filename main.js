@@ -19,6 +19,9 @@ app.post('/login', (req, res) => {
 
 });
 
+// assets
+app.set('assets', __dirname + '/frontend/assets');
+
 // APIs
 // Version 1
 app.get('/api/v1/red-flags', (req, res) => {
@@ -26,5 +29,5 @@ app.get('/api/v1/red-flags', (req, res) => {
 });
 
 const server = app.listen(8001, () => {
-  console.log('Starting server');
+  console.log('Server started :8001');
 });
