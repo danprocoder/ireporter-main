@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
 	controller: function(name) {
 		return require(path.join(__dirname, `controllers/${name}.js`));
