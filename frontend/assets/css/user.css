@@ -1,0 +1,129 @@
+.header-container {
+	padding: 20px 0;
+}
+
+table {
+	width: 100%;
+	border-spacing: 0;
+}
+
+table th {
+	text-align: left;
+	font-size: 14px;
+	border-top: 1px solid #dfdfdf;
+	border-bottom: 1px solid #dfdfdf;
+	padding: 9px 0;
+}
+
+table td {
+	border-top: 1px solid #dfdfdf;
+	padding: 9px 0;
+}
+
+.record-status {
+	display: inline-block;
+	border-width: 1px;
+	border-radius: 30px;
+	border-style: solid;
+	padding: 4px 8px;
+	font-size: 12px;
+}
+
+.record-status.pending {
+	border-color: gray;
+	color: gray;
+}
+
+.record-status.under-investigation {
+	border-color: blue;
+	color: blue;
+}
+
+.record-status.resolved {
+	border-color: green;
+	color: green;
+}
+
+.record-status.rejected {
+	border-color: red;
+	color: red;
+}
+
+.record-status .dropdown-menu {
+	background: #ffffff;
+	border: 1px solid #dfdfdf;
+	border-radius: 3px;
+	top: 103%;
+	width: 180px;
+}
+
+table .action {
+	font-size: 14px;
+	margin-right: 8px;
+}
+
+table .action.red {
+		color: red;
+}
+
+table .action.blue {
+	color: blue;
+}
+
+.no-select {
+	user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-wekbit-user-select: none;
+	-o-user-select: none;
+}
+
+.pagination li,
+.pagination li a {
+	display: inline-block;
+	box-sizing: border-box;
+}
+
+.pagination li a {
+	background: #e7e7e7;
+	color: blue;
+	padding: 5px 9px;
+	border-radius: 3px;
+}
+
+.pagination li.active a {
+	border: 1px solid blue;
+	color: blue;
+	background: #ffffff;
+}
+
+.pagination li a:hover {
+	background: blue;
+	color: #ffffff;
+}
+
+.pagination li {
+	margin-left: 3px;
+}
+
+.tab li,
+.tab li a {
+	display: inline-block;
+	padding: 0 0 4px 0;
+}
+
+.tab li.active a {
+	background: #429ed4;
+    color: #fff;
+    padding: 3px 9px;
+    border-radius: 30px;
+}
+
+.tab li {
+	margin-right: 10px;
+}
+
+.tab li a {
+	color: #444;
+	font-size: 13px;
+}

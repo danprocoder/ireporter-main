@@ -1,0 +1,45 @@
+.widget-container {
+	margin-top: 10px;
+}
+
+.widget {
+	float: left;
+	border: 2px solid #f4f4f4;
+	border-radius: 6px;
+	background: #fff;
+}
+
+.widget.right {
+	float: right;
+}
+
+.widget.counter {
+	width: 180px;
+	padding: 18px;
+	margin-right: 10px;
+}
+
+.widget.counter .num {
+	font-size: 38px;
+	position: relative;
+	top: 3px;
+	font-weight: bold;
+}
+
+.widget.counter .text {
+	margin-top: 9px;
+	color: #777;
+	font-size: 14px;
+}
+
+.widget.counter.gray .num {
+	color: gray;
+}
+
+.widget.counter.blue .num {
+	color: #005ec1;
+}
+
+.widget.counter.green .num {
+	color: #69ca69;
+}

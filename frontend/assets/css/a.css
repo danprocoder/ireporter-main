@@ -1,0 +1,29 @@
+body {
+	background: url('../images/bedge-grunge.png');
+}
+
+form .info {
+	margin-top: 9px;
+	display: inline-block;
+}
+
+form {
+	margin: 0 auto;
+	border: 1px solid #dfdfdf;
+	background: #fff;
+	border-radius: 4px;
+	margin-top: 40px;
+	padding: 25px 20px;
+}
+
+form.login {
+	width: 400px;
+}
+
+form.signup {
+	width: 600px;
+}
+
+.header-container {
+	margin-bottom: 40px;
+}

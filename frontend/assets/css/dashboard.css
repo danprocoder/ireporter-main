@@ -1,0 +1,13 @@
+.gray-bg {
+	background: #f5f5f5;
+	padding: 20px;
+	border-radius: 3px;
+}
+
+.gray-bg .button {
+	margin-top: 15px;
+}
+
+.gray-bg p {
+	line-height: 150%;
+}

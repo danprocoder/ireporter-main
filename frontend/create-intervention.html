@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create an Intervention | iReporter</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/ireporter.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/navbar2.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/user.css" />
+
+	<script src="assets/js/ireporter.js"></script>
+</head>
+<body>
+	<div class="red-bg">
+		<div class="container">
+			<div id="navbar">
+				<a href="dashboard.html" class="sitename">iReporter</a>
+				<div class="navbar-menu">
+					<ul>
+						<li><a href="red-flags.html">Red Flags</a></li>
+						<li><a href="interventions.html">Interventions</a></li>
+						<li class="dropdown">
+							<a href="#">Account <i class="fa fa-caret-down"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="profile.html">My Profile</a></li>
+								<li><a href="index.html">Log out</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="container">
+			<div class="header-container">
+				<div class="header">Create an Intervention</div>
+				<div style="margin-top:9px;"><small><span class="required">*</span> Required fields</small></div>
+			</div>
+			<div>
+				<form role="form">
+					<div class="field-section">
+						<label>Title <span class="required">*</span></label>
+						<input type="text" name="title" class="text-field" />
+					</div>
+					<div class="field-section">
+						<label>Comment <span class="required">*</span></label>
+						<textarea name="title" class="text-field" rows="14"></textarea>
+					</div>
+					<div class="form-section">
+						<div class="form-section-header"><i class="fa fa-map-marker"></i> Add Geo Location</div>
+						<div class="form-section-body grid-container">
+							<div class="grid-10">
+								<label>Lat</label>
+								<input type="text" name="lat" class="text-field" />
+							</div>
+							<div class="grid-10">
+								<label>Long</label>
+								<input type="text" name="long" class="text-field" />
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+					<div class="field-section">
+						<a href="interventions.html" class="button">Create an Intervention</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

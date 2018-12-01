@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Interventions | iReporter</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/ireporter.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/navbar2.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/user.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/records.css" />
+
+	<script src="assets/js/ireporter.js"></script>
+</head>
+<body>
+	<div class="red-bg">
+		<div class="container">
+			<div id="navbar">
+				<a href="dashboard.html" class="sitename">iReporter</a>
+				<div class="navbar-menu">
+					<ul>
+						<li><a href="red-flags.html">Red Flags</a></li>
+						<li><a href="interventions.html">Interventions</a></li>
+						<li class="dropdown">
+							<a href="#">Account <i class="fa fa-caret-down"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="profile.html">My Profile</a></li>
+								<li><a href="index.html">Log out</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="container">
+			<div class="header-container">
+				<div class="f-left">
+					<span class="header">Interventions</span>
+					<a href="create-intervention.html" class="button small" style="margin-left:20px;"><i class="fa fa-plus"></i> Create an Intervention</a>
+				</div>
+				<div class="f-right"></div>
+				<div class="clearfix"></div>
+			</div>
+			<div>
+				<ul class="tab f-left">
+					<li><a href="#">Pending</a></li>
+					<li><a href="#">Resolved</a></li>
+					<li><a href="#">Under Investigation</a></li>
+					<li><a href="#">Rejected</a></li>
+					<li class="active"><a href="#">All</a></li>
+				</ul>
+				<div class="f-right">
+					Showing 1 - 5 of 5
+					<div class="search-box">
+						<input type="text" placeholder="Search title" name="q" class="text-field" />
+						<button><i class="fa fa-search"></i></button>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="content">
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<th>#</th>
+							<th>Title</th>
+							<th>Created At</th>
+							<th>Status</th>
+							<th>Action</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>Lots of pot holes on the road in some place</td>
+								<td>11:08:45 11-12-2018</td>
+								<td><span class="record-status pending no-select">IN DRAFT</span></td>
+								<td>
+									<a href="view-intervention.html" class="action blue"><i class="fa fa-eye"></i> View</a>
+									<a href="#" class="action blue"><i class="fa fa-pencil"></i> Edit</a>
+									<a href="#" class="action red"><i class="fa fa-trash"></i> Delete</a>
+								</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>Lots of pot holes on the road in some place</td>
+								<td>11:08:45 11-12-2018</td>
+								<td><span class="record-status pending no-select">IN DRAFT</span></td>
+								<td>
+									<a href="view-intervention.html" class="action blue"><i class="fa fa-eye"></i> View</a>
+									<a href="#" class="action blue"><i class="fa fa-pencil"></i> Edit</a>
+									<a href="#" class="action red"><i class="fa fa-trash"></i> Delete</a>
+								</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>Lots of pot holes on the road in some place</td>
+								<td>11:08:45 11-12-2018</td>
+								<td><span class="record-status resolved no-select">RESOLVED</span></td>
+								<td>
+									<a href="view-intervention.html" class="action blue"><i class="fa fa-eye"></i> View</a>
+								</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>Lots of pot holes on the road in some place</td>
+								<td>11:08:45 11-12-2018</td>
+								<td><span class="record-status under-investigation no-select">UNDER INVESTIGATION</span></td>
+								<td>
+									<a href="view-intervention.html" class="action blue"><i class="fa fa-eye"></i> View</a>
+								</td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>Lots of pot holes on the road in some place</td>
+								<td>11:08:45 11-12-2018</td>
+								<td><span class="record-status rejected no-select">REJECTED</span></td>
+								<td>
+									<a href="view-intervention.html" class="action blue"><i class="fa fa-eye"></i> View</a>
+								</td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td>Lots of pot holes on the road in some place</td>
+								<td>11:08:45 11-12-2018</td>
+								<td><span class="record-status rejected no-select">REJECTED</span></td>
+								<td>
+									<a href="view-intervention.html" class="action blue"><i class="fa fa-eye"></i> View</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="pagination-wrapper">
+					<ul class="pagination f-right">
+						<li class="active"><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li>...</li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</div>	
+		</div>
+	</div>
+</body>
+</html>

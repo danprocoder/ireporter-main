@@ -1,0 +1,30 @@
+.welcome-text-container {
+	padding: 100px;
+}
+
+.welcome-text-container .large-text {
+	font-size: 47px;
+	font-weight: bold;
+}
+
+.welcome-text-container .large-text span {
+	color: #fff;
+}
+
+.welcome-text-container .info-text {
+	margin-top: 26px;
+	line-height: 140%;
+	font-size: 17px;
+}
+
+.section.features {
+	padding-top: 30px;
+}
+
+.section.features .grid-container {
+	margin-top: 30px;
+}
+
+.section.features .content {
+	margin-top: 15px;
+}

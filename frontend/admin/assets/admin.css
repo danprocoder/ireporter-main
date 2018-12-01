@@ -1,0 +1,97 @@
+.sidenav {
+	width: 250px;
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	background: #af2a2a;
+}
+
+
+.sidenav .sitename a {
+	height: 50px;
+	line-height: 50px;
+	background: #9e1b1b;
+	display: block;
+	color: yellow;
+	padding: 0 10px;
+}
+
+.sidenav .sidenav-menus {
+	font-size: 18px;
+	margin-top: 18px;
+}
+
+.sidenav .sidenav-menus a {
+	color: #b1afaf;
+	display: block;
+	padding: 15px 10px;
+}
+
+.sidenav .sidenav-menus li.active a {
+	background: #901a1a;
+	color: #ffffff;
+}
+
+.main-content {
+	margin-left: 250px;
+	padding-top: 50px;
+}
+
+.main-content .navbar {
+	height: 50px;
+	line-height: 50px;
+	background: #f54343;
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 999999;
+	left: 250px;
+}
+
+.main-content .navbar .dropdown-menu {
+	width: 180px;
+}
+
+.main-content .navbar .dropdown-menu .bio {
+	line-height: 100%;
+	padding: 12px 8px;
+	border-bottom: 1px solid #dfdfdf;
+	font-weight: 700;
+}
+
+.main-content .navbar .dropdown-menu a {
+	line-height: 100%;
+}
+
+body {
+	background: #fdfdfd !important;
+}
+
+.main-content .navbar {
+	padding: 0 20px;
+}
+
+.main-content .navbar a {
+	color: #ffffff;
+}
+
+.main-content .content {
+	padding: 10px 20px;
+}
+
+.main-content .content .p {
+	margin-top: 20px;
+}
+
+.main-content .content .navigation.header {
+	margin-top: 10px;
+}
+
+.search-box {
+	display: inline-block;
+}
+
+table td .status {
+	cursor: pointer;
+}
