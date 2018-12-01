@@ -1,4 +1,6 @@
 const express = require('express');
+const path = require('path');
+
 const app = express();
 
 app.get('/', (req, res) => {
@@ -20,7 +22,7 @@ app.post('/login', (req, res) => {
 });
 
 // assets
-app.set('assets', __dirname + '/frontend/assets');
+app.use(express.static(path.join(__dirname, 'frontend/assets')));
 
 // APIs
 // Version 1
