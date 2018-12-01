@@ -22,7 +22,7 @@ app.post('/login', (req, res) => {
 });
 
 // assets
-app.use(express.static(path.join(__dirname, 'frontend/assets')));
+app.use(express.static(path.join(__dirname, 'frontend')));
 
 // APIs
 // Version 1
