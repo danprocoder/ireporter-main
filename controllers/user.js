@@ -2,12 +2,12 @@
 
 class User {
   
-  auth() {
-    
+  auth(req, res) {
+    res.end('Auth function called');
   }
 
-  addUser() {
-    
+  addUser(req, res) {
+    res.end('Auth function called');
   }
 }
 
