@@ -30,11 +30,11 @@ export default {
 		mobile = req.body.mobile;
 
 	let id = userData.insert({
-		firstname,
-		lastname,
-		email,
-		mobile,
-		password
+		'firstname': firstname,
+		'lastname': lastname,
+		'email': email,
+		'mobile': mobile,
+		'password': password
 	});
     return response.success({
 		'id': id
