@@ -78,12 +78,12 @@
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				firstname: form['firstname'],
-				lastname: form['lastname'],
-				email: form['email'],
-				mobile: form['mobile'],
-				password: form['password'],
-				password2: form['password2']
+				firstname: form['firstname'].value,
+				lastname: form['lastname'].value,
+				email: form['email'].value,
+				mobile: form['mobile'].value,
+				password: form['password'].value,
+				password2: form['password2'].value
 			})
 		}).then(res => {
 			return res.json();
