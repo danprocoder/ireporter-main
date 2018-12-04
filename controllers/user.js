@@ -1,9 +1,14 @@
-module.exports = {
-	addUser: function(req, res) {
-		res.end('Adding user');
-	},
+'use strict';
 
-	auth: function(req, res) {
-		res.end('Authenticating user');
-	}
-};
+class User {
+  
+  auth() {
+    
+  }
+
+  addUser() {
+    
+  }
+}
+
+export default User;
