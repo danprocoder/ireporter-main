@@ -3,11 +3,12 @@
 import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
-import Loader from './loader.js';
+import load from './loader.js';
 
 const app = express();
-const load = new Loader();
 const urlEncodedParser = bodyParser.urlencoded({extended: false});
+
+console.log(load.controller('user'));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend/index.html'));
@@ -16,12 +17,10 @@ app.get('/', (req, res) => {
 app.get('/signup', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend/signup.html'));
 });
-app.post('/signup', urlEncodedParser, load.controller('user').addUser);
 
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend/login.html'));
 });
-app.post('/login', urlEncodedParser, load.controller('user').auth);
 
 // assets
 app.use(express.static(path.join(__dirname, 'frontend')));
@@ -31,7 +30,20 @@ app.use(express.static(path.join(__dirname, 'frontend')));
  *
  * @version 1.0
  */
-// Version 1
+
+// User signup
+app.post('/api/v1/user/new', urlEncodedParser, (req, res) => {
+  let a = load.controller('user').addUser(req, res);
+  res.send(a);
+});
+
+// User login.
+app.post('/api/v1/user/auth', urlEncodedParser, (req, res) => {
+  let a = load.controller('user').auth(req, res);
+  res.send(a);
+});
+
+// Get all red flags.
 app.get('/api/v1/red-flags', (req, res) => {
 
 });
