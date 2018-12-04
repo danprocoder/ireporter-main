@@ -7,7 +7,7 @@ export default {
       'status': 200,
       'data': data instanceof Array ? data : [data]
     }
-  }
+  },
 
   fail: function(message) {
     return {
