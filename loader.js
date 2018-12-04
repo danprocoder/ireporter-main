@@ -1,11 +1,14 @@
-const path = require('path');
+import path from 'path';
 
-module.exports = {
-	controller: function(name) {
+class Loader {
+	
+	controller(name) {
 		return require(path.join(__dirname, `controllers/${name}.js`));
-	},
+	}
 
-	library: function(name) {
+	library(name) {
 		return require(path.join(__dirname, `libraries/${name}.js`));
 	}
 }
+
+export default Loader;

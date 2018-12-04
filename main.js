@@ -1,9 +1,12 @@
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
-const load = require('./loader.js');
+'use strict';
+
+import express from 'express';
+import path from 'path';
+import bodyParser from 'body-parser';
+import Loader from './loader.js';
 
 const app = express();
+const load = new Loader();
 const urlEncodedParser = bodyParser.urlencoded({extended: false});
 
 app.get('/', (req, res) => {
