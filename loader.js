@@ -1,14 +1,16 @@
 import path from 'path';
 
-class Loader {
+export default {
 	
-	controller(name) {
-		return require(path.join(__dirname, `controllers/${name}.js`));
-	}
+	controller: function(name) {
+		return this._getObject('controllers', name);
+	},
 
-	library(name) {
-		return require(path.join(__dirname, `libraries/${name}.js`));
+	library: function(name) {
+		return this._getObject('libraries', name);
+	},
+
+	_getObject: function(folder, name) {
+		return require(path.join(__dirname, `${folder}/${name}.js`)).default;
 	}
 }
-
-export default Loader;
