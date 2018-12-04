@@ -23,7 +23,7 @@
 		</div>
 	</div>
 	<div>
-		<form role="form" class="signup" action="/signup" method="post">
+		<form role="form" class="signup" id="signup-form" onsubmit="submitForm(event)" method="post">
 			<div class="header-container t-center">
 				<div class="header">Sign Up</div>
 				<small class="info">All fields are required</small>
@@ -54,11 +54,11 @@
 				<div class="field-section grid-container">
 					<div class="grid-50">
 						<label>Your Password</label>
-						<input type="password" name="firstname" class="text-field" />
+						<input type="password" name="password" class="text-field" />
 					</div>
 					<div class="grid-50">
 						<label>Re-enter Password</label>
-						<input type="password" name="lastname" class="text-field" />
+						<input type="password" name="password2" class="text-field" />
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -68,5 +68,26 @@
 			</div>
 		</form>
 	</div>
+	<script>
+	function submitForm(event) {
+		var form = document.getElementById('signup-form').elements;
+
+		fetch('/api/v1/user/new', {
+			method: 'POST',
+			body: JSON.stringify({
+				firstname: form['firstname'],
+				lastname: form['lastname'],
+				email: form['email'],
+				mobile: form['mobile'],
+				password: form['password'],
+				password2: form['password2']
+			})
+		}).then(function(data) {
+			console.log(data);
+		});
+
+		event.preventDefault();
+	}
+	</script>
 </body>
 </html>
