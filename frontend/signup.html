@@ -82,6 +82,8 @@
 				password: form['password'],
 				password2: form['password2']
 			})
+		}).then(res => {
+			return res.json();
 		}).then(function(data) {
 			console.log(data);
 		});
