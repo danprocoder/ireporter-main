@@ -1,11 +1,16 @@
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
+	
 	controller: function(name) {
-		return require(path.join(__dirname, `controllers/${name}.js`));
+		return this._getObject('controllers', name);
 	},
 
 	library: function(name) {
-		return require(path.join(__dirname, `libraries/${name}.js`));
+		return this._getObject('libraries', name);
+	},
+
+	_getObject: function(folder, name) {
+		return require(path.join(__dirname, `${folder}/${name}.js`)).default;
 	}
 }
