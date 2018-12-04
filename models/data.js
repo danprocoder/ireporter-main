@@ -57,7 +57,7 @@ class Data {
             console.log(this.data[id][field]);
             console.log(this.conditions[field]);
             if (this.data[id][field] != this.conditions[field]) {
-                pass = false;console.log('breaking');
+                pass = false;
                 break;
             }
         }
