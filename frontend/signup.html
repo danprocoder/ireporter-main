@@ -74,9 +74,6 @@
 
 		fetch('/api/v1/user/new', {
 			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
 			body: JSON.stringify({
 				firstname: form['firstname'],
 				lastname: form['lastname'],
