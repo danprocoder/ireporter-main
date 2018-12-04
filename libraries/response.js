@@ -9,7 +9,7 @@ export default {
     }
   }
 
-  fail(message) {
+  fail: function(message) {
     return {
       'status': 404,
       'error': message
