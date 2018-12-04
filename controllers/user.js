@@ -20,6 +20,8 @@ export default {
 		email = req.body.email,
 		password = req.body.password;
 
+	console.log(req.body);
+
 	let id = userData.insert({
 		firstname: req.body.firstname.toLowerCase(),
 		lastname: req.body.lastname.toLowerCase(),
