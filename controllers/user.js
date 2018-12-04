@@ -25,7 +25,8 @@ export default {
 	let firstname = req.body.firstname,
 		lastname = req.body.lastname,
 		email = req.body.email,
-		password = req.body.password;
+		password = req.body.password,
+		mobile = req.body.mobile;
 
 	let id = userData.insert({
 		firstname,
