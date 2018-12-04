@@ -8,7 +8,7 @@ import load from './loader.js';
 const app = express();
 const urlEncodedParser = bodyParser.urlencoded({extended: false});
 
-console.log(load.controller('user'));
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend/index.html'));
