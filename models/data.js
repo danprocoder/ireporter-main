@@ -5,39 +5,49 @@ import path from 'path';
 
 class Data {
   constructor(name) {
-    var relPath = path.join(__dirname, 'data');
+    let relPath = path.join(__dirname, 'data');
 
     if (!fileSystem.existsSync(relPath)) {
       mkdirSync(relPath);
     }
 
-    var filePath = path.join(relPath, name);
-    if (!fileSystem.existsSync(filePath)) {
-        fileSystem.writeFileSync(filePath, '{}');
+    this.filePath = path.join(relPath, name);
+    if (!fileSystem.existsSync(this.filePath)) {
+        fileSystem.writeFileSync(this.filePath, '{}');
         this.data = {};
     } else {
-        let data = fileSystem.readFileSync(filePath);
+        let data = fileSystem.readFileSync(this.filePath);
         this.data = JSON.parse(data);
     }
   }
 
   insert(data) {
+    let id = this.data.keys().length + 1;
+    this.data[id] = data;
+    this._commit();
+    return id;
   }
 
-  update() {
-
+  update(id, data) {
+    this.data[id] = data;
+    this._commit();
   }
 
   delete(id) {
-
+    delete this.data[id];
+    this._commit();
   }
 
   getAll() {
-
+    return this.data;
   }
 
   get(id) {
+    return this.data[id];
+  }
 
+  _commit() {
+    fileSystem.writeFileSync(this.filePath, JSON.stringify(this.data));
   }
 }
 
