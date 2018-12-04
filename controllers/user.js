@@ -10,8 +10,15 @@ export default {
   
   auth: (req, res) => {
 	let email = req.body.email,
-		password = req.body.password;
-    return response.success({'id':200});
+		password = req.body.password,
+		user = userData.init().where('email', email).first();
+	if (user == null) {
+      return response.fail('Email address not registered');
+	} else if (password != user.password) {
+		return response.fail('Password is incorrect');
+	} else {
+		return response.success();
+	}
   },
 
   addUser: (req, res) => {
@@ -20,14 +27,12 @@ export default {
 		email = req.body.email,
 		password = req.body.password;
 
-	console.log(req.body);
-
 	let id = userData.insert({
-		firstname: req.body.firstname.toLowerCase(),
-		lastname: req.body.lastname.toLowerCase(),
-		email: req.body.email.toLowerCase(),
-		mobile: req.body.mobile,
-		password: req.body.password,
+		firstname,
+		lastname,
+		email,
+		mobile,
+		password
 	});
     return response.success({
 		'id': id
