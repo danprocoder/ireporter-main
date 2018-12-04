@@ -22,6 +22,9 @@ class Data {
   }
 
   insert(data) {
+    let id = this.data.keys().length + 1;
+    this.data[id] = data;
+    return id;
   }
 
   update() {
