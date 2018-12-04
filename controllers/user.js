@@ -12,6 +12,7 @@ export default {
 	let email = req.body.email,
 		password = req.body.password,
 		user = userData.init().where('email', email).first();
+		console.log(user);
 	if (user == null) {
       return response.fail('Email address not registered');
 	} else if (password != user.password) {
