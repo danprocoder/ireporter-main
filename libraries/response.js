@@ -1,7 +1,8 @@
 'use strict';
 
-class Response {
-  success(data) {
+export default {
+  
+  success: function(data) {
     return {
       'status': 200,
       'data': data instanceof Array ? data : [data]
