@@ -1,5 +1,6 @@
 .welcome-text-container {
 	padding: 100px;
+	color: #fff
 }
 
 .welcome-text-container .large-text {
@@ -8,13 +9,13 @@
 }
 
 .welcome-text-container .large-text span {
-	color: #fff;
+	color: #ff0;
 }
 
 .welcome-text-container .info-text {
-	margin-top: 26px;
-	line-height: 140%;
-	font-size: 17px;
+	margin-top: 48px;
+    line-height: 165%;
+    font-size: 17px;
 }
 
 .section.features {
