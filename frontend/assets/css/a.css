@@ -18,10 +18,12 @@ form {
 
 form.login {
 	width: 400px;
+	margin-top: 8.6%;
 }
 
 form.signup {
 	width: 600px;
+	margin-top: 5.5%;
 }
 
 .header-container {
