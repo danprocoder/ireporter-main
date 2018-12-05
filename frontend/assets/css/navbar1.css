@@ -1,4 +1,15 @@
+.navbar-inner {
+	height: 37px;
+    line-height: 37px;
+}
+
 #navbar .navbar-menu li a {
-	padding: 10px 11px;
-	border: 1px solid #f19494;
+	border: 1px solid #f77;
+	height: 37px;
+	padding: 0 11px;
+}
+
+.navbar-container {
+    width: auto;
+    padding: 0 6%;
 }
