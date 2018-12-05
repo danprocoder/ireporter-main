@@ -67,11 +67,11 @@ table td {
 
 table .action {
 	font-size: 14px;
-	margin-right: 8px;
+	margin-right: 14px;
 }
 
 table .action.red {
-		color: red;
+	color: red;
 }
 
 table .action.blue {
