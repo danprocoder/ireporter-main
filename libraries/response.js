@@ -1,7 +1,7 @@
 'use strict';
 
 export default {
-  
+
   success: function(data) {
     return {
       'status': 200,
@@ -11,7 +11,7 @@ export default {
 
   fail: function(message) {
     return {
-      'status': 404,
+      'status': 400,
       'error': message
     };
   }

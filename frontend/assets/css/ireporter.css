@@ -161,13 +161,13 @@ textarea {
 /* button */
 .button {
 	display: inline-block;
-	padding: 12px 17px;
-	background: #ff385d;
-	border: none;
-	outline: none;
-	color: #fff;
-	font-size: 14px;
-	transition: background 0.3s;
+    padding: 12px 17px;
+    background: #ef3b3b;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 16px;
+    transition: background 0.3s;
 }
 
 .button.small {
@@ -202,7 +202,7 @@ form label {
 }
 
 .text-field:focus {
-	border-color: #bbbbbb;
+	border-color: #9f9f9f;
 }
 
 form .field-section {
