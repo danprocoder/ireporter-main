@@ -28,13 +28,13 @@ app.use(express.static(path.join(__dirname, 'frontend')));
  */
 
 // User signup
-app.post('/api/v1/user/new', urlEncodedParser, (req, res) => {
+app.post('/api/v1/user/new', (req, res) => {
   let a = load.controller('user').addUser(req, res);
   res.send(a);
 });
 
 // User login.
-app.post('/api/v1/user/auth', urlEncodedParser, (req, res) => {
+app.post('/api/v1/user/auth', (req, res) => {
   let a = load.controller('user').auth(req, res);
   res.send(a);
 });
