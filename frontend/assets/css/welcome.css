@@ -26,6 +26,11 @@
 	margin-top: 30px;
 }
 
+.section.features .header {
+	color: #8e8e8e;
+}
+
 .section.features .content {
-	margin-top: 15px;
+	margin-top: 22px;
+	font-size: 17px;
 }
