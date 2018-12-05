@@ -1,9 +1,9 @@
-#ireporter-main
+# ireporter-main
 
-##Project Description
+## Project Description
 Corruption is a huge bane to Africa’s development. African countries must develop novel andlocalised solutions that will curb this menace, hence the birth of iReporter. iReporter enablesany/every citizen to bring any form of corruption to the notice of appropriate authorities and thegeneral public. Users can also report on things that needs government intervention.
 
-##Project Features
+## Project Features
 1. Users can create an account and log in.
 2. Users can create a ​red-flag ​​record (An incident linked to corruption).
 3. Users can create ​intervention​​ record​​​(a call for a government agency to intervene e.grepair bad road sections, collapsed bridges, flooding e.t.c).
@@ -13,14 +13,14 @@ Corruption is a huge bane to Africa’s development. African countries must deve
 7. Users can change the geolocation (Lat Long Coordinates) attached to their ​red-flag ​​orintervention ​​records​.
 8. Admin can change the ​status​​ of a record to either ​under investigation, rejected ​​(in theevent of a false claim)​​​or​ resolved ​​(in the event that the claim has been investigated and resolved)​.
 
-##How to Use
+## How to Use
 1. Clone this repository to your local machine 
 2. Run `npm install` to install the dependencies
 3. Run `npm start` to start the application
 
-##Testing
+## Testing
 Run `npm test` to test the API endpoints
 
-##About this Project
+## About this Project
 UI Templates: https://danprocoder.github.io/ireporter
 Pivotal Tracker: https://www.pivotaltracker.com/n/projects/2226635
