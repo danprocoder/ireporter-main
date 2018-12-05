@@ -1,14 +1,10 @@
-'use strict';
-
 import express from 'express';
 import path from 'path';
-import bodyParser from 'body-parser';
 import load from './loader.js';
 
 const app = express();
-const urlEncodedParser = bodyParser.urlencoded({extended: false});
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend/index.html'));
@@ -32,13 +28,13 @@ app.use(express.static(path.join(__dirname, 'frontend')));
  */
 
 // User signup
-app.post('/api/v1/user/new', urlEncodedParser, (req, res) => {
+app.post('/api/v1/user/new', (req, res) => {
   let a = load.controller('user').addUser(req, res);
   res.send(a);
 });
 
 // User login.
-app.post('/api/v1/user/auth', urlEncodedParser, (req, res) => {
+app.post('/api/v1/user/auth', (req, res) => {
   let a = load.controller('user').auth(req, res);
   res.send(a);
 });
