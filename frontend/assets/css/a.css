@@ -3,7 +3,7 @@ body {
 }
 
 form .info {
-	margin-top: 9px;
+	margin-top: 15px;
 	display: inline-block;
 }
 
@@ -26,4 +26,8 @@ form.signup {
 
 .header-container {
 	margin-bottom: 40px;
+}
+
+form .button-section {
+	margin-top: 30px;
 }
