@@ -1,5 +1,5 @@
 .sidenav {
-	width: 250px;
+	width: 220px;
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -10,31 +10,35 @@
 
 .sidenav .sitename a {
 	height: 50px;
-	line-height: 50px;
-	background: #9e1b1b;
-	display: block;
-	color: yellow;
-	padding: 0 10px;
+    line-height: 50px;
+    background: #de3838;
+    display: block;
+    color: yellow;
+    padding: 0 10px;
+    border-bottom: 1px solid #e8e802;
 }
 
 .sidenav .sidenav-menus {
-	font-size: 18px;
+	font-size: 16px;
 	margin-top: 18px;
 }
 
 .sidenav .sidenav-menus a {
-	color: #b1afaf;
+	color: #ffffff;
 	display: block;
 	padding: 15px 10px;
 }
 
+.sidenav .sidenav-menus a:hover {
+	background-color: #a22727;
+}
+
 .sidenav .sidenav-menus li.active a {
 	background: #901a1a;
-	color: #ffffff;
 }
 
 .main-content {
-	margin-left: 250px;
+	margin-left: 220px;
 	padding-top: 50px;
 }
 
@@ -46,7 +50,7 @@
 	top: 0;
 	right: 0;
 	z-index: 999999;
-	left: 250px;
+	left: 220px;
 }
 
 .main-content .navbar .dropdown-menu {
@@ -77,15 +81,15 @@ body {
 }
 
 .main-content .content {
-	padding: 10px 20px;
+	padding: 0px 20px;
 }
 
 .main-content .content .p {
-	margin-top: 20px;
+	margin-top: 30px;
 }
 
 .main-content .content .navigation.header {
-	margin-top: 10px;
+	font-size: 17px;
 }
 
 .search-box {

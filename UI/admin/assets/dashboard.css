@@ -15,8 +15,8 @@
 
 .widget.counter {
 	width: 180px;
-	padding: 18px;
-	margin-right: 10px;
+	padding: 26px;
+	margin-right: 26px;
 }
 
 .widget.counter .num {
@@ -27,7 +27,7 @@
 }
 
 .widget.counter .text {
-	margin-top: 9px;
+	margin-top: 18px;
 	color: #777;
 	font-size: 14px;
 }
@@ -42,4 +42,10 @@
 
 .widget.counter.green .num {
 	color: #69ca69;
+}
+
+.p .label {
+	font-weight: bold;
+	color: #777;
+	font-size: 13px;
 }

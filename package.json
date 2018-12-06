@@ -19,7 +19,7 @@
   },
   "scripts": {
     "test": "null",
-    "start": "nodemon --exec babel-node --presets env ./main.js"
+    "start": "nodemon --exec babel-node --presets env ./api-endpoints/main.js"
   },
   "repository": {
     "type": "git",

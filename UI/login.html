@@ -32,36 +32,60 @@
 			<div class="field-section">
 				<label>Your Email</label>
 				<input type="text" name="email" class="text-field" />
+				<div class="error email"></div>
 			</div>
 			<div class="field-section">
 				<label>Your Password</label>
 				<input type="password" name="password" class="text-field" />
+				<div class="error password"></div>
 			</div>
-			<div class="field-section button-section">
-				<a href="dashboard.html" class="button">Log In</a>
-				<!-- <input type="submit" class="button" value="Log In" /> -->
+			<div class="field-section t-center button-section">
+				<!-- <a href="dashboard.html" class="button">Log In</a> -->
+				<input type="submit" class="button" value="Log In" />
 			</div>
 		</form>
 	</div>
 
+	<script src="assets/js/validator.js"></script>
 	<script>
 	function authUser(event) {
-	  let form = document.getElementById('login-form');
-	  fetch('/api/v1/user/auth', {
-		  method: 'POST',
-		  headers: {
-			  'Content-Type': 'application/json'
-		  },
-		  body: JSON.stringify({
-			email: form['email'].value,
-			password: form['password'].value
-		  })
-	  }).then(res => 
-		  res.json()).then((data) => {
-		console.log(data);
-	  });
-
 	  event.preventDefault();
+
+	  var errors = document.querySelectorAll('#login-form .error');
+	  for (let i = 0; i < errors.length; i++) {
+	  	errors[i].innerHTML = '';
+	  	errors[i].classList.remove('show');
+	  }
+
+      const validator = new FormValidator('login-form'),
+      		rules = {
+      			'email': ['required'],
+      			'password': ['required']
+      		};
+      if (validator.validate(rules)) {
+      	window.location = './dashboard.html';
+   //    	let form = document.getElementById('login-form');
+	  //   fetch('/api/v1/user/auth', {
+		 //  method: 'POST',
+		 //  headers: {
+			//   'Content-Type': 'application/json'
+		 //  },
+		 //  body: JSON.stringify({
+			// email: form['email'].value,
+			// password: form['password'].value
+		 //  })
+	  //   }).then(res => 
+		 //  res.json()).then((data) => {
+		 //  console.log(data);
+	  //   });
+      } else {
+      	const errors = validator.getErrors();
+      	for (const name in errors) {
+      	  const errMessage = document.querySelector('#login-form .error.' + name);
+      	  errMessage.innerHTML = errors[name];
+      	  errMessage.classList.add('show');
+      	}
+      }
 	}
 	</script>
 </body>
