@@ -34,6 +34,7 @@ class Model {
 
   insert(data) {
     const id = Object.keys(this.data).length + 1;
+    data['id'] = id;
     this.data[id] = data;
     this._commit();
     return id;
