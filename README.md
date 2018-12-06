@@ -22,5 +22,5 @@ Corruption is a huge bane to Africa’s development. African countries must deve
 Run `npm test` to test the API endpoints
 
 ## About this Project
-UI Templates: https://danprocoder.github.io/ireporter
+UI Templates: https://danprocoder.github.io/ireporter-main
 Pivotal Tracker: https://www.pivotaltracker.com/n/projects/2226635
