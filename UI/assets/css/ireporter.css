@@ -187,6 +187,20 @@ form label {
 	display: inline-block;
 }
 
+form .error {
+	color: red;
+    font-size: 11px;
+    margin-top: 4px;
+    background: #fdf3f3;
+    padding: 0 4px;
+    border-radius: 4px;
+    display: none;
+}
+
+form .error.show {
+	display: inline-block;
+}
+
 .required {
 	font-weight: normal;
 	color: #f00;
