@@ -5,7 +5,6 @@ import apiRouter from './src/routes/api';
 const app = express();
 
 app.use(apiRouter);
-app.use(express.json());
 app.use(express.static(path.join(__dirname, '../UI')));
 
 app.listen(process.env.PORT || 8001, () => {
