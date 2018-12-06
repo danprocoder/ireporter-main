@@ -1,14 +1,14 @@
 
 
-import load from '../loader';
-import Data from '../models/model';
+import load from '../helpers/loader';
+import Model from '../models/model';
 
 const response = load.library('response');
 const userModel = new Model('user');
 
-export default {
+export default class {
 
-  auth: (req, res) => {
+  auth(req, res) {
     const { email, password } =  req.body;
 
     const user = userModel.init().where('email', email).first();
@@ -21,7 +21,7 @@ export default {
     return response.success();
   },
 
-  addUser: (req, res) => {
+  addUser(req, res) {
     const { firstname, lastname, email, password, mobile } = req.body;
 
     const id = userModel.insert({
