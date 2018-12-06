@@ -3,7 +3,8 @@ import path from 'path';
 export default {
 
   controller(name) {
-    return new this._getObject('controllers', name)();
+  	const controllerClass = this._getObject('controllers', name);
+    return new controllerClass();
   },
 
   library(name) {
@@ -11,6 +12,6 @@ export default {
   },
 
   _getObject(folder, name) {
-    return new require(path.join(__dirname, `${folder}/${name}.js`)).default;
+    return require(path.join(__dirname, `../${folder}/${name}.js`)).default;
   },
 };

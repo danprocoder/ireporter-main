@@ -1,2 +1,5 @@
 # Ignore node_module
-/node_modules/
+node_modules/
+
+#Ignore data folder
+api-endpoints/src/.data

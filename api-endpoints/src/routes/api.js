@@ -23,7 +23,14 @@ router.post('/api/v1/user/auth', (req, res) => {
 
 // Get all red flags.
 router.get('/api/v1/red-flags', (req, res) => {
+  const json = load.controller('red-flag').getAll();
+  res.send(json);
+});
 
+// Get a specific red flag record.
+router.get('/api/v1/red-flags/:id', (req, res) => {
+  const json = load.controller('red-flag').get(req.param.id);
+  res.send(json);
 });
 
 export default router;
