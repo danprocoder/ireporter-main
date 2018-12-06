@@ -2,8 +2,9 @@
 
 import load from '../helpers/loader';
 import Model from '../models/model';
+import Validator from '../helpers/validator';
+import response from '../helpers/response';
 
-const response = load.library('response');
 const userModel = new Model('user');
 
 export default class {
@@ -19,20 +20,34 @@ export default class {
       return response.fail('Password is incorrect');
     }
     return response.success();
-  },
+  }
 
   addUser(req, res) {
-    const { firstname, lastname, email, password, mobile } = req.body;
+    const validator = new Validator(req.body);
+    const rules = {
+      firstname: ['required'],
+      lastname: ['required'],
+      email: ['required', 'email', 'valid_email'],
+      password: ['required', 'min_length[8]'],
+      mobile: ['required', 'valid_mobile']
+    };
+    if (validator.validate(rules)) {
+      const { firstname, lastname, email, password, mobile } = req.body;
 
-    const id = userModel.insert({
-      firstname,
-      lastname,
-      email,
-      mobile,
-      password,
-    });
-    return response.success({
-      id,
-    });
-  },
+      const id = userModel.insert({
+        firstname,
+        lastname,
+        email,
+        phoneNumber: mobile,
+        password,
+        registered: new Date(),
+        isAdmin: false
+      });
+      return response.success({
+        id,
+      });
+    } else {
+      return response.fail(validator.getErrors());
+    }
+  }
 };

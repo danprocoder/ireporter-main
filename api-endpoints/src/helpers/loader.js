@@ -8,7 +8,7 @@ export default {
   },
 
   library(name) {
-    return this._getObject('libraries', name);
+    return this._getObject('helpers', name);
   },
 
   _getObject(folder, name) {

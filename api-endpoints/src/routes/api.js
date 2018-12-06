@@ -2,6 +2,7 @@ import express from 'express';
 import load from '../helpers/loader';
 
 const router = new express.Router();
+router.use(express.urlencoded());
 router.use(express.json());
 
 /**
