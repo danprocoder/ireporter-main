@@ -1,13 +1,13 @@
 import express from 'express';
 import path from 'path';
-import apiRouter from './src/routes/api.js';
+import apiRouter from './src/routes/api';
 
 const app = express();
 
 app.use(apiRouter);
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'frontend')));
+app.use(express.static(path.join(__dirname, 'UI')));
 
-const server = app.listen(8001, () => {
-  console.log('Server started :8001');
+app.listen(process.env.PORT || 8001, () => {
+  console.log('Server started: 8001');
 });

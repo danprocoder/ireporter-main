@@ -1,18 +1,18 @@
-'use strict';
+
 
 export default {
 
-  success: function(data) {
+  success(data) {
     return {
-      'status': 200,
-      'data': data instanceof Array ? data : [data]
+      status: 200,
+      data: data instanceof Array ? data : [data],
     };
   },
 
-  fail: function(message) {
+  fail(message) {
     return {
-      'status': 400,
-      'error': message
+      status: 400,
+      error: message,
     };
-  }
-}
+  },
+};

@@ -1,5 +1,5 @@
 import express from 'express';
-import load from '../helpers/loader.js';
+import load from '../helpers/loader';
 
 const router = new express.Router();
 
@@ -11,13 +11,13 @@ const router = new express.Router();
 
 // User signup
 router.post('/api/v1/user/new', (req, res) => {
-  let a = load.controller('user').addUser(req, res);
+  const a = load.controller('user').addUser(req, res);
   res.send(a);
 });
 
 // User login.
 router.post('/api/v1/user/auth', (req, res) => {
-  let a = load.controller('user').auth(req, res);
+  const a = load.controller('user').auth(req, res);
   res.send(a);
 });
 
