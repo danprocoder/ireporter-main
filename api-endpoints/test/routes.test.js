@@ -12,7 +12,7 @@ describe('API tests', () => {
     it('should insert a new red-flag record', (done) => {
       supertest(app).post('/api/v1/red-flags').send({
         title: 'Snake ate #10m',
-        comment: 'A funny news heard',
+        comment: 'A funny news heard A funny news heard A funny news heard A funny news heard',
         lat: 1234,
         long: 34212
       }).end((err, res) => {
@@ -45,7 +45,7 @@ describe('API tests', () => {
     it('should edit the title of the created red-flag record', (done) => {
       supertest(app).patch('/api/v1/red-flags/' + recordId).send({
         title: 'new title',
-        comment: 'new comment',
+        comment: 'new comment new comment new comment new comment new comment new comment',
         lat: null,
         long: null
       }).end((err, res) => {
@@ -57,11 +57,11 @@ describe('API tests', () => {
 
   // Get editted red flag record
   describe('# Confirm record was really editted', () => {
-    it('should show title as \'new title\' and comment as \'new comment\'', (done) => {
+    it('should show title as \'new title\' and comment as \'new comment new comment new comment new comment new comment new comment\'', (done) => {
       supertest(app).get('/api/v1/red-flags/' + recordId).end((err, res) => {
         expect(res.body.status).equal(200);
         expect(res.body.data[0].title).equal('new title');
-        expect(res.body.data[0].comment).equal('new comment');
+        expect(res.body.data[0].comment).equal('new comment new comment new comment new comment new comment new comment');
         done();
       });
     });

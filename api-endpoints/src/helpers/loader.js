@@ -1,7 +1,6 @@
 import path from 'path';
 
 export default {
-
   controller(name) {
   	const controllerClass = this._getObject('controllers', name);
     return new controllerClass();

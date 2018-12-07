@@ -1,7 +1,4 @@
-
-
 export default {
-
   success(data) {
     return {
       status: 200,

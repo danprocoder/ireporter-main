@@ -12,13 +12,13 @@ router.use(express.json());
  */
 
 // User signup
-router.post('/api/v1/users', (req, res) => {
+router.post('/api/v1/auth/signup', (req, res) => {
   const a = load.controller('user').addUser(req, res);
   res.send(a);
 });
 
 // User login.
-router.post('/api/v1/user/auth', (req, res) => {
+router.post('/api/v1/auth/login', (req, res) => {
   const a = load.controller('user').auth(req, res);
   res.send(a);
 });
