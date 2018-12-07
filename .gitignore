@@ -3,3 +3,6 @@ node_modules/
 
 #Ignore data folder
 api-endpoints/src/.data
+
+#Ignore build folder
+build/

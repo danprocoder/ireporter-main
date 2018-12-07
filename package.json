@@ -20,8 +20,9 @@
   },
   "scripts": {
     "test": "null",
-    "build": "babel main.js -d build",
-    "start": "babel-watch api-endpoints/main.js"
+    "build": "babel api-endpoints -d build",
+    "start": "babel-watch api-endpoints/main.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run build"
   },
   "repository": {
     "type": "git",
