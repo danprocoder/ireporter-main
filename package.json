@@ -11,15 +11,17 @@
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "babel-watch": "^2.0.7",
+    "chai": "^4.2.0",
     "eslint": "^5.9.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "mocha": "^5.2.0",
-    "nodemon": "^1.18.7"
+    "nodemon": "^1.18.7",
+    "supertest": "^3.3.0"
   },
   "scripts": {
-    "test": "null",
+    "test": "mocha api-endpoints/test --require babel-register --exit",
     "build": "babel api-endpoints -d build",
     "start": "babel-watch api-endpoints/main.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run build"
