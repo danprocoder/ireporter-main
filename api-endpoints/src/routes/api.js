@@ -31,7 +31,7 @@ router.get('/api/v1/red-flags', (req, res) => {
 
 // Get a specific red flag record.
 router.get('/api/v1/red-flags/:id', (req, res) => {
-  const json = load.controller('red-flag').get('red-flag', req.param.id);
+  const json = load.controller('red-flag').get('red-flag', req.params.id);
   res.send(json);
 });
 
