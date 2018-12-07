@@ -41,4 +41,10 @@ router.post('/api/v1/red-flags', (req, res) => {
   res.send(json);
 });
 
+// Edit a specific red-flag record.
+router.patch('/api/v1/red-flags/:id', (req, res) => {
+  const json = load.controller('red-flag').update('red-flag', req.params.id, req.body);
+  res.send(json);
+});
+
 export default router;
