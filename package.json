@@ -21,7 +21,7 @@
   "scripts": {
     "test": "null",
     "build": "babel main.js -d build",
-    "start": "babel-watch api-endpoints/main.js --require babel-register --exit"
+    "start": "babel-watch api-endpoints/main.js"
   },
   "repository": {
     "type": "git",
