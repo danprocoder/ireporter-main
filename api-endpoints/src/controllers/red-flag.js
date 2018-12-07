@@ -44,4 +44,31 @@ export default class RedFlag {
   	const redFlag = this.model.init().where('type', type).where('id', id).first();
     return redFlag ? response.success(redFlag) : response.fail('Record not found');
   }
+
+  update(type, id, reqBody) {
+    // Check if ID exists.
+    if (this.model.init().where('id', id).where('type', type).first() == null) {
+      return response.fail('Record not found');
+    }
+    const validator = new Validator(reqBody);
+    const rules = {
+      title: ['required'],
+      comment: ['required']
+    };
+    if (validator.validate(rules)) {
+      const { title, comment, lat, long } = reqBody;
+      this.model.init().where('id', id).where('type', type).update({
+        title,
+        comment,
+        location: lat && long ? lat + ', ' + long : null
+      });
+
+      return response.success({
+        id,
+        message: 'Updated red-flag record'
+      });
+    } else {
+      return response.fail(validator.getErrors());
+    }
+  }
 }

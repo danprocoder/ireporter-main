@@ -27,6 +27,28 @@ class Model {
     fileSystem.writeFileSync(this.filePath, JSON.stringify(this.data));
   }
 
+  _getWhere(callback=null) {
+    const data = [];
+    for (const id in this.data) {
+      let pass = false;
+
+      for (const field in this.conditions) {
+        if (this.conditions[field] != this.data[id][field]) {
+          pass = true;
+          break;
+        }
+      }
+
+      if (!pass) {
+        data.push(this.data[id]);
+        if (typeof callback == 'function') {
+          callback.call(this, this.data[id]);
+        }
+      }
+    }
+    return data;
+  }
+
   init() {
     this.conditions = {};
     return this;
@@ -40,8 +62,12 @@ class Model {
     return id;
   }
 
-  update(id, data) {
-    this.data[id] = data;
+  update(data) {
+    this._getWhere((record) => {
+      for (const k in data) {
+        this.data[record.id][k] = data[k];
+      }
+    });
     this._commit();
   }
 
@@ -55,27 +81,11 @@ class Model {
   }
 
   get() {
-    const data = []; let
-      numRows = 0;
-    for (const id in this.data) {
-      let pass = true;
-      for (const field in this.conditions) {
-        if (this.data[id][field] != this.conditions[field]) {
-          pass = false;
-          break;
-        }
-      }
-
-      if (pass) {
-        data.push(this.data[id]);
-        numRows++;
-      }
-    }
-    return data;
+    return this._getWhere();
   }
 
   first() {
-    return this.get()[0] || null;
+    return this._getWhere()[0] || null;
   }
 
   where(field, value) {
