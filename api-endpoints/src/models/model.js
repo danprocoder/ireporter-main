@@ -1,5 +1,3 @@
-
-
 import fileSystem, { mkdirSync, fstat } from 'fs';
 import path from 'path';
 

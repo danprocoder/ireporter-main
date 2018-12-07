@@ -3,7 +3,7 @@ import response from '../helpers/response';
 import Model from '../models/model';
 import Validator from '../helpers/validator';
 
-export default class RedFlag {
+export default class Incident {
   constructor() {
     this.model = new Model('incidents');
   }
@@ -11,9 +11,23 @@ export default class RedFlag {
   add(type, req) {
     const validator = new Validator(req.body);
     const rules = {
-      title: ['required'],
-      comment: ['required']
+      title: {
+        required: 'Title is required'
+      },
+      comment: {
+        required: 'Comment is required',
+        'min_length[40]': 'Comment should be atleast 40 characters long'
+      },
+      lat: {
+        optional: true,
+        latitude: 'Latitude must be between -90 and 90'
+      },
+      long: {
+        optional: true,
+        longitude: 'Longitude must be between -180 and 180'
+      }
     };
+
     if (validator.validate(rules)) {
       const { title, comment, lat, long } = req.body;
 
@@ -50,11 +64,26 @@ export default class RedFlag {
     if (this.model.init().where('id', id).where('type', type).first() == null) {
       return response.fail('Record not found');
     }
+
     const validator = new Validator(reqBody);
     const rules = {
-      title: ['required'],
-      comment: ['required']
+      title: {
+        required: 'Title is required'
+      },
+      comment: {
+        required: 'Comment is required',
+        'min_length[40]': 'Comment should be atleast 40 characters long'
+      },
+      lat: {
+        optional: true,
+        latitude: 'Latitude must be between -90 and 90'
+      },
+      long: {
+        optional: true,
+        longitude: 'Longitude must be between -180 and 180'
+      }
     };
+
     if (validator.validate(rules)) {
       const { title, comment, lat, long } = reqBody;
       this.model.init().where('id', id).where('type', type).update({
