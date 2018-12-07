@@ -17,6 +17,14 @@ export default class Incident {
       comment: {
         required: 'Comment is required',
         'min_length[40]': 'Comment should be atleast 40 characters long'
+      },
+      lat: {
+        optional: true,
+        latitude: 'Latitude must be between -90 and 90'
+      },
+      long: {
+        optional: true,
+        longitude: 'Longitude must be between -180 and 180'
       }
     };
 
@@ -65,6 +73,14 @@ export default class Incident {
       comment: {
         required: 'Comment is required',
         'min_length[40]': 'Comment should be atleast 40 characters long'
+      },
+      lat: {
+        optional: true,
+        latitude: 'Latitude must be between -90 and 90'
+      },
+      long: {
+        optional: true,
+        longitude: 'Longitude must be between -180 and 180'
       }
     };
 

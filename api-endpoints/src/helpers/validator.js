@@ -31,6 +31,10 @@ export default class Validator {
    * @return Returns a string if there is an error message or true if there is no error.
    */
   _test(value, rules) {
+    if (rules.hasOwnProperty('optional') && rules.optional === true && !value) {
+      return true;
+    }
+
     for (const r in rules) {
       let pass = true;
 
@@ -48,7 +52,12 @@ export default class Validator {
       } else if (r == 'integer' && /[^0-9]/.test(value)) {
         pass = false;
       } else if (r == 'alpha' && /[^a-zA-Z]/.test(value)) {
-        console.log('Validate');
+        pass = false;
+      } else if (r == 'numeric' && this._isNumeric(value)) {
+        pass = false;
+      } else if (r == 'latitude' && !(this._isNumeric(value) && value >= -90 && value <= 90)) {
+        pass = false;
+      } else if (r == 'longitude' && !(this._isNumeric(value) && value >= -180 && value <= 180)) {
         pass = false;
       }
 
@@ -58,5 +67,9 @@ export default class Validator {
     }
 
     return true;
+  }
+
+  _isNumeric(value) {
+    return /[-+]?[0-9]+(\.[0-9]+)?/.test(value);
   }
 }
