@@ -71,4 +71,16 @@ export default class RedFlag {
       return response.fail(validator.getErrors());
     }
   }
+  
+  delete(type, id) {
+    if (this.model.init().where('type', type).where('id', id).first() == null) {
+      return response.fail('Record not found');
+    }
+
+    this.model.init().where('type', type).where('id', id).delete();
+    return response.success({
+      id,
+      message: 'red-flag record has been deleted'
+    });
+  }
 }

@@ -71,8 +71,10 @@ class Model {
     this._commit();
   }
 
-  delete(id) {
-    delete this.data[id];
+  delete() {
+    this._getWhere((record) => {
+      delete this.data[record.id];
+    });
     this._commit();
   }
 
