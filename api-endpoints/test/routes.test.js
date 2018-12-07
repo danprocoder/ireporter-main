@@ -13,8 +13,8 @@ describe('API tests', () => {
       supertest(app).post('/api/v1/red-flags').send({
         title: 'Snake ate #10m',
         comment: 'A funny news heard A funny news heard A funny news heard A funny news heard',
-        lat: 1234,
-        long: 34212
+        lat: 78,
+        long: 130
       }).end((err, res) => {
         expect(res.body.status).to.equal(200);
         recordId = res.body.data[0].id;
