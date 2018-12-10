@@ -55,11 +55,15 @@
 }
 
 .button-area .reporter-signup-btn:hover {
-  background: #ee3b3b;
+  background: #ff5757;
   color: yellow;
 }
 
 @media screen and (max-width:768px) {
+  #navbar {
+      border-bottom: 1px solid #fb6767;
+  }
+
   .welcome-text-container {
     padding-top: 50px;
   }
@@ -70,5 +74,13 @@
 
   .welcome-text-container .info-text {
     margin-top: 10px;
+  }
+
+  .section.features .grid-50 {
+    width: 100%;
+    float: none;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid #e3e3e3;
   }
 }
