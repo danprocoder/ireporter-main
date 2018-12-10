@@ -4,8 +4,9 @@ export default {
   },
   database: {
     host: 'localhost',
-    user: 'daniel',
-    pass: 'daniel',
-    port: 5432
-  }
-}
+    database: 'ireporter-app',
+    user: 'ireporter',
+    pass: 'ireporter',
+    port: 5432,
+  },
+};
