@@ -1,36 +1,86 @@
 .welcome-text-container {
-	padding: 100px;
-	color: #fff
+  padding: 100px 0;
+  color: #fff
 }
 
 .welcome-text-container .large-text {
-	font-size: 47px;
-	font-weight: bold;
+  font-size: 47px;
+  font-weight: bold;
+  line-height: 100%;
 }
 
 .welcome-text-container .large-text span {
-	color: #ff0;
+  color: #ff0;
 }
 
 .welcome-text-container .info-text {
-	margin-top: 48px;
-    line-height: 165%;
-    font-size: 17px;
+  margin-top: 30px;
+  line-height: 145%;
+  font-size: 17px;
 }
 
 .section.features {
-	padding-top: 30px;
+  padding-top: 30px;
 }
 
 .section.features .grid-container {
-	margin-top: 30px;
+  margin-top: 30px;
+}
+
+.section.features .grid-container .button-area {
+  margin-top: 19px;
 }
 
 .section.features .header {
-	color: #8e8e8e;
+  color: #8e8e8e;
 }
 
 .section.features .content {
-	margin-top: 22px;
-	font-size: 17px;
+  margin-top: 22px;
+  font-size: 17px;
+}
+
+.button-area {
+  margin-top: 30px;
+}
+
+.button-area .reporter-signup-btn {
+  background: yellow;
+  color: #ee3b3b;
+  padding: 15px 31px;
+  text-transform: uppercase;
+  display: inline-block;
+  border: 1px solid yellow;
+  transition: background 0.3s, color 0.3s;
+}
+
+.button-area .reporter-signup-btn:hover {
+  background: #ff5757;
+  color: yellow;
+}
+
+@media screen and (max-width:768px) {
+  #navbar {
+      border-bottom: 1px solid #fb6767;
+  }
+
+  .welcome-text-container {
+    padding-top: 50px;
+  }
+
+  .welcome-text-container .large-text {
+    display: none;
+  }
+
+  .welcome-text-container .info-text {
+    margin-top: 10px;
+  }
+
+  .section.features .grid-50 {
+    width: 100%;
+    float: none;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid #e3e3e3;
+  }
 }
