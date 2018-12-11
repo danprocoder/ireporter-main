@@ -9,7 +9,8 @@ db.query(
     username VARCHAR(200) NOT NULL,
     email VARCHAR(200) NOT NULL,
     password VARCHAR(256) NOT NULL,
-    phonenumber VARCHAR(16) NOT NULL
+    phonenumber VARCHAR(16) NOT NULL,
+    isadmin BOOLEAN NOT NULL DEFAULT false
   );`, (err, res) => {
     if (err) {
       console.log('Failed to create `users` table.');
@@ -35,8 +36,7 @@ db.query(
         } else {
           console.log('Failed to create `incidents` table');
         }
-      }
+      },
     );
-
   },
 );
