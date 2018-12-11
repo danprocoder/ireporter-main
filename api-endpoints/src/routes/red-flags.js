@@ -1,7 +1,11 @@
 import express from 'express';
 import IncidentController from '../controllers/Incident';
+import verifyJwtToken from '../middlewares/verifyJwtToken';
+import loginRequired from '../middlewares/loginRequired';
+import adminRequired from '../middlewares/adminRequired';
 
 const router = express.Router();
+router.use(verifyJwtToken, loginRequired);
 
 // Get all red flags.
 router.get('/api/v1/red-flags', (req, res) => {
