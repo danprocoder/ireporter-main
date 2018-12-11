@@ -1,4 +1,3 @@
 language: node_js
-rvm:
- - 10.13.0
- - node
+node_js:
+ - "7"
