@@ -11,16 +11,45 @@ export default class {
   }
 
   auth(req, res) {
-    const { email, password } =  req.body;
-
-    const user = userModel.init().where('email', email).first();
-
-    if (user == null) {
-      return response.fail('Email address not registered');
-    } if (password != user.password) {
-      return response.fail('Password is incorrect');
+    const rules = {
+      email: {
+        required: 'Email address is required',
+        valid_email: 'Please enter a valid email'
+      },
+      password: {
+        required: 'Password is required'
+      }
+    };
+    const validator = new Validator(req.body);
+    if (validator.validate(rules)) {
+      const { email, password } =  req.body;
+      this.model.getByEmail(email, (row) => {
+        if (!row) {
+          res.status(400).json(response.fail('Email address is not registered'));
+        } else {
+          bcrypt.compare(password, row.password, function(err, success) {
+            if (success === true) {
+              res.status(200).json({
+                token: jwt.sign({
+                  userId: row.id
+                }, config.jwt.secret),
+                user: {
+                  firstname: row.firstname,
+                  lastname: row.lastname,
+                  username: row.username,
+                  email: row.email,
+                  phoneNumber: row.phonenumber
+                }
+              });
+            } else {
+              res.status(400).json(response.fail('Incorrect password'));
+            }
+          });
+        }
+      });
+    } else {
+      res.status(400).json(validator.getErrors());
     }
-    return response.success();
   }
 
   addUser(req, res) {
@@ -66,10 +95,10 @@ export default class {
         const userId = row.id;
         row.id = undefined;
         res.status(200).json(response.success({
-          'token': jwt.sign({
-            'id': userId
+          token: jwt.sign({
+            userId: userId
           }, config.jwt.secret),
-          'user': row
+          user: row
         }));
       });
     } else {

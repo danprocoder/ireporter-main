@@ -8,11 +8,11 @@ export default class Validator {
   	this.errors = {};
 
     for (const name in rules) {
-      const r = rules[name];
+      const fieldRules = rules[name];
 
       const value = this.requestBody[name];
 
-      const err = this._test(value, r);
+      const err = this._test(value, fieldRules);
       if (err !== true) {
       	this.errors[name] = err;
       }
@@ -26,9 +26,9 @@ export default class Validator {
   }
 
   /**
-   * @param value value to test against rules
-   * @param rules object in format {<rule 1>:<error message 1>,...,<rule n>:<error message n>}
-   * @return Returns a string if there is an error message or true if there is no error.
+   * @param {object} value value to test against rules
+   * @param {object} rules object in format {<rule 1>:<error message 1>,...,<rule n>:<error message n>}
+   * @return {string} Returns a string if there is an error message or true if there is no error.
    */
   _test(value, rules) {
     if (rules.hasOwnProperty('optional') && rules.optional === true && !value) {
@@ -40,9 +40,9 @@ export default class Validator {
 
       if (r == 'required' && !value) {
       	pass = false;
-      } if (/^min_length\[(\d+)\]$/.test(r)) {
-      	const length = /min_length\[(\d+)\]/.exec(r)[1];
-      	if (value.length < length) {
+      } else if (/^min_length\[(\d+)\]$/.test(r)) {
+      	const expectedLength = /min_length\[(\d+)\]/.exec(r)[1];
+      	if (value.length < expectedLength) {
       	  pass = false;
       	}
       } else if (r == 'valid_email' && !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)) {
