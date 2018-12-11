@@ -1,7 +1,9 @@
 import express from 'express';
-import load from '../helpers/loader';
+import UserController from '../controllers/user';
 
 const router = new express.Router();
+
+const userController = new UserController();
 
 /**
  * APIs
@@ -11,14 +13,12 @@ const router = new express.Router();
 
 // User signup
 router.post('/api/v1/auth/signup', (req, res) => {
-  const a = load.controller('user').addUser(req, res);
-  res.send(a);
+  userController.addUser(req, res);
 });
 
 // User login.
 router.post('/api/v1/auth/login', (req, res) => {
-  const a = load.controller('user').auth(req, res);
-  res.send(a);
+  userController.auth(req, res);
 });
 
 export default router;
