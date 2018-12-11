@@ -34,7 +34,7 @@ describe('API tests', () => {
   describe('# Get all red flag records', () => {
     it('should select an array containing 1 red flag record', (done) => {
       supertest(app).get('/api/v1/red-flags').end((err, res) => {
-        expect(res.body.data.length).to.be.above(1);
+        expect(res.body.data.length).to.be.at.least(1);
         done();
       });
     })

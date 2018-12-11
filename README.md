@@ -16,6 +16,7 @@ Corruption is a huge bane to Africa’s development. African countries must deve
 ## How to Use
 1. Clone this repository to your local machine 
 2. Run `npm install` to install the dependencies
+3. Run `npm run migrate` to run the migration files to create the database tables.
 3. Run `npm start` to start the application
 
 ## Testing
