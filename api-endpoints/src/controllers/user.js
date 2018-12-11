@@ -1,11 +1,15 @@
-import load from '../helpers/loader';
-import Model from '../models/model';
+import UserModel from '../models/User';
 import Validator from '../helpers/validator';
 import response from '../helpers/response';
-
-const userModel = new Model('user');
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import config from '../../config';
 
 export default class {
+  constructor() {
+    this.model = new UserModel();
+  }
+
   auth(req, res) {
     const { email, password } =  req.body;
 
@@ -51,21 +55,25 @@ export default class {
     if (validator.validate(rules)) {
       const { firstname, lastname, username, email, password, phoneNumber } = req.body;
 
-      const id = userModel.insert({
+      this.model.insert({
         firstname,
         lastname,
         username,
         email,
         phoneNumber,
-        password,
-        registered: new Date(),
-        isAdmin: false
-      });
-      return response.success({
-        id,
+        password: bcrypt.hashSync(password, bcrypt.genSaltSync())
+      }, (row) => {
+        const userId = row.id;
+        row.id = undefined;
+        res.status(200).json(response.success({
+          'token': jwt.sign({
+            'id': userId
+          }, config.jwt.secret),
+          'user': row
+        }));
       });
     } else {
-      return response.fail(validator.getErrors());
+      res.status(400).json(response.fail(validator.getErrors()));
     }
   }
 };
