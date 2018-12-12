@@ -120,7 +120,10 @@ export default class Incident {
             latitude: lat ? lat : null,
             longitude: long ? long : null
           }, () => {
-            res.status(200).json(response.success(`Updated ${type} record`));
+            res.status(200).json(response.success({
+              id: req.params.id,
+              message: `Updated ${type} record`,
+            }));
           });
         } else {
           res.status(400).json(response.fail(validator.getErrors()));
