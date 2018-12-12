@@ -7,6 +7,8 @@ import adminRequired from '../middlewares/adminRequired';
 const router = express.Router();
 router.use(verifyJwtToken, loginRequired);
 
+const controller = new IncidentController('red-flag');
+
 // Get all red flags.
 router.get('/api/v1/red-flags', (req, res) => {
   const json = (new IncidentController()).getAll('red-flag');
@@ -21,8 +23,7 @@ router.get('/api/v1/red-flags/:id', (req, res) => {
 
 // Create a red flag record.
 router.post('/api/v1/red-flags', (req, res) => {
-  const json = (new IncidentController()).add('red-flag', req);
-  res.send(json);
+  controller.add(req, res);
 });
 
 // Edit a specific red-flag record.

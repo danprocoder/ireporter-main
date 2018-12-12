@@ -25,7 +25,7 @@ class Model {
     fileSystem.writeFileSync(this.filePath, JSON.stringify(this.data));
   }
 
-  _getWhere(callback=null) {
+  _getWhere(callback = null) {
     const data = [];
     for (const id in this.data) {
       let pass = false;
@@ -39,7 +39,7 @@ class Model {
 
       if (!pass) {
         data.push(this.data[id]);
-        if (typeof callback == 'function') {
+        if (typeof callback === 'function') {
           callback.call(this, this.data[id]);
         }
       }
@@ -54,7 +54,7 @@ class Model {
 
   insert(data) {
     const id = Object.keys(this.data).length + 1;
-    data['id'] = id;
+    data.id = id;
     this.data[id] = data;
     this._commit();
     return id;

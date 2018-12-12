@@ -1,14 +1,15 @@
 import load from '../helpers/loader';
 import response from '../helpers/response';
-import Model from '../models/model';
+import IncidentModel from '../models/Incident';
 import Validator from '../helpers/validator';
 
 export default class Incident {
-  constructor() {
-    this.model = new Model('incidents');
+  constructor(type) {
+    this.type = type;
+    this.model = new IncidentModel();
   }
 
-  add(type, req) {
+  add(req, res) {
     const validator = new Validator(req.body);
     const rules = {
       title: {
@@ -31,21 +32,21 @@ export default class Incident {
     if (validator.validate(rules)) {
       const { title, comment, lat, long } = req.body;
 
-      const id = this.model.insert({
-      	'createdOn': new Date(),
-      	'createdBy': 2,
-      	'title': title,
-      	'status': 'draft',
-      	'comment': comment,
-      	'location': lat && long ? lat + ', ' + long : null,
-      	'type': type
-      });
-      return response.success({
-      	'id': id,
-      	'message': 'Created red-flag record'
+      this.model.insert({
+      	createdBy: req.loggedInUser.id,
+      	title,
+      	comment,
+        latitude: lat ? lat : null,
+        longitude: long ? long : null,
+      	type: this.type
+      }, (row) => {
+        res.status(200).json(response.success({
+          id: row.id,
+          message: `Created ${this.type} record`
+        }));
       });
     } else {
-      return response.fail(validator.getErrors());
+      res.status(400).json(response.fail(validator.getErrors()));
     }
   }
 

@@ -24,7 +24,7 @@ export default class {
   }
 
   getById(id, callback) {
-    const sql = escape(`SELECT * FROM users WHERE id=%L LIMIT 1`, id.toString());
+    const sql = escape('SELECT * FROM users WHERE id=%L LIMIT 1', id.toString());
     db.query(sql, (err, res) => {
       if (!err) {
         callback(res.rows[0] || null);
@@ -33,7 +33,7 @@ export default class {
   }
 
   getByEmail(email, callback) {
-    const sql = escape(`SELECT * FROM users WHERE email=%L LIMIT 1`, email);
+    const sql = escape('SELECT * FROM users WHERE email=%L LIMIT 1', email);
     db.query(sql, (err, res) => {
       if (!err) {
         callback(res.rows[0] || null);

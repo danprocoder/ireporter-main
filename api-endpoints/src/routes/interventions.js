@@ -7,6 +7,8 @@ import adminRequired from '../middlewares/adminRequired';
 const router = express.Router();
 router.use(verifyJwtToken, loginRequired);
 
+const controller = new IncidentController('intervention');
+
 // Get all interventions.
 router.get('/api/v1/interventions', (req, res) => {
   const json = (new IncidentController()).getAll('intervention');
@@ -21,8 +23,7 @@ router.get('/api/v1/interventions/:id', (req, res) => {
 
 // Create an intervention record.
 router.post('/api/v1/interventions', (req, res) => {
-  const json = (new IncidentController()).add('intervention', req);
-  res.send(json);
+  controller.add(req, res);
 });
 
 // Edit a specific intervention record.

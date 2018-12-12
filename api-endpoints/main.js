@@ -5,7 +5,9 @@ import redFlagRouter from './src/routes/red-flags';
 import interventionRouter from './src/routes/interventions';
 
 const app = express();
-app.use(express.urlencoded());
+app.use(express.urlencoded({
+  extended: false,
+}));
 app.use(express.json());
 
 app.use(userRouter);
