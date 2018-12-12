@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.com/danprocoder/ireporter-main.svg?branch=develop)](https://travis-ci.com/danprocoder/ireporter-main)
 
+[![Coverage Status](https://coveralls.io/repos/github/danprocoder/ireporter-main/badge.svg?branch=develop)](https://coveralls.io/github/danprocoder/ireporter-main?branch=develop)
+
 ## Project Description
 Corruption is a huge bane to Africa’s development. African countries must develop novel andlocalised solutions that will curb this menace, hence the birth of iReporter. iReporter enablesany/every citizen to bring any form of corruption to the notice of appropriate authorities and thegeneral public. Users can also report on things that needs government intervention.
 

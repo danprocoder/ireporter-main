@@ -144,7 +144,10 @@ export default class Incident {
           res.status(400).json(response.fail('Bad request'));
         } else {
           model.updateStatus(type, req.params.id, req.body.status, () => {
-            res.status(200).json(response.success(`Updated ${type} record status`));
+            res.status(200).json(response.success({
+              id: req.params.id,
+              message: `Updated ${type} record status`,
+            }));
           });
         }
       }
@@ -162,7 +165,10 @@ export default class Incident {
         res.status(400).json(response.fail('Access forbidden'));
       } else {
         model.deleteById(type, req.params.id, () => {
-          res.status(200).json(response.success(`${type} record has been deleted`));
+          res.status(200).json(response.success({
+            id: req.params.id,
+            message: `${type} record has been deleted`,
+          }));
         });
       }
     });
