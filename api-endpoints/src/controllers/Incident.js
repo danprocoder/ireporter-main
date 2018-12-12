@@ -124,15 +124,20 @@ export default class Incident {
     }
   }
   
-  delete(type, id) {
-    if (this.model.init().where('type', type).where('id', id).first() == null) {
-      return response.fail('Record not found');
-    }
+  delete(req, res) {
+    const model = this.model;
+    const type = this.type;
 
-    this.model.init().where('type', type).where('id', id).delete();
-    return response.success({
-      id,
-      message: 'red-flag record has been deleted'
+    model.readOneById(type, req.params.id, (row) => {
+      if (!row) {
+        res.status(404).json(response.notFound('Record not found'));
+      } else if (row.createdby != req.loggedInUser.id) { // Only the creator of the record can delete the record.
+        res.status(400).json(response.fail('Access forbidden'));
+      } else {
+        model.deleteById(type, req.params.id, () => {
+          res.status(200).json(response.success(`${type} record has been deleted`));
+        });
+      }
     });
   }
 }

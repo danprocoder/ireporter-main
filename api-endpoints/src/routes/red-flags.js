@@ -32,8 +32,7 @@ router.patch('/api/v1/red-flags/:id', (req, res) => {
 
 // Deletes a specific red flag record.
 router.delete('/api/v1/red-flags/:id', (req, res) => {
-  const json = (new IncidentController()).delete('red-flag', req.params.id);
-  res.send(json);
+  controller.delete(req, res);
 });
 
 export default router;

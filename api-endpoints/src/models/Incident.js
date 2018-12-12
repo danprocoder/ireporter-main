@@ -46,4 +46,13 @@ export default class IncidentModel {
       }
     });
   }
+
+  deleteById(type, id, callback) {
+    const sql = escape(`DELETE FROM ${this.table} WHERE type=%L AND id=%L`, type, id.toString());
+    db.query(sql, (err, res) => {
+      if (!err) {
+        callback();
+      }
+    });
+  }
 }

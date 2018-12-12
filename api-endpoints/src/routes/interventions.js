@@ -32,8 +32,7 @@ router.patch('/api/v1/interventions/:id', (req, res) => {
 
 // Deletes a specific intervention record.
 router.delete('/api/v1/interventions/:id', (req, res) => {
-  const json = (new IncidentController()).delete('intervention', req.params.id);
-  res.send(json);
+  controller.delete(req, res);
 });
 
 export default router;
