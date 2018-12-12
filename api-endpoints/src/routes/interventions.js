@@ -34,4 +34,9 @@ router.delete('/api/v1/interventions/:id', (req, res) => {
   controller.delete(req, res);
 });
 
+// Updates a specific intervention record's status.
+router.patch('/api/v1/interventions/:id/status', adminRequired, (req, res) => {
+  controller.updateStatus(req, res);
+});
+
 export default router;

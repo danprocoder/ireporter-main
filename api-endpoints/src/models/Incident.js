@@ -36,6 +36,13 @@ export default class IncidentModel {
     });
   }
 
+  updateStatus(type, id, status, callback) {
+    const sql = escape(`UPDATE ${this.table} SET status=%L WHERE type=%L AND id=%L`, status, type, id);
+    db.query(sql, (err, res) => {
+      callback(!err);
+    });
+  }
+
   read(type, filters, callback) {
     let sql = `SELECT * FROM ${this.table} WHERE type=%L`;
     const params = [type];

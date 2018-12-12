@@ -128,6 +128,25 @@ export default class Incident {
       }
     });
   }
+
+  updateStatus(req, res) {
+    const model = this.model;
+    const type = this.type;
+
+    model.readOneById(type, req.params.id, (row) => {
+      if (!row) {
+        res.status(404).json(response.notFound('Record does not exists'));
+      } else {
+        if (['in-draft', 'under-investigation', 'resolved', 'rejected'].indexOf(req.body.status) == -1) {
+          res.status(400).json(response.fail('Bad request'));
+        } else {
+          model.updateStatus(type, req.params.id, req.body.status, () => {
+            res.status(200).json(response.success(`Updated ${type} record status`));
+          });
+        }
+      }
+    });
+  }
   
   delete(req, res) {
     const model = this.model;
