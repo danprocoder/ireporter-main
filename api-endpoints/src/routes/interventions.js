@@ -16,8 +16,7 @@ router.get('/api/v1/interventions', (req, res) => {
 
 // Get a specific intervention record.
 router.get('/api/v1/interventions/:id', (req, res) => {
-  const json = (new IncidentController()).get('intervention', req.params.id);
-  res.send(json);
+  controller.get(req, res);
 });
 
 // Create an intervention record.

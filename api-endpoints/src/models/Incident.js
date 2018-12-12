@@ -37,4 +37,13 @@ export default class IncidentModel {
       }
     });
   }
+
+  readOneById(type, id, callback) {
+    const sql = escape(`SELECT * FROM ${this.table} WHERE type=%L AND id=%L LIMIT 1`, type, id.toString());
+    db.query(sql, (err, res) => {
+      if (!err) {
+        callback(res.rows[0] || null);
+      }
+    });
+  }
 }

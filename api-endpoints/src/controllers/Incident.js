@@ -67,9 +67,19 @@ export default class Incident {
     });
   }
 
-  get(type, id) {
-  	const redFlag = this.model.init().where('type', type).where('id', id).first();
-    return redFlag ? response.success(redFlag) : response.fail('Record not found');
+  get(req, res) {
+    this.model.readOneById(this.type, req.params.id, (row) => {
+      if (row) {
+        // If user is not an admin, they can only fetch their own record.
+        if (!req.loggedInUser.isadmin && row.createdby != req.loggedInUser.id) {
+          res.status(400).json(response.fail('Record was not created by you'));
+        } else {
+          res.status(200).json(response.success(row));
+        }
+      } else {
+        res.status(404).json(response.notFound('Record not found'));
+      }
+    });
   }
 
   update(type, id, reqBody) {

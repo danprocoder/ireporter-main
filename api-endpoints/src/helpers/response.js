@@ -12,4 +12,11 @@ export default {
       error: message,
     };
   },
+
+  notFound(message) {
+    return {
+      status: 404,
+      error: message,
+    };
+  },
 };

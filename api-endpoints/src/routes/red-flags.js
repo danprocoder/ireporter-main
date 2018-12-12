@@ -16,8 +16,7 @@ router.get('/api/v1/red-flags', (req, res) => {
 
 // Get a specific red flag record.
 router.get('/api/v1/red-flags/:id', (req, res) => {
-  const json = (new IncidentController()).get('red-flag', req.params.id);
-  res.send(json);
+  controller.get(req, res);
 });
 
 // Create a red flag record.
