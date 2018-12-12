@@ -1,8 +1,8 @@
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import UserModel from '../models/User';
 import Validator from '../helpers/validator';
 import response from '../helpers/response';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import config from '../../config';
 
 export default class {
@@ -14,33 +14,33 @@ export default class {
     const rules = {
       email: {
         required: 'Email address is required',
-        valid_email: 'Please enter a valid email'
+        valid_email: 'Please enter a valid email',
       },
       password: {
-        required: 'Password is required'
-      }
+        required: 'Password is required',
+      },
     };
     const validator = new Validator(req.body);
     if (validator.validate(rules)) {
-      const { email, password } =  req.body;
+      const { email, password } = req.body;
       this.model.getByEmail(email, (row) => {
         if (!row) {
           res.status(400).json(response.fail('Email address is not registered'));
         } else {
-          bcrypt.compare(password, row.password, function(err, success) {
+          bcrypt.compare(password, row.password, (err, success) => {
             if (success === true) {
-              res.status(200).json({
+              res.status(200).json(response.success({
                 token: jwt.sign({
-                  userId: row.id
+                  userId: row.id,
                 }, config.jwt.secret),
                 user: {
                   firstname: row.firstname,
                   lastname: row.lastname,
                   username: row.username,
                   email: row.email,
-                  phoneNumber: row.phonenumber
-                }
-              });
+                  phoneNumber: row.phonenumber,
+                },
+              }));
             } else {
               res.status(400).json(response.fail('Incorrect password'));
             }
@@ -82,7 +82,9 @@ export default class {
       }
     };
     if (validator.validate(rules)) {
-      const { firstname, lastname, username, email, password, phoneNumber } = req.body;
+      const {
+        firstname, lastname, username, email, password, phoneNumber,
+      } = req.body;
 
       this.model.insert({
         firstname,
@@ -96,9 +98,9 @@ export default class {
         row.id = undefined;
         res.status(200).json(response.success({
           token: jwt.sign({
-            userId: userId
+            userId,
           }, config.jwt.secret),
-          user: row
+          user: row,
         }));
       });
     } else {

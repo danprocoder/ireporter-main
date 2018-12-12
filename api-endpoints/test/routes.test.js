@@ -4,8 +4,9 @@ import app from '../main';
 
 const { expect } = chai;
 
-describe('API tests', () => {
+describe('API endpoints tests', () => {
   let userId = null;
+  let token = null;
 
   describe('POST /api/v1/auth/signup', () => {
     const userData = {
@@ -22,6 +23,22 @@ describe('API tests', () => {
         expect(res.body.data.length).to.equal(1);
 
         userId = res.body.data[0].id;
+
+        done();
+      });
+    });
+  });
+
+  describe('POST /api/v1/auth/login', () => {
+    it('should log the user in using the detail used to authenticate the user', (done) => {
+      supertest(app).post('/api/v1/auth/login').send({
+        email: 'testuser@gmail.com',
+        password: 'testuser101',
+      }).end((err, res) => {
+        expect(res.body.status).to.equal(200);
+        expect(res.body.data.length).to.equal(1);
+
+        token = res.body.data[0].token;
 
         done();
       });
