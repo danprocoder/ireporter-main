@@ -12,11 +12,26 @@ export default class IncidentModel {
       data.type,
       data.title,
       data.comment,
-      data.latitude,
-      data.longitude);
+      data.latitude ? data.latitude.toString() : null,
+      data.longitude ? data.longitude.toString() : null);
     db.query(sql, (err, res) => {
       if (!err) {
         callback(res.rows[0] || null);
+      }
+    });
+  }
+
+  update(type, id, data, callback) {
+    const sql = escape(`UPDATE ${this.table} SET title=%L, comment=%L, latitude=%L, longitude=%L WHERE type=%L AND id=%L`,
+      data.title,
+      data.comment,
+      data.latitude ? data.latitude.toString() : null,
+      data.longitude ? data.longitude.toString() : null,
+      type,
+      id.toString());
+    db.query(sql, (err, res) => {
+      if (!err) {
+        callback();
       }
     });
   }
