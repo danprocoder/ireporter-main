@@ -1,10 +1,33 @@
 import supertest from 'supertest';
-import app from '../main.js';
 import chai from 'chai';
+import app from '../main';
 
-const expect = chai.expect;
+const { expect } = chai;
 
 describe('API tests', () => {
+  let userId = null;
+
+  describe('POST /api/v1/auth/signup', () => {
+    const userData = {
+      firstname: 'Test',
+      lastname: 'User',
+      username: 'testuser',
+      password: 'testuser101',
+      email: 'testuser@gmail.com',
+      phoneNumber: '+2348085321223',
+    };
+    it('should add a new user', (done) => {
+      supertest(app).post('/api/v1/auth/signup').send(userData).end((err, res) => {
+        expect(res.body.status).to.equal(200);
+        expect(res.body.data.length).to.equal(1);
+
+        userId = res.body.data[0].id;
+
+        done();
+      });
+    });
+  });
+
   let recordId = null;
   
   // Create a new red flag record.
