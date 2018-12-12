@@ -34,4 +34,9 @@ router.delete('/api/v1/red-flags/:id', (req, res) => {
   controller.delete(req, res);
 });
 
+// Update a specific red-flag record's status.
+router.patch('/api/v1/red-flags/:id/status', adminRequired, (req, res) => {
+  controller.updateStatus(req, res);
+});
+
 export default router;
