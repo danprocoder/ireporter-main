@@ -11,8 +11,7 @@ const controller = new IncidentController('red-flag');
 
 // Get all red flags.
 router.get('/api/v1/red-flags', (req, res) => {
-  const json = (new IncidentController()).getAll('red-flag');
-  res.send(json);
+  controller.getAll(req, res);
 });
 
 // Get a specific red flag record.

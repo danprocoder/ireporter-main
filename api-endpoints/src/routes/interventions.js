@@ -11,8 +11,7 @@ const controller = new IncidentController('intervention');
 
 // Get all interventions.
 router.get('/api/v1/interventions', (req, res) => {
-  const json = (new IncidentController()).getAll('intervention');
-  res.send(json);
+  controller.getAll(req, res);
 });
 
 // Get a specific intervention record.

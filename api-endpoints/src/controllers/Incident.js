@@ -49,10 +49,22 @@ export default class Incident {
       res.status(400).json(response.fail(validator.getErrors()));
     }
   }
-
-  getAll(type) {
-    const redFlags = this.model.init().where('type', type).get();
-    return response.success(redFlags);
+  
+  /**
+   * Sends all incident records created on the platform if the user is an admin else it 
+   * send backs only the records created by the user.
+   * 
+   * @param {*} req 
+   * @param {*} res 
+   */
+  getAll(req, res) {
+    const filters = {};
+    if (!req.loggedInUser.isadmin) {
+      filters.createdBy = req.loggedInUser.id;
+    }
+    this.model.read(this.type, filters, (rows) => {
+      res.status(200).json(response.success(rows));
+    });
   }
 
   get(type, id) {
