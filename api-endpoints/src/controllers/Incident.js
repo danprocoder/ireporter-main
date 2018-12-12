@@ -82,13 +82,8 @@ export default class Incident {
     });
   }
 
-  update(type, id, reqBody) {
-    // Check if ID exists.
-    if (this.model.init().where('id', id).where('type', type).first() == null) {
-      return response.fail('Record not found');
-    }
-
-    const validator = new Validator(reqBody);
+  update(req, res) {
+    const validator = new Validator(req.body);
     const rules = {
       title: {
         required: 'Title is required'
@@ -107,21 +102,31 @@ export default class Incident {
       }
     };
 
-    if (validator.validate(rules)) {
-      const { title, comment, lat, long } = reqBody;
-      this.model.init().where('id', id).where('type', type).update({
-        title,
-        comment,
-        location: lat && long ? lat + ', ' + long : null
-      });
+    const type = this.type;
+    const model = this.model;
+    
+    model.readOneById(type, req.params.id, (row) => {
+      if (!row) {
+        res.status(404).json(response.notFound('Record not found'));
+      } else if (row.createdby != req.loggedInUser.id) {
+        res.status(400).json(response.fail('Access forbidden'));
+      } else {
+        if (validator.validate(rules)) {
+          const { title, comment, lat, long } = req.body;
 
-      return response.success({
-        id,
-        message: 'Updated red-flag record'
-      });
-    } else {
-      return response.fail(validator.getErrors());
-    }
+          model.update(type, req.params.id, {
+            title,
+            comment,
+            latitude: lat ? lat : null,
+            longitude: long ? long : null
+          }, () => {
+            res.status(200).json(response.success(`Updated ${type} record`));
+          });
+        } else {
+          res.status(400).json(response.fail(validator.getErrors()));
+        }
+      }
+    });
   }
   
   delete(req, res) {

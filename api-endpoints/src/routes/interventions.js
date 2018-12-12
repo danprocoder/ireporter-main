@@ -26,8 +26,7 @@ router.post('/api/v1/interventions', (req, res) => {
 
 // Edit a specific intervention record.
 router.patch('/api/v1/interventions/:id', (req, res) => {
-  const json = (new IncidentController()).update('intervention', req.params.id, req.body);
-  res.send(json);
+  controller.update(req, res);
 });
 
 // Deletes a specific intervention record.

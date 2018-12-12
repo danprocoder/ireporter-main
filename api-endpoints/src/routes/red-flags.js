@@ -26,8 +26,7 @@ router.post('/api/v1/red-flags', (req, res) => {
 
 // Edit a specific red-flag record.
 router.patch('/api/v1/red-flags/:id', (req, res) => {
-  const json = (new IncidentController()).update('red-flag', req.params.id, req.body);
-  res.send(json);
+  controller.update(req, res);
 });
 
 // Deletes a specific red flag record.
