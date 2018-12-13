@@ -14,33 +14,42 @@ db.query(
   );`, (err, res) => {
     if (err) {
       console.log('Failed to create `users` table.');
-      console.log(err);
     } else {
       console.log('Table `users` created successfully.');
     }
 
-    // Create incident tables.
-    db.query(
-      `CREATE TABLE incidents (
-        id SERIAL PRIMARY KEY,
-        createdon TIMESTAMP DEFAULT NOW(),
-        createdby INTEGER NOT NULL REFERENCES users(id),
-        type VARCHAR(20) NOT NULL,
-        title VARCHAR(200) NOT NULL,
-        comment TEXT NOT NULL,
-        status VARCHAR(30) NOT NULL DEFAULT 'in-draft',
-        latitude VARCHAR(15),
-        longitude VARCHAR(15)
-      );`, (err, res) => {
-        if (!err) {
-          console.log('Table `incidents` created successfully');
-        } else {
-          console.log('Failed to create `incidents` table');
-          console.log(err);
-        }
+    // Create admin user.
+    db.query(`INSERT INTO users(
+        firstname, lastname, username, email, password, phonenumber, isadmin)
+      VALUES(
+        'Web', 'Admin', 'webadmin', 'webadmin@ireporter.com', 'webadmin123', '+2348123435333', TRUE
+      )`, (err, res) => {
+      if (!err) {
+        console.log('User `Web Admin` created successfully');
+      }
 
-        process.exit();
-      },
-    );
+      // Create incident tables.
+      db.query(
+        `CREATE TABLE incidents (
+            id SERIAL PRIMARY KEY,
+            createdon TIMESTAMP DEFAULT NOW(),
+            createdby INTEGER NOT NULL REFERENCES users(id),
+            type VARCHAR(20) NOT NULL,
+            title VARCHAR(200) NOT NULL,
+            comment TEXT NOT NULL,
+            status VARCHAR(30) NOT NULL DEFAULT 'in-draft',
+            latitude VARCHAR(15),
+            longitude VARCHAR(15)
+          );`, (err, res) => {
+          if (!err) {
+            console.log('Table `incidents` created successfully');
+          } else {
+            console.log('Failed to create `incidents` table');
+          }
+
+          process.exit();
+        },
+      );
+    });
   },
 );
