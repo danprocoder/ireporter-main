@@ -1,4 +1,8 @@
 import pg from 'pg';
-import config from '../../config';
+import dotenv from 'dotenv';
 
-export default new pg.Pool(config.database);
+dotenv.config();
+
+export default new pg.Pool({
+  connectionString: process.env.DATABASE_URL
+});

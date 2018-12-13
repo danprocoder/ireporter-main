@@ -6,3 +6,6 @@ api-endpoints/src/.data
 
 #Ignore build folder
 build/
+
+#Ignore environment variable file.
+.env
