@@ -18,4 +18,4 @@ export default (req, res, next) => {
   } else {
     res.status(400).json(response.fail('Token required'));
   }
-}
+};

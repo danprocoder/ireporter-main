@@ -46,7 +46,7 @@ describe('API endpoints tests', () => {
   });
 
   let recordId = null;
-  
+
   // Create a new red flag record.
   describe('# Insert a new red-flag', () => {
     it('should insert a new red-flag record', (done) => {

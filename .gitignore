@@ -9,3 +9,5 @@ build/
 
 #Ignore environment variable file.
 .env
+
+.nyc_output/

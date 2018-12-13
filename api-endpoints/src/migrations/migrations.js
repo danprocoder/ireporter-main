@@ -22,7 +22,7 @@ db.query(
     db.query(`INSERT INTO users(
         firstname, lastname, username, email, password, phonenumber, isadmin)
       VALUES(
-        'Web', 'Admin', 'webadmin', 'webadmin@ireporter.com', 'webadmin123', '+2348123435333', TRUE
+        'Web', 'Admin', 'webadmin', 'webadmin@ireporter.com', '$2a$10$M046C4T5TapFuR4t4h7pvu1TVw8ty96rG7LQJLiOkaajpNBlsDde2', '+2348123435333', TRUE
       )`, (err, res) => {
       if (!err) {
         console.log('User `Web Admin` created successfully');

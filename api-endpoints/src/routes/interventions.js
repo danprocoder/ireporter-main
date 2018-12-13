@@ -3,6 +3,7 @@ import IncidentController from '../controllers/Incident';
 import verifyJwtToken from '../middlewares/verifyJwtToken';
 import loginRequired from '../middlewares/loginRequired';
 import adminRequired from '../middlewares/adminRequired';
+import adminNotRequired from '../middlewares/adminNotRequired';
 
 const router = express.Router();
 router.use(verifyJwtToken, loginRequired);
@@ -20,17 +21,17 @@ router.get('/api/v1/interventions/:id', (req, res) => {
 });
 
 // Create an intervention record.
-router.post('/api/v1/interventions', (req, res) => {
+router.post('/api/v1/interventions', adminNotRequired, (req, res) => {
   controller.add(req, res);
 });
 
 // Edit a specific intervention record.
-router.patch('/api/v1/interventions/:id', (req, res) => {
+router.patch('/api/v1/interventions/:id', adminNotRequired, (req, res) => {
   controller.update(req, res);
 });
 
 // Deletes a specific intervention record.
-router.delete('/api/v1/interventions/:id', (req, res) => {
+router.delete('/api/v1/interventions/:id', adminNotRequired, (req, res) => {
   controller.delete(req, res);
 });
 
