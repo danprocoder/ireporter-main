@@ -72,7 +72,7 @@ export default class Incident {
       if (row) {
         // If user is not an admin, they can only fetch their own record.
         if (!req.loggedInUser.isadmin && row.createdby != req.loggedInUser.id) {
-          res.status(400).json(response.fail('Record was not created by you'));
+          res.status(403).json(response.fail('Record was not created by you'));
         } else {
           res.status(200).json(response.success(row));
         }
@@ -109,7 +109,7 @@ export default class Incident {
       if (!row) {
         res.status(404).json(response.notFound('Record not found'));
       } else if (row.createdby != req.loggedInUser.id) {
-        res.status(400).json(response.fail('Access forbidden'));
+        res.status(403).json(response.fail('Access forbidden'));
       } else {
         if (validator.validate(rules)) {
           const { title, comment, lat, long } = req.body;
@@ -141,7 +141,7 @@ export default class Incident {
         res.status(404).json(response.notFound('Record does not exists'));
       } else {
         if (['in-draft', 'under-investigation', 'resolved', 'rejected'].indexOf(req.body.status) == -1) {
-          res.status(400).json(response.fail('Bad request'));
+          res.status(400).json(response.fail(`Status can either be 'in-draft', 'under-investigation', 'resolved' or 'rejected'`));
         } else {
           model.updateStatus(type, req.params.id, req.body.status, () => {
             res.status(200).json(response.success({
