@@ -14,6 +14,7 @@ db.query(
   );`, (err, res) => {
     if (err) {
       console.log('Failed to create `users` table.');
+      console.log(err);
     } else {
       console.log('Table `users` created successfully.');
     }
@@ -32,10 +33,13 @@ db.query(
         longitude VARCHAR(15)
       );`, (err, res) => {
         if (!err) {
-          console.log('`incidents` table created successfully');
+          console.log('Table `incidents` created successfully');
         } else {
           console.log('Failed to create `incidents` table');
+          console.log(err);
         }
+
+        process.exit();
       },
     );
   },

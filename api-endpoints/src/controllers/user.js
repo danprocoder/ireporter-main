@@ -3,7 +3,9 @@ import jwt from 'jsonwebtoken';
 import UserModel from '../models/User';
 import Validator from '../helpers/validator';
 import response from '../helpers/response';
-import config from '../../config';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export default class {
   constructor() {
@@ -32,7 +34,7 @@ export default class {
               res.status(200).json(response.success({
                 token: jwt.sign({
                   userId: row.id,
-                }, config.jwt.secret),
+                }, process.env.SECRET_KEY),
                 user: {
                   firstname: row.firstname,
                   lastname: row.lastname,
@@ -99,7 +101,7 @@ export default class {
         res.status(200).json(response.success({
           token: jwt.sign({
             userId,
-          }, config.jwt.secret),
+          }, process.env.SECRET_KEY),
           user: row,
         }));
       });

@@ -4,6 +4,7 @@
   "description": "Add that allows users to report cases of corruption",
   "main": "main.js",
   "dependencies": {
+    "dotenv": "^6.2.0",
     "express": "^4.16.4"
   },
   "devDependencies": {
