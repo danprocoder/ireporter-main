@@ -35,34 +35,34 @@ export default class Validator {
       return true;
     }
 
-    for (const r in rules) {
+    for (const rule in rules) {
       let pass = true;
 
-      if (r == 'required' && !value) {
+      if (rule == 'required' && !value) {
       	pass = false;
-      } else if (/^min_length\[(\d+)\]$/.test(r)) {
-      	const expectedLength = /min_length\[(\d+)\]/.exec(r)[1];
+      } else if (/^min_length\[(\d+)\]$/.test(rule)) {
+      	const expectedLength = /min_length\[(\d+)\]/.exec(rule)[1];
       	if (value.length < expectedLength) {
       	  pass = false;
       	}
-      } else if (r == 'valid_email' && !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)) {
+      } else if (rule == 'valid_email' && !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)) {
       	pass = false;
-      } else if (r == 'valid_mobile' && !/^(\+?234|0)[0-9]{10}$/.test(value)) {
+      } else if (rule == 'valid_mobile' && !/^(\+?234|0)[0-9]{10}$/.test(value)) {
       	pass = false;
-      } else if (r == 'integer' && /[^0-9]/.test(value)) {
+      } else if (rule == 'integer' && /[^0-9]/.test(value)) {
         pass = false;
-      } else if (r == 'alpha' && /[^a-zA-Z]/.test(value)) {
+      } else if (rule == 'alpha' && /[^a-zA-Z]/.test(value)) {
         pass = false;
-      } else if (r == 'numeric' && this._isNumeric(value)) {
+      } else if (rule == 'numeric' && this._isNumeric(value)) {
         pass = false;
-      } else if (r == 'latitude' && !(this._isNumeric(value) && value >= -90 && value <= 90)) {
+      } else if (rule == 'latitude' && !(this._isNumeric(value) && value >= -90 && value <= 90)) {
         pass = false;
-      } else if (r == 'longitude' && !(this._isNumeric(value) && value >= -180 && value <= 180)) {
+      } else if (rule == 'longitude' && !(this._isNumeric(value) && value >= -180 && value <= 180)) {
         pass = false;
       }
 
       if (!pass) {
-        return rules[r];
+        return rules[rule];
       }
     }
 

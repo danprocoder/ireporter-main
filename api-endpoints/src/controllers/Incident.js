@@ -13,19 +13,19 @@ export default class Incident {
     const validator = new Validator(req.body);
     const rules = {
       title: {
-        required: 'Title is required'
+        required: 'Title is required',
       },
       comment: {
         required: 'Comment is required',
-        'min_length[40]': 'Comment should be atleast 40 characters long'
+        'min_length[40]': 'Comment should be atleast 40 characters long',
       },
       lat: {
         optional: true,
-        latitude: 'Latitude must be between -90 and 90'
+        latitude: 'Latitude must be between -90 and 90',
       },
       long: {
         optional: true,
-        longitude: 'Longitude must be between -180 and 180'
+        longitude: 'Longitude must be between -180 and 180',
       }
     };
 
@@ -36,8 +36,8 @@ export default class Incident {
       	createdBy: req.loggedInUser.id,
       	title,
       	comment,
-        latitude: lat ? lat : null,
-        longitude: long ? long : null,
+        latitude: lat && long ? lat : null,
+        longitude: lat && long ? long : null,
       	type: this.type
       }, (row) => {
         res.status(200).json(response.success({
@@ -86,19 +86,19 @@ export default class Incident {
     const validator = new Validator(req.body);
     const rules = {
       title: {
-        required: 'Title is required'
+        required: 'Title is required',
       },
       comment: {
         required: 'Comment is required',
-        'min_length[40]': 'Comment should be atleast 40 characters long'
+        'min_length[40]': 'Comment should be atleast 40 characters long',
       },
       lat: {
         optional: true,
-        latitude: 'Latitude must be between -90 and 90'
+        latitude: 'Latitude must be between -90 and 90',
       },
       long: {
         optional: true,
-        longitude: 'Longitude must be between -180 and 180'
+        longitude: 'Longitude must be between -180 and 180',
       }
     };
 
@@ -117,8 +117,8 @@ export default class Incident {
           model.update(type, req.params.id, {
             title,
             comment,
-            latitude: lat ? lat : null,
-            longitude: long ? long : null
+            latitude: lat && long ? lat : null,
+            longitude: lat && long ? long : null
           }, () => {
             res.status(200).json(response.success({
               id: req.params.id,
