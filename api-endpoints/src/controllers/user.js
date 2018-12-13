@@ -1,9 +1,9 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import UserModel from '../models/User';
 import Validator from '../helpers/validator';
 import response from '../helpers/response';
-import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -60,28 +60,28 @@ export default class {
     const rules = {
       firstname: {
         required: 'Firstname is required',
-        alpha: 'Firstname can only contain letters'
+        alpha: 'Firstname can only contain letters',
       },
       lastname: {
         required: 'Lastname is required',
-        alpha: 'Lastname can only contain letters'
+        alpha: 'Lastname can only contain letters',
       },
       username: {
         required: 'Username is required',
-        alpha: 'Username can only contain letters'
+        alpha: 'Username can only contain letters',
       },
       email: {
         required: 'Email is required',
-        valid_email: 'Please provide a valid email'
+        valid_email: 'Please provide a valid email',
       },
       password: {
         required: 'Password is required',
-        'min_length[8]': 'Password should be atleast 8 characters'
+        'min_length[8]': 'Password should be atleast 8 characters',
       },
       phoneNumber: {
         required: 'Your phone number is required',
-        valid_mobile: 'Phone number format is not correct'
-      }
+        valid_mobile: 'Phone number format is not correct',
+      },
     };
     if (validator.validate(rules)) {
       const {
@@ -94,7 +94,7 @@ export default class {
         username,
         email,
         phoneNumber,
-        password: bcrypt.hashSync(password, bcrypt.genSaltSync())
+        password: bcrypt.hashSync(password, bcrypt.genSaltSync()),
       }, (row) => {
         const userId = row.id;
         row.id = undefined;
@@ -109,4 +109,4 @@ export default class {
       res.status(400).json(response.fail(validator.getErrors()));
     }
   }
-};
+}
