@@ -22,6 +22,7 @@
     "jsonwebtoken": "^8.4.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.7",
+    "nyc": "^13.1.0",
     "pg": "^7.7.1",
     "pg-escape": "^0.2.0",
     "supertest": "^3.3.0"
@@ -29,11 +30,11 @@
   "scripts": {
     "migrate": "babel-node api-endpoints/src/migrations/migrations.js",
     "eslint-fix-api": "eslint api-endpoints --fix",
-    "test": "mocha api-endpoints/test --require babel-register --exit",
+    "test": "nyc mocha --require babel-polyfill --require babel-register ./api-endpoints/test/ --timeout 10000 --exit",
     "build": "babel api-endpoints -d build",
     "start": "babel-watch api-endpoints/main.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run build",
-    "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls"
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
