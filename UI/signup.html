@@ -26,7 +26,7 @@
 		</div>
 	</div>
 	<div>
-		<form role="form" class="signup" id="signup-form" onsubmit="submitForm(event)" method="post">
+		<form role="form" class="signup" id="signup-form" method="post">
 			<div class="header-container t-center">
 				<div class="header">Sign Up</div>
 				<small class="info">All fields are required</small>
@@ -47,41 +47,46 @@
 				</div>
 				<div class="field-section grid-container">
 					<div class="grid-50">
+						<label>Your Username</label>
+						<input type="text" name="username" class="text-field" />
+						<div class="error username"></div>
+					</div>
+					<div class="grid-50">
 						<label>Your Email</label>
 						<input type="text" name="email" class="text-field" />
 						<div class="error email"></div>
-					</div>
-					<div class="grid-50">
-						<label>Your Mobile Number</label>
-						<input type="text" name="mobile" class="text-field" />
-						<div class="error mobile"></div>
 					</div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="field-section grid-container">
 					<div class="grid-50">
+						<label>Your Mobile Number</label>
+						<input type="text" name="mobile" class="text-field" />
+						<div class="error mobile"></div>
+					</div>
+					<div class="grid-50">
 						<label>Your Password</label>
 						<input type="password" name="password" class="text-field" />
 						<div class="error password"></div>
 					</div>
-					<div class="grid-50">
-						<label>Re-enter Password</label>
-						<input type="password" name="password2" class="text-field" />
-						<div class="error password2"></div>
-					</div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="field-section t-center button-section">
-					<input type="submit" class="button" value="Create an Account" />
+					<input type="submit" id="submit-button" class="button" value="Create an Account" />
 				</div>
 			</div>
 		</form>
 	</div>
 
 	<script src="assets/js/validator.js"></script>
+	<script src="assets/js/api.js"></script>
+	<script src="assets/js/app.js"></script>
 	<script>
-	function submitForm(event) {
+	const submitBtn = document.getElementById('submit-button');
+
+	function submitForm(http, event) {
 		event.preventDefault();
+		submitBtn.disabled = true;
 
 	    var errors = document.querySelectorAll('#signup-form .error');
 		for (let i = 0; i < errors.length; i++) {
@@ -91,35 +96,49 @@
 
 		const validator = new FormValidator('signup-form'),
 		  rules = {
-		  	'firstname': ['required'],
-		  	'lastname': ['required'],
-		  	'email': ['required', 'valid_email'],
-		  	'mobile': ['required', 'valid_mobile'],
-		  	'password': ['required', 'min_length[8]'],
-		  	'password2': ['required']
+		  	'firstname': {
+		  		'required': 'Your firstname is required',
+		  		'alpha': 'Firstname can only contain letters'
+		  	},
+		  	'lastname': {
+		  		'required': 'Your lastname is required',
+		  		'alpha': 'Lastname can only contain letters'
+		  	},
+		  	'username': {
+		  		'required': 'Your username is required',
+		  		'alpha': 'Username can only contain letters'
+		  	},
+		  	'email': {
+		  		'required': 'Your email address is required',
+		  		'valid_email': 'Email address provided is not valid'
+		  	},
+		  	'mobile': {
+		  		'required': 'Your mobile number is required',
+		  		'valid_mobile': 'Mobile number format is not valid'
+		  	},
+		  	'password': {
+		  		'required': 'Your password is required',
+		  		'min_length[8]': 'Password should be at least 8 characters'
+		  	},
 		  };
 		if (validator.validate(rules)) {
-      	    window.location = './dashboard.html';
-			// var form = document.getElementById('signup-form').elements;
+			var form = document.getElementById('signup-form').elements;
 
-			// fetch('/api/v1/user/new', {
-			// 	method: 'POST',
-			// 	headers: {
-			// 		'Content-Type': 'application/json'
-			// 	},
-			// 	body: JSON.stringify({
-			// 		firstname: form['firstname'].value,
-			// 		lastname: form['lastname'].value,
-			// 		email: form['email'].value,
-			// 		mobile: form['mobile'].value,
-			// 		password: form['password'].value,
-			// 		password2: form['password2'].value
-			// 	})
-			// }).then(res => {
-			// 	return res.json();
-			// }).then(function(data) {
-			// 	console.log(data);
-			// });
+
+			(http.api('auth/signup')).body({
+				firstname: form['firstname'].value,
+				lastname: form['lastname'].value,
+				email: form['email'].value,
+				phoneNumber: form['mobile'].value,
+				password: form['password'].value,
+				username: form['username'].value
+			}).post((data) => {
+				app.setAuthToken(data[0].token);
+				http.redirect('./dashboard.html');
+			}, () => {
+				submitBtn.disabled = false;
+				console.log('Failed to signup. Try again.');
+			});
 		} else {
 			const errors = validator.getErrors();
 	      	for (const name in errors) {
@@ -127,8 +146,19 @@
 	      	  errMessage.innerHTML = errors[name];
 	      	  errMessage.classList.add('show');
 	      	}
+
+	      	submitBtn.disabled = false;
 		}
 	}
+
+
+	app.setAuthRequired(false, true);
+	app.ready((http) => {
+	  document.getElementById('signup-form').onsubmit = (event) => {
+	  	submitForm(http, event);
+	  };
+	});
+	app.start();
 	</script>
 </body>
 </html>

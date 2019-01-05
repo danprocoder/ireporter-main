@@ -181,6 +181,10 @@ textarea {
     background: #ca2745;
 }
 
+.button:disabled {
+    background: #fda0a0;
+}
+
 form label {
     font-weight: 700;
     font-size: 13px;

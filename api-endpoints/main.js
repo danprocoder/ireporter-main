@@ -10,10 +10,11 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, '../UI')));
+
 app.use(userRouter);
 app.use(redFlagRouter);
 app.use(interventionRouter);
-app.use(express.static(path.join(__dirname, '../UI')));
 
 app.listen(process.env.PORT || 8001, () => {
   console.log('Server started: 8001');
