@@ -26,7 +26,7 @@
 		</div>
 	</div>
 	<div>
-		<form role="form" class="signup" id="signup-form" onsubmit="submitForm(event)" method="post">
+		<form role="form" class="signup" id="signup-form" method="post">
 			<div class="header-container t-center">
 				<div class="header">Sign Up</div>
 				<small class="info">All fields are required</small>
@@ -80,10 +80,11 @@
 
 	<script src="assets/js/validator.js"></script>
 	<script src="assets/js/api.js"></script>
+	<script src="assets/js/app.js"></script>
 	<script>
 	const submitBtn = document.getElementById('submit-button');
 
-	function submitForm(event) {
+	function submitForm(http, event) {
 		event.preventDefault();
 		submitBtn.disabled = true;
 
@@ -124,7 +125,7 @@
 			var form = document.getElementById('signup-form').elements;
 
 
-			(new API('auth/signup')).body({
+			(http.api('auth/signup')).body({
 				firstname: form['firstname'].value,
 				lastname: form['lastname'].value,
 				email: form['email'].value,
@@ -132,11 +133,8 @@
 				password: form['password'].value,
 				username: form['username'].value
 			}).post((data) => {
-				var d = new Date();
-				d.setTime(d.getTime() + (30*24*60*60*1000));
-				var expires = d.toUTCString();
-				document.cookie = `token=${data[0].token};expires=${expires};path=/`;
-				window.location = './dashboard.html';
+				app.setAuthToken(data[0].token);
+				http.redirect('./dashboard.html');
 			}, () => {
 				submitBtn.disabled = false;
 				console.log('Failed to signup. Try again.');
@@ -152,6 +150,15 @@
 	      	submitBtn.disabled = false;
 		}
 	}
+
+
+	app.setAuthRequired(false, true);
+	app.ready((http) => {
+	  document.getElementById('signup-form').onsubmit = (event) => {
+	  	submitForm(http, event);
+	  };
+	});
+	app.start();
 	</script>
 </body>
 </html>
