@@ -36,7 +36,7 @@ class FormValidator {
     if (rules.hasOwnProperty('optional') && rules.optional === true && !value) {
       return true;
     }
-    
+
     for (const rule in rules) {
       let pass = true;
 

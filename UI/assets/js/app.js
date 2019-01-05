@@ -1,14 +1,14 @@
 const cookieManager = {
   set(name, value) {
-	var d = new Date();
-	d.setTime(d.getTime() + (30*24*60*60*1000));
-	var expires = d.toUTCString();
-	
-	document.cookie = `${name}=${value};expires=${expires};path=/`;
+    const d = new Date();
+    d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
+    const expires = d.toUTCString();
+
+    document.cookie = `${name}=${value};expires=${expires};path=/`;
   },
 
   get(name) {
-    var cookies = document.cookie.split(';');
+    const cookies = document.cookie.split(';');
     for (let i = 0; i < cookies.length; i++) {
       const cookieVar = cookies[i].split('=');
       if (cookieVar[0] == name) {
@@ -18,16 +18,16 @@ const cookieManager = {
   },
 
   delete(name) {
-   document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
-  }
+    document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
+  },
 };
 
 const app = {
   auth: {
     required: false,
-    redirect: false
+    redirect: false,
   },
-  
+
   setAuthRequired(required, redirect) {
     this.auth = { required, redirect };
   },
@@ -51,14 +51,12 @@ const app = {
       	window.location = './login.html';
       	return;
       }
-    } else {
-      if (token && this.auth.redirect) {
+    } else if (token && this.auth.redirect) {
       	window.location = './dashboard.html';
       	return;
-      }
     }
 
-    if (typeof app.readyCallback == 'function') {
+    if (typeof app.readyCallback === 'function') {
   	  window.addEventListener('load', (e) => {
   	    app.readyCallback({
   	      api(endpoint) {
@@ -67,9 +65,9 @@ const app = {
 
   	      redirect(url) {
   	      	window.location = url;
-  	      }
+  	      },
   	    });
   	  });
     }
-  }
+  },
 };

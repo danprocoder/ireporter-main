@@ -26,7 +26,7 @@
 		</div>
 	</div>
 	<div>
-		<form role="form" class="login" id="login-form" onsubmit="authUser(event)" method="post">
+		<form role="form" class="login" id="login-form" method="post">
 			<div class="header-container">
 				<div class="header t-center">Log In</div>
 			</div>
@@ -41,53 +41,64 @@
 				<div class="error password"></div>
 			</div>
 			<div class="field-section t-center button-section">
-				<!-- <a href="dashboard.html" class="button">Log In</a> -->
-				<input type="submit" class="button" value="Log In" />
+				<input type="submit" class="button" id="login-btn" value="Log In" />
 			</div>
 		</form>
 	</div>
 
 	<script src="assets/js/validator.js"></script>
+	<script src="assets/js/api.js"></script>
+	<script src="assets/js/app.js"></script>
 	<script>
-	function authUser(event) {
-	  event.preventDefault();
+	app.setAuthRequired(false, true);
+	app.ready(http => {
+      const loginBtn = document.getElementById('login-btn');
 
-	  var errors = document.querySelectorAll('#login-form .error');
-	  for (let i = 0; i < errors.length; i++) {
-	  	errors[i].innerHTML = '';
-	  	errors[i].classList.remove('show');
-	  }
+      const form = document.getElementById('login-form');
+      form.onsubmit = (event) => {
+      	event.preventDefault();
+      	loginBtn.disabled = true;
 
-      const validator = new FormValidator('login-form'),
-      		rules = {
-      			'email': ['required'],
-      			'password': ['required']
-      		};
-      if (validator.validate(rules)) {
-      	window.location = './dashboard.html';
-   //    	let form = document.getElementById('login-form');
-	  //   fetch('/api/v1/user/auth', {
-		 //  method: 'POST',
-		 //  headers: {
-			//   'Content-Type': 'application/json'
-		 //  },
-		 //  body: JSON.stringify({
-			// email: form['email'].value,
-			// password: form['password'].value
-		 //  })
-	  //   }).then(res => 
-		 //  res.json()).then((data) => {
-		 //  console.log(data);
-	  //   });
-      } else {
-      	const errors = validator.getErrors();
-      	for (const name in errors) {
-      	  const errMessage = document.querySelector('#login-form .error.' + name);
-      	  errMessage.innerHTML = errors[name];
-      	  errMessage.classList.add('show');
-      	}
+      	// Clear all error messages.
+      	var errors = document.querySelectorAll('#login-form .error');
+		for (let i = 0; i < errors.length; i++) {
+		  errors[i].innerHTML = '';
+		  errors[i].classList.remove('show');
+		}
+
+	    const validator = new FormValidator('login-form'),
+  		  rules = {
+  		    'email': {
+  		      'required': 'Please provide your email address',
+  		    },
+  		    'password': {
+  		      'required': 'Please provide your password',
+  		    }
+  		  };
+	    if (validator.validate(rules)) {
+	      http.api('auth/login').body({
+            email: form.elements['email'].value,
+            password: form.elements['password'].value
+	      }).post((data) => {
+            app.setAuthToken(data[0].token);
+            http.redirect('./dashboard.html');
+	      }, (error) => {
+	      	loginBtn.disabled = false;
+	      	console.log(error);
+	      });
+	    } else {
+	      const errors = validator.getErrors();
+	      for (const name in errors) {
+	      	const errMessage = document.querySelector('#login-form .error.' + name);
+	      	errMessage.innerHTML = errors[name];
+	      	errMessage.classList.add('show');
+	      }
+
+	      loginBtn.disabled = false;
+	    }
       }
-	}
+	});
+	app.start();
 	</script>
 </body>
 </html>
