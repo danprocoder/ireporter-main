@@ -10,6 +10,69 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/user.css" />
 
 	<script src="assets/js/ireporter.js"></script>
+	<script src="assets/js/api.js"></script>
+	<script src="assets/js/app.js"></script>
+	<script>
+	function showMap(lat, long) {
+      const map = new google.maps.Map(
+      	document.getElementById('map-container'),
+      	{
+      	  zoom: 4,
+      	  center: {
+      	  	lat,
+      	  	lng: long
+      	  }
+      	});
+      const marker = new google.maps.Marker({
+      	position: {
+      	  lat,
+      	  lng: long
+      	},
+      	map
+      });
+	}
+	</script>
+	<script>
+	app.setAuthRequired(true);
+	app.ready(http => {
+	  const id = http.params['id'];
+	  if (typeof id == 'undefined') {
+	  	http.redirect('./red-flags.html');
+	  }
+
+	  http.api(`red-flags/${id}`).get((data) => {
+	  	const incident = data[0];
+
+	  	// Title
+	  	app.dom.selector('.js-title-text').html(incident.title);
+
+	  	// Status
+	  	let status = incident.status.split('-');
+	  	status = status.join(' ');
+	  	app.dom.selector('.record-status').addClass(incident.status).html(status);
+
+	  	// Date
+	  	app.dom.selector('.js-time-text').html(incident.createdon);
+
+	  	// Comment
+	    app.dom.selector('.record-content .comment').html(incident.comment);
+
+        // Add map
+	    if (incident.latitude && incident.longitude) {
+	      app.dom.selector('.record-content').addClass('has-map');
+
+	      app.dom.selector('.js-coords-text').html(`(${incident.latitude}&deg;, ${incident.longitude}&deg;)`);
+
+	      var googleMapApi = document.createElement('script')
+	      googleMapApi.setAttribute('src', `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=showMap(${incident.latitude},${incident.longitude})`);
+	      document.head.appendChild(googleMapApi);
+	    }
+	  }, (error) => {
+	  	console.log(error);
+	  });
+	});
+	app.start();
+	</script>
 </head>
 <body>
 	<div class="red-bg">
@@ -36,17 +99,15 @@
 	<div>
 		<div class="container">
 			<div>
-				<div class="navigation"><a href="red-flags.html">Red Flags</a> / Some corruption related title</div>
-				<div class="title">Some corruption related title</div>
-				<div class="info-wrapper"><span class="info date">Created 11:08PM 14 Nov, 2018</span> <span class="info record-status under-investigation">Under Investigation</span></div>
+				<div class="navigation"><a href="red-flags.html">Red Flags</a> / <span class="js-title-text"></span></div>
+				<div class="title js-title-text"></div>
+				<div class="info-wrapper"><span class="info date">Created <span class="js-time-text"></span></span> <span class="info record-status no-select"></span></div>
 			</div>
-			<div class="record-content has-map">
-				<div class="comment">
-					Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit.
-				</div>
+			<div class="record-content">
+				<div class="comment"></div>
 				<div class="map-wrapper">
-					<div><i class="fa fa-map-marker"></i> Lat: 50, Long: 75</div>
-					<div id="map-container"><img src="assets/images/map.png"></div>
+					<div><i class="fa fa-map-marker"></i> <span class="js-coords-text"></span></div>
+					<div id="map-container"></div>
 				</div>
 				<!-- <div class="media-section">
 					<div class="section-header"><i class="fa fa-image"></i> Media</div>

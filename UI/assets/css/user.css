@@ -37,7 +37,7 @@ table td {
 	font-size: 12px;
 }
 
-.record-status.pending {
+.record-status.in-draft {
 	border-color: gray;
 	color: gray;
 }
