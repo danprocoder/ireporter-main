@@ -1,6 +1,13 @@
 class API {
   constructor(url) {
     this.endpoint = url;
+    this.headers = {
+      'Content-Type': 'application/json',
+    };
+  }
+  
+  header(key, value) {
+  	this.headers[key] = value;
   }
 
   body(body) {
@@ -27,15 +34,13 @@ class API {
   _fetch(method, success, error) {
     this.fetch = fetch(`/api/v1/${this.endpoint}`, {
       method,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: this.headers,
       body: JSON.stringify(this.body),
     }).then(res => res.json()).then((data) => {
       if (data.status == 200) {
-	        	success(data.data);
+	    success(data.data);
       } else {
-        error();
+        error(data);
       }
     }).catch(() => {
       error();

@@ -70,4 +70,8 @@ class FormValidator {
 
     return true;
   }
+
+  _isNumeric(value) {
+    return /[-+]?[0-9]+(\.[0-9]+)?/.test(value);
+  }
 }
