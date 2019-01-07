@@ -45,6 +45,35 @@ class DOMSelector {
   }
 }
 
+class Table {
+  constructor(id) {
+    this.table = document.getElementById(id);
+    this.dataSet = [];
+    this.rowView = null;
+  }
+
+  setDataSet(dataSet) {
+    this.dataSet = dataSet;
+    return this;
+  }
+
+  setRowView(view) {
+    this.rowView = view;
+  }
+
+  remove(index) {
+    
+  }
+
+  draw() {
+    let buffer = '';
+    for (let i = 0, serialCounter = 1; i < this.dataSet.length; i++, serialCounter++) {
+      buffer += this.rowView(this.dataSet[i], serialCounter);
+    }
+    this.table.querySelector('tbody').innerHTML = buffer;
+  }
+}
+
 class Http {
   constructor() {
     this.params = this._getUrlParams();
@@ -146,5 +175,9 @@ const app = {
 
   form(id) {
     return new Form(id);
+  },
+
+  table(id) {
+    return new Table(id);
   },
 };
