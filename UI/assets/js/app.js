@@ -1,14 +1,64 @@
+class Form {
+  constructor(id) {
+    this.form = document.getElementById(id);
+  }
+
+  hideFieldErrors() {
+    var errors = this.form.querySelectorAll('.error');
+    for (let i = 0; i < errors.length; i++) {
+      errors[i].innerHTML = '';
+      errors[i].classList.remove('show');
+    }
+  }
+
+  showFieldErrors(errors) {
+    for (const name in errors) {
+      const errMessage = this.form.querySelector('.error.' + name);
+      errMessage.innerHTML = errors[name];
+      errMessage.classList.add('show');
+    }
+  }
+}
+
+class Http {
+  constructor() {
+    this.params = this._getUrlParams();
+  }
+
+  _getUrlParams() {
+    const params = {};
+
+    const query = window.location.search.substr(1).split('&');
+    for (let i = 0; i < query.length; i++) {
+      const param = query[i].split('=');
+      params[ decodeURIComponent(param[0]) ] = decodeURIComponent(param[1]);
+    }
+
+    return params;
+  }
+
+  api(endpoint) {
+    const api = new API(endpoint);
+    api.header('x-access-token', cookieManager.get('token'));
+    return api;
+  }
+
+  redirect(url) {
+    window.location = url;
+  }
+}
+
 const cookieManager = {
   set(name, value) {
-	var d = new Date();
-	d.setTime(d.getTime() + (30*24*60*60*1000));
-	var expires = d.toUTCString();
-	
-	document.cookie = `${name}=${value};expires=${expires};path=/`;
+    const d = new Date();
+    d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
+    const expires = d.toUTCString();
+
+    document.cookie = `${name}=${value};expires=${expires};path=/`;
   },
 
   get(name) {
-    var cookies = document.cookie.split(';');
+    const cookies = document.cookie.split(';');
     for (let i = 0; i < cookies.length; i++) {
       const cookieVar = cookies[i].split('=');
       if (cookieVar[0] == name) {
@@ -18,17 +68,17 @@ const cookieManager = {
   },
 
   delete(name) {
-   document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
-  }
+    document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
+  },
 };
 
 const app = {
   auth: {
     required: false,
-    redirect: false
+    redirect: false,
   },
-  
-  setAuthRequired(required, redirect) {
+
+  setAuthRequired(required, redirect=false) {
     this.auth = { required, redirect };
   },
 
@@ -51,25 +101,19 @@ const app = {
       	window.location = './login.html';
       	return;
       }
-    } else {
-      if (token && this.auth.redirect) {
+    } else if (token && this.auth.redirect) {
       	window.location = './dashboard.html';
       	return;
-      }
     }
 
-    if (typeof app.readyCallback == 'function') {
+    if (typeof app.readyCallback === 'function') {
   	  window.addEventListener('load', (e) => {
-  	    app.readyCallback({
-  	      api(endpoint) {
-  	      	return new API(endpoint);
-  	      },
-
-  	      redirect(url) {
-  	      	window.location = url;
-  	      }
-  	    });
+  	    app.readyCallback(new Http());
   	  });
     }
-  }
+  },
+
+  form(id) {
+    return new Form(id);
+  },
 };

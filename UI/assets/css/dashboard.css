@@ -13,10 +13,6 @@
   transition: background 0.2s;
 }
 
-.gray-bg:hover {
-  background: #e5e5e5;
-}
-
 .gray-bg .button {
   margin-top: 15px;
 }

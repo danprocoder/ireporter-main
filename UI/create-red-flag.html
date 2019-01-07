@@ -9,6 +9,70 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/user.css" />
 
 	<script src="assets/js/ireporter.js"></script>
+	<script src="assets/js/validator.js"></script>
+	<script src="assets/js/api.js"></script>
+	<script src="assets/js/app.js"></script>
+	<script>
+	app.setAuthRequired(true);
+	app.ready(http => {
+      const mode = http.params['action'] == 'edit' && typeof http.params['id'] !== 'undefined' ? 'edit' : 'add';
+
+	  const form = document.getElementById('incident-form');
+	  const submitBtn = document.getElementById('submit-btn');
+
+	  form.onsubmit = (event) => {
+	  	event.preventDefault();
+	  	submitBtn.disabled = true;
+
+	  	app.form('incident-form').hideFieldErrors();
+
+	  	const validator = new FormValidator('incident-form');
+	  	const rules = {
+	  	  title: {
+	  	  	required: 'Title is required',
+	  	  },
+	  	  comment: {
+	  	  	required: 'Comment is required',
+	  	  	'min_length[40]': 'Comment should be at least 40 characters',
+	  	  },
+	  	  lat: {
+	  	  	optional: true,
+	  	  	latitude: 'Latitude must be between -90 and 90',
+	  	  },
+	  	  long: {
+	  	  	optional: true,
+	  	  	longitude: 'Longitude must be between -180 and 180',
+	  	  }
+	  	};
+	  	if (validator.validate(rules)) {
+          const endpoint = http.api('red-flags').body({
+          	title: form.elements['title'].value,
+          	comment: form.elements['comment'].value,
+          	lat: form.elements['lat'].value,
+          	long: form.elements['long'].value,
+          });
+          const onApiSuccess = (data) => {
+          	http.redirect(`./view-red-flag.html?id=${data[0].id}`);
+          };
+          const onApiError = (error) => {
+          	submitBtn.disabled = false;
+          	console.log(error);
+          };
+
+          if (mode == 'add') {
+          	endpoint.post(onApiSuccess, onApiError);
+          } else if (mode == 'edit') {
+          	endpoint.patch(onApiSuccess, onApiError);
+          }
+	  	} else {
+	  	  app.form('incident-form').showFieldErrors(validator.getErrors());
+
+	  	  submitBtn.disabled = false;
+	  	}
+	  };
+	});
+	app.start();
+	</script>
 </head>
 <body>
 	<div class="red-bg">
@@ -39,31 +103,38 @@
 				<div style="margin-top:9px;"><small><span class="required">*</span> Required fields</small></div>
 			</div>
 			<div>
-				<form role="form">
+				<form role="form" id="incident-form">
 					<div class="field-section">
 						<label>Title <span class="required">*</span></label>
 						<input type="text" name="title" class="text-field" />
+						<div class="error title"></div>
 					</div>
 					<div class="field-section">
 						<label>Comment <span class="required">*</span></label>
-						<textarea name="title" class="text-field" rows="14"></textarea>
+						<textarea name="comment" class="text-field" rows="14"></textarea>
+						<div class="error comment"></div>
 					</div>
 					<div class="form-section">
 						<div class="form-section-header"><i class="fa fa-map-marker"></i> Add Geo Location</div>
-						<div class="form-section-body grid-container">
-							<div class="grid-10">
-								<label>Lat</label>
-								<input type="text" name="lat" class="text-field" />
+						<div class="form-section-body">
+							<div class="grid-container">
+								<div class="grid-10">
+									<label>Lat</label>
+									<input type="text" name="lat" class="text-field" />
+								</div>
+								<div class="grid-10">
+									<label>Long</label>
+									<input type="text" name="long" class="text-field" />
+								</div>
+								<div class="clearfix"></div>
 							</div>
-							<div class="grid-10">
-								<label>Long</label>
-								<input type="text" name="long" class="text-field" />
-							</div>
-							<div class="clearfix"></div>
+
+							<div class="error lat"></div>
+							<div class="error long"></div>
 						</div>
 					</div>
 					<div class="field-section">
-						<a href="red-flags.html" class="button">Create a Red Flag</a>
+						<input type="submit" class="button" value="Create a Red Flag" id="submit-btn" />
 					</div>
 				</form>
 			</div>

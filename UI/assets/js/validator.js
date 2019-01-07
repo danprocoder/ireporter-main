@@ -36,7 +36,7 @@ class FormValidator {
     if (rules.hasOwnProperty('optional') && rules.optional === true && !value) {
       return true;
     }
-    
+
     for (const rule in rules) {
       let pass = true;
 
@@ -69,5 +69,9 @@ class FormValidator {
     }
 
     return true;
+  }
+
+  _isNumeric(value) {
+    return /[-+]?[0-9]+(\.[0-9]+)?/.test(value);
   }
 }
