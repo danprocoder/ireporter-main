@@ -20,6 +20,31 @@ class Form {
   }
 }
 
+class DOMSelector {
+  constructor(parent, selector) {
+    this.elements = parent.querySelectorAll(selector);
+  }
+
+  html(html) {
+    this._iter(e => {
+      e.innerHTML = html;
+    });
+  }
+
+  addClass(cl) {
+    this._iter(e => {
+      e.classList.add(cl);
+    });
+    return this;
+  }
+
+  _iter(callback) {
+    for (let i = 0; i < this.elements.length; i++) {
+      callback(this.elements[i]);
+    }
+  }
+}
+
 class Http {
   constructor() {
     this.params = this._getUrlParams();
@@ -76,6 +101,12 @@ const app = {
   auth: {
     required: false,
     redirect: false,
+  },
+
+  dom: {
+    selector(selector) {
+      return new DOMSelector(document, selector);
+    }
   },
 
   setAuthRequired(required, redirect=false) {

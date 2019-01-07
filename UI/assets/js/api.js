@@ -42,8 +42,8 @@ class API {
       } else {
         error(data);
       }
-    }).catch(() => {
-      error();
+    }).catch((e) => {
+      error(e);
     });
   }
 }
