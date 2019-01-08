@@ -48,7 +48,7 @@
 
 	  	// Status
 	  	let status = incident.status.split('-');
-	  	status = status.join(' ');
+	  	status = status.join(' ').toUpperCase();
 	  	app.dom.selector('.record-status').addClass(incident.status).html(status);
 
 	  	// Date
@@ -64,7 +64,8 @@
 	      app.dom.selector('.js-coords-text').html(`(${incident.latitude}&deg;, ${incident.longitude}&deg;)`);
 
 	      var googleMapApi = document.createElement('script')
-	      googleMapApi.setAttribute('src', `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=showMap(${incident.latitude},${incident.longitude})`);
+	      googleMapApi.setAttribute('src',
+	      	`https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=showMap(${incident.latitude},${incident.longitude})`);
 	      document.head.appendChild(googleMapApi);
 	    }
 	  }, (error) => {

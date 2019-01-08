@@ -10,6 +10,41 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/records.css" />
 
 	<script src="assets/js/ireporter.js"></script>
+	<script src="assets/js/api.js"></script>
+	<script src="assets/js/app.js"></script>
+	<script>
+	let incidentTable = null;
+
+	app.setAuthRequired(true);
+	app.ready((http) => {
+	  incidentTable = app.table('incident-table');
+	  incidentTable.setRowView((data, serial) => {
+	    const status = data.status.replace('-', ' ').toUpperCase();
+
+	  	let row = `<tr>
+	  	  <td>${serial}</td>
+	  	  <td><a href="./view-red-flag.html?id=${data.id}">${data.title}</a></td>
+	  	  <td>${data.createdon}</td>
+	  	  <td><span class="record-status no-select ${data.status}">${status}</span></td>
+	  	  <td>
+	  	    <a href="./view-red-flag.html?id=${data.id}" class="action blue"><i class="fa fa-eye"></i> View</a>`;
+	  	if (data.status == 'in-draft') {
+	  	  row += `
+	  	    <a href="./create-red-flag.html?action=edit&id=${data.id}" class="action blue"><i class="fa fa-pencil"></i> Edit</a>
+	  	    <a href="#" class="action red"><i class="fa fa-trash"></i> Delete</a>`;
+	  	}
+	  	row += '</td></tr>';
+	  	return row;
+	  });
+
+	  http.api('red-flags').get((data) => {
+	  	incidentTable.setDataSet(data).draw();
+	  }, (error) => {
+        console.log(error);
+	  });
+	});
+	app.start();
+	</script>
 </head>
 <body>
 	<div class="red-bg">
@@ -52,7 +87,7 @@
 					<li class="active"><a href="#">All</a></li>
 				</ul>
 				<div class="f-right">
-					Showing 1 - 5 of 5
+					<!-- Showing 1 - 5 of 5 -->
 					<div class="search-box">
 						<input type="text" placeholder="Search title" name="q" class="text-field" />
 						<button><i class="fa fa-search"></i></button>
@@ -62,7 +97,7 @@
 			</div>
 			<div class="content">
 				<div class="table-wrapper">
-					<table>
+					<table id="incident-table">
 						<thead>
 							<th>#</th>
 							<th>Title</th>
@@ -70,66 +105,7 @@
 							<th>Status</th>
 							<th>Action</th>
 						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Snake ate &#8358;10m</td>
-								<td>11:08:45 11-12-2018</td>
-								<td><span class="record-status pending no-select">IN DRAFT</span></td>
-								<td>
-									<a href="view-red-flag.html" class="action blue"><i class="fa fa-eye"></i> View</a>
-									<a href="#" class="action blue"><i class="fa fa-pencil"></i> Edit</a>
-									<a href="#" class="action red"><i class="fa fa-trash"></i> Delete</a>
-								</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>Snake ate &#8358;10m</td>
-								<td>11:08:45 11-12-2018</td>
-								<td><span class="record-status pending no-select">IN DRAFT</span></td>
-								<td>
-									<a href="view-red-flag.html" class="action blue"><i class="fa fa-eye"></i> View</a>
-									<a href="#" class="action blue"><i class="fa fa-pencil"></i> Edit</a>
-									<a href="#" class="action red"><i class="fa fa-trash"></i> Delete</a>
-								</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>Snake ate &#8358;10m</td>
-								<td>11:08:45 11-12-2018</td>
-								<td><span class="record-status resolved no-select">RESOLVED</span></td>
-								<td>
-									<a href="view-red-flag.html" class="action blue"><i class="fa fa-eye"></i> View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>Snake ate &#8358;10m</td>
-								<td>11:08:45 11-12-2018</td>
-								<td><span class="record-status under-investigation no-select">UNDER INVESTIGATION</span></td>
-								<td>
-									<a href="view-red-flag.html" class="action blue"><i class="fa fa-eye"></i> View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td>Snake ate &#8358;10m</td>
-								<td>11:08:45 11-12-2018</td>
-								<td><span class="record-status rejected no-select">REJECTED</span></td>
-								<td>
-									<a href="view-red-flag.html" class="action blue"><i class="fa fa-eye"></i> View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>5</td>
-								<td>Snake ate &#8358;10m</td>
-								<td>11:08:45 11-12-2018</td>
-								<td><span class="record-status rejected no-select">REJECTED</span></td>
-								<td>
-									<a href="view-red-flag.html" class="action blue"><i class="fa fa-eye"></i> View</a>
-								</td>
-							</tr>
-						</tbody>
+						<tbody></tbody>
 					</table>
 				</div>
 				<!-- <div class="pagination-wrapper">
