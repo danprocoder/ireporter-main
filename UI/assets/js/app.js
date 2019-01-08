@@ -18,6 +18,27 @@ class Form {
       errMessage.classList.add('show');
     }
   }
+
+  field(name) {
+    const element = this.form.elements[name];
+    return {
+      element,
+      value() {
+        if (arguments.length > 0) {
+          this.element.value = arguments[0];
+        } else {
+          return this.element.value;
+        }
+      },
+    };
+  }
+
+  onsubmit(callback) {
+    const instance = this;
+    this.form.onsubmit = (event) => {
+      callback(event, instance);
+    };
+  }
 }
 
 class DOMSelector {
@@ -168,7 +189,7 @@ const app = {
 
     if (typeof app.readyCallback === 'function') {
   	  window.addEventListener('load', (e) => {
-  	    app.readyCallback(new Http());
+  	    app.readyCallback(new Http(), app.dom);
   	  });
     }
   },

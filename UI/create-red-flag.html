@@ -13,18 +13,13 @@
 	<script src="assets/js/api.js"></script>
 	<script src="assets/js/app.js"></script>
 	<script>
-	app.setAuthRequired(true);
-	app.ready(http => {
-      const mode = http.params['action'] == 'edit' && typeof http.params['id'] !== 'undefined' ? 'edit' : 'add';
+	function onSubmit(event, form, mode, http) {
+	  event.preventDefault();
 
-	  const form = document.getElementById('incident-form');
 	  const submitBtn = document.getElementById('submit-btn');
+	  submitBtn.disabled = true;
 
-	  form.onsubmit = (event) => {
-	  	event.preventDefault();
-	  	submitBtn.disabled = true;
-
-	  	app.form('incident-form').hideFieldErrors();
+	  form.hideFieldErrors();
 
 	  	const validator = new FormValidator('incident-form');
 	  	const rules = {
@@ -45,31 +40,64 @@
 	  	  }
 	  	};
 	  	if (validator.validate(rules)) {
-          const endpoint = http.api('red-flags').body({
-          	title: form.elements['title'].value,
-          	comment: form.elements['comment'].value,
-          	lat: form.elements['lat'].value,
-          	long: form.elements['long'].value,
-          });
-          const onApiSuccess = (data) => {
-          	http.redirect(`./view-red-flag.html?id=${data[0].id}`);
-          };
-          const onApiError = (error) => {
-          	submitBtn.disabled = false;
-          	console.log(error);
-          };
+	  	  const url = (mode == 'edit' ? `red-flags/${http.params.id}` : 'red-flags');
+	      const endpoint = http.api(url).body({
+	      	title: form.field('title').value(),
+	      	comment: form.field('comment').value(),
+	      	lat: form.field('lat').value(),
+	      	long: form.field('long').value(),
+	      });
+	      const onApiSuccess = (data) => {
+	      	http.redirect(`./view-red-flag.html?id=${data[0].id}`);
+	      };
+	      const onApiError = (error) => {
+	      	submitBtn.disabled = false;
+	      	console.log(error);
+	      };
 
-          if (mode == 'add') {
-          	endpoint.post(onApiSuccess, onApiError);
-          } else if (mode == 'edit') {
-          	endpoint.patch(onApiSuccess, onApiError);
-          }
+	      if (mode == 'add') {
+	      	endpoint.post(onApiSuccess, onApiError);
+	      } else if (mode == 'edit') {
+	      	endpoint.patch(onApiSuccess, onApiError);
+	      }
 	  	} else {
-	  	  app.form('incident-form').showFieldErrors(validator.getErrors());
+	  	  form.showFieldErrors(validator.getErrors());
 
 	  	  submitBtn.disabled = false;
 	  	}
-	  };
+	  }
+
+	app.setAuthRequired(true);
+	app.ready((http, dom) => {
+      const mode = http.params['action'] == 'edit' && typeof http.params['id'] !== 'undefined' ? 'edit' : 'add';
+      
+      const incidentForm = app.form('incident-form');
+
+      // Pre-populate the form if mode is edit
+      if (mode == 'edit') {
+      	http.api(`red-flags/${http.params.id}`).get((data) => {
+      	  const incident = data[0];
+
+          incidentForm.field('title').value(incident.title);
+
+          incidentForm.field('comment').value(incident.comment);
+
+          if (incident.latitude && incident.longitude) {
+          	incidentForm.field('lat').value(incident.latitude);
+          	incidentForm.field('long').value(incident.longitude);
+          }
+
+          incidentForm.onsubmit((event, form) => {
+          	onSubmit(event, form, mode, http);
+          });
+      	}, (error) => {
+
+      	});
+      } else if (mode == 'add') {
+      	incidentForm.onsubmit((event, form) => {
+      		onSubmit(event, form, mode, http);
+      	});
+      }
 	});
 	app.start();
 	</script>
