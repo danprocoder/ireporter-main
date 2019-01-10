@@ -8,7 +8,15 @@ const app = express();
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'https://danprocoder.github.io');
-  next();
+  res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, PATCH');
+  res.header('Access-Control-Allow-Headers', '*');
+  
+  // Handle preflight requests.
+  if (req.method == 'OPTIONS') {
+  	res.send(200);
+  } else {
+    next();
+  }
 });
 
 app.use(express.urlencoded({

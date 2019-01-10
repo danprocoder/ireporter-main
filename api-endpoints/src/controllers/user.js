@@ -50,7 +50,7 @@ export default class {
         }
       });
     } else {
-      res.status(400).json(validator.getErrors());
+      res.status(400).json(response.fail(validator.getErrors()));
     }
   }
 
