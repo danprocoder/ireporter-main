@@ -82,14 +82,19 @@ class Table {
     this.rowView = view;
   }
 
+  dataAt(index) {
+    return this.dataSet[index];
+  }
+
   remove(index) {
-    
+    this.dataSet.splice(index, 1);
+    this.draw();
   }
 
   draw() {
     let buffer = '';
     for (let i = 0, serialCounter = 1; i < this.dataSet.length; i++, serialCounter++) {
-      buffer += this.rowView(this.dataSet[i], serialCounter);
+      buffer += this.rowView(this.dataSet[i], serialCounter, i);
     }
     this.table.querySelector('tbody').innerHTML = buffer;
   }

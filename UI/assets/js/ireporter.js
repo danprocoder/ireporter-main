@@ -20,6 +20,34 @@ class Dropdown {
   }
 }
 
+class Modal {
+  constructor(id) {
+    this.container = document.querySelector('.modal-container');
+    this.modal = this.container.querySelector(`.modal#${id}`);
+
+    const obj = this;
+    this.modal.querySelector('.close').onclick = (event) => {
+      obj.hide();
+    };
+  }
+
+  show() {
+    this.container.style.display = 'block';
+    this.modal.style.display = 'block';
+  }
+
+  hide() {
+    this.modal.style.display = 'none';
+    this.container.style.display = 'none';
+  }
+}
+
+class QuestionModal extends Modal {
+  onYes(callback) {
+    this.modal.querySelector('.modal-btn.yes').onclick = callback;
+  }
+}
+
 const elements = [];
 
 const classMap = {
