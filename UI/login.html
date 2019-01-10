@@ -3,6 +3,8 @@
 <head>
 	<title>Log In | iReporter</title>
 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 	<link rel="stylesheet" type="text/css" href="assets/css/ireporter.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/navbar1.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/a.css" />
@@ -69,7 +71,8 @@
 	    const validator = new FormValidator('login-form'),
   		  rules = {
   		    'email': {
-  		      'required': 'Please provide your email address',
+  		      'required': 'Your email address is required',
+  		      valid_email: 'Email address is not valid',
   		    },
   		    'password': {
   		      'required': 'Please provide your password',
@@ -84,7 +87,10 @@
             http.redirect('./dashboard.html');
 	      }, (error) => {
 	      	loginBtn.disabled = false;
-	      	console.log(error);
+
+	      	if (typeof error.error == 'string') {
+	      	  app.toast.error(error.error);
+	      	}
 	      });
 	    } else {
 	      const errors = validator.getErrors();

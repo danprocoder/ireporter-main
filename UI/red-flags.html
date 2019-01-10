@@ -26,6 +26,8 @@
           const id = incidentTable.dataAt(index).id;
           http.api(`red-flags/${id}`).delete((data) => {
             incidentTable.remove(index);
+
+            app.toast.success(data[0].message);
           }, (error) => {
           	console.log(error);
           });

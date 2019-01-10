@@ -289,3 +289,31 @@ form .form-section .form-section-body {
 .modal-container .modal-body {
     padding: 10px;
 }
+
+/* Toast/snackbar */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 13px;
+    padding: 15px;
+    border-radius: 3px;
+}
+
+.toast.red {
+    background: red;
+    color: #ffffff;
+}
+
+.toast.green {
+    background: green;
+    color: #ffffff;
+}
+
+@media screen and (max-width:768px) {
+    .toast {
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+}
