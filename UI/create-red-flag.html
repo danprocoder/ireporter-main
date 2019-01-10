@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Create a Red Flag | iReporter</title>
+	<title></title>
 
 	<link rel="stylesheet" type="text/css" href="assets/css/ireporter.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/navbar2.css" />
@@ -13,10 +13,11 @@
 	<script src="assets/js/api.js"></script>
 	<script src="assets/js/app.js"></script>
 	<script>
+	let submitBtn = null;
+
 	function onSubmit(event, form, mode, http) {
 	  event.preventDefault();
 
-	  const submitBtn = document.getElementById('submit-btn');
 	  submitBtn.disabled = true;
 
 	  form.hideFieldErrors();
@@ -52,6 +53,8 @@
 	      };
 	      const onApiError = (error) => {
 	      	submitBtn.disabled = false;
+
+	      	app.toast.error('Failed to ' + (mode == 'edit' ? 'edit' : 'create') + ' red-flag record');
 	      	console.log(error);
 	      };
 
@@ -69,12 +72,18 @@
 
 	app.setAuthRequired(true);
 	app.ready((http, dom) => {
+	  submitBtn = document.getElementById('submit-btn');
+
       const mode = http.params['action'] == 'edit' && typeof http.params['id'] !== 'undefined' ? 'edit' : 'add';
       
       const incidentForm = app.form('incident-form');
 
       // Pre-populate the form if mode is edit
       if (mode == 'edit') {
+      	document.title = 'Edit Red Flag | iReporter';
+      	dom.selector('.js-text-header').html('Edit Red Flag');
+      	submitBtn.value = 'Save';
+
       	http.api(`red-flags/${http.params.id}`).get((data) => {
       	  const incident = data[0];
 
@@ -94,6 +103,10 @@
 
       	});
       } else if (mode == 'add') {
+      	document.title = 'Create a Red Flag | iReporter';
+      	dom.selector('.js-text-header').html('Create a Red Flag');
+      	submitBtn.value = 'Create a Red Flag';
+
       	incidentForm.onsubmit((event, form) => {
       		onSubmit(event, form, mode, http);
       	});
@@ -127,7 +140,7 @@
 	<div>
 		<div class="container">
 			<div class="header-container">
-				<div class="header">Create a Red Flag</div>
+				<div class="header js-text-header"></div>
 				<div style="margin-top:9px;"><small><span class="required">*</span> Required fields</small></div>
 			</div>
 			<div>

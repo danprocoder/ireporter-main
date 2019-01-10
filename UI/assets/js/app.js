@@ -148,9 +148,41 @@ const cookieManager = {
   },
 
   delete(name) {
-    document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
+    document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/`;
   },
 };
+
+class Toast {
+  constructor(className, text) {
+    this.toast = document.createElement('div');
+    this.toast.setAttribute('class', 'toast no-select');
+    this.toast.classList.add(className);
+    this.toast.innerHTML = text;
+
+    this.isShown = false;
+  }
+
+  show() {
+    document.body.appendChild(this.toast);
+
+    this.isShown = true;
+
+    const _this = this;
+    this.timeoutId = setTimeout(() => {
+      _this.hide();
+    }, 2500);
+  }
+
+  hide() {
+    if (this.isShown) {
+      clearTimeout(this.timeoutId);
+
+      document.body.removeChild(this.toast);
+      
+      this.isShown = false;
+    }
+  }
+}
 
 const app = {
   auth: {
@@ -161,6 +193,27 @@ const app = {
   dom: {
     selector(selector) {
       return new DOMSelector(document, selector);
+    }
+  },
+
+  toast: {
+    current: null,
+
+    success(text) {
+      this.show('green', text);
+    },
+
+    error(text) {
+      this.show('red', text);
+    },
+
+    show(className, text) {
+      if (this.current) {
+        this.current.hide();
+      }
+
+      this.current = new Toast(className, text);
+      this.current.show();
     }
   },
 
