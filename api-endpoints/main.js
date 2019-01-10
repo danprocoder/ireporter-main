@@ -7,7 +7,7 @@ import interventionRouter from './src/routes/interventions';
 const app = express();
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://danprocoder.github.io/ireporter-main');
+  res.header('Access-Control-Allow-Origin', 'https://danprocoder.github.io');
   next();
 });
 
