@@ -8,7 +8,7 @@ const app = express();
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'https://danprocoder.github.io/ireporter-main');
-  res.next();
+  next();
 });
 
 app.use(express.urlencoded({
