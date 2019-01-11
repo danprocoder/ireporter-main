@@ -72,6 +72,8 @@
 
 	app.setAuthRequired(true);
 	app.ready((http, dom) => {
+      dom.selector('.auth-logout').click(app.logout);
+      
 	  submitBtn = document.getElementById('submit-btn');
 
       const mode = http.params['action'] == 'edit' && typeof http.params['id'] !== 'undefined' ? 'edit' : 'add';
@@ -128,7 +130,7 @@
 							<a href="#">Account <i class="fa fa-caret-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="profile.html">My Profile</a></li>
-								<li><a href="index.html">Log out</a></li>
+								<li><a href="#" class="auth-logout">Log out</a></li>
 							</ul>
 						</li>
 					</ul>
