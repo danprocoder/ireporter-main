@@ -12,107 +12,13 @@
 	<script src="assets/js/validator.js"></script>
 	<script src="assets/js/api.js"></script>
 	<script src="assets/js/app.js"></script>
+	<script src="assets/js/create-incident.js"></script>
 	<script>
-	let submitBtn = null;
-
-	function onSubmit(event, form, mode, http) {
-	  event.preventDefault();
-
-	  submitBtn.disabled = true;
-
-	  form.hideFieldErrors();
-
-	  	const validator = new FormValidator('incident-form');
-	  	const rules = {
-	  	  title: {
-	  	  	required: 'Title is required',
-	  	  },
-	  	  comment: {
-	  	  	required: 'Comment is required',
-	  	  	'min_length[40]': 'Comment should be at least 40 characters',
-	  	  },
-	  	  lat: {
-	  	  	optional: true,
-	  	  	latitude: 'Latitude must be between -90 and 90',
-	  	  },
-	  	  long: {
-	  	  	optional: true,
-	  	  	longitude: 'Longitude must be between -180 and 180',
-	  	  }
-	  	};
-	  	if (validator.validate(rules)) {
-	  	  const url = (mode == 'edit' ? `red-flags/${http.params.id}` : 'red-flags');
-	      const endpoint = http.api(url).body({
-	      	title: form.field('title').value(),
-	      	comment: form.field('comment').value(),
-	      	lat: form.field('lat').value(),
-	      	long: form.field('long').value(),
-	      });
-	      const onApiSuccess = (data) => {
-	      	http.redirect(`./view-red-flag.html?id=${data[0].id}`);
-	      };
-	      const onApiError = (error) => {
-	      	submitBtn.disabled = false;
-
-	      	app.toast.error('Failed to ' + (mode == 'edit' ? 'edit' : 'create') + ' red-flag record');
-	      	console.log(error);
-	      };
-
-	      if (mode == 'add') {
-	      	endpoint.post(onApiSuccess, onApiError);
-	      } else if (mode == 'edit') {
-	      	endpoint.patch(onApiSuccess, onApiError);
-	      }
-	  	} else {
-	  	  form.showFieldErrors(validator.getErrors());
-
-	  	  submitBtn.disabled = false;
-	  	}
-	  }
-
 	app.setAuthRequired(true);
 	app.ready((http, dom) => {
       dom.selector('.auth-logout').click(app.logout);
-      
-	  submitBtn = document.getElementById('submit-btn');
 
-      const mode = http.params['action'] == 'edit' && typeof http.params['id'] !== 'undefined' ? 'edit' : 'add';
-      
-      const incidentForm = app.form('incident-form');
-
-      // Pre-populate the form if mode is edit
-      if (mode == 'edit') {
-      	document.title = 'Edit Red Flag | iReporter';
-      	dom.selector('.js-text-header').html('Edit Red Flag');
-      	submitBtn.value = 'Save';
-
-      	http.api(`red-flags/${http.params.id}`).get((data) => {
-      	  const incident = data[0];
-
-          incidentForm.field('title').value(incident.title);
-
-          incidentForm.field('comment').value(incident.comment);
-
-          if (incident.latitude && incident.longitude) {
-          	incidentForm.field('lat').value(incident.latitude);
-          	incidentForm.field('long').value(incident.longitude);
-          }
-
-          incidentForm.onsubmit((event, form) => {
-          	onSubmit(event, form, mode, http);
-          });
-      	}, (error) => {
-
-      	});
-      } else if (mode == 'add') {
-      	document.title = 'Create a Red Flag | iReporter';
-      	dom.selector('.js-text-header').html('Create a Red Flag');
-      	submitBtn.value = 'Create a Red Flag';
-
-      	incidentForm.onsubmit((event, form) => {
-      		onSubmit(event, form, mode, http);
-      	});
-      }
+      onReady(http, dom, 'red-flag');
 	});
 	app.start();
 	</script>
