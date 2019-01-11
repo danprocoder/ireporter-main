@@ -13,27 +13,11 @@
 	<script src="assets/js/api.js"></script>
 	<script src="assets/js/app.js"></script>
 	<script src="assets/js/incidents.js"></script>
+	<script src="assets/js/delete-incident.js"></script>
 	<script>
 	app.setAuthRequired(true);
 	app.ready((http, dom) => {
       dom.selector('.auth-logout').click(app.logout);
-
-      deleteIncident = (index) => {
-	    const modal = new QuestionModal('delete-modal');
-	    modal.onYes(() => {
-	      modal.hide();
-
-          const id = incidentTable.dataAt(index).id;
-          http.api(`red-flags/${id}`).delete((data) => {
-            incidentTable.remove(index);
-
-            app.toast.success(data[0].message);
-          }, (error) => {
-          	console.log(error);
-          });
-	    });
-	    modal.show();
-      };
 
 	  initTable('red-flag');
 
