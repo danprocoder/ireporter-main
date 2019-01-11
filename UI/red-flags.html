@@ -12,10 +12,8 @@
 	<script src="assets/js/ireporter.js"></script>
 	<script src="assets/js/api.js"></script>
 	<script src="assets/js/app.js"></script>
+	<script src="assets/js/incidents.js"></script>
 	<script>
-	let incidentTable = null;
-	let deleteIncident = null;
-    
 	app.setAuthRequired(true);
 	app.ready((http, dom) => {
       dom.selector('.auth-logout').click(app.logout);
@@ -37,31 +35,9 @@
 	    modal.show();
       };
 
-	  incidentTable = app.table('incident-table');
-	  incidentTable.setRowView((data, serial, index) => {
-	    const status = data.status.replace('-', ' ').toUpperCase();
+	  initTable('red-flag');
 
-	  	let row = `<tr>
-	  	  <td>${serial}</td>
-	  	  <td><a href="./view-red-flag.html?id=${data.id}">${data.title}</a></td>
-	  	  <td>${data.createdon}</td>
-	  	  <td><span class="record-status no-select ${data.status}">${status}</span></td>
-	  	  <td>
-	  	    <a href="./view-red-flag.html?id=${data.id}" class="action blue"><i class="fa fa-eye"></i> View</a>`;
-	  	if (data.status == 'in-draft') {
-	  	  row += `
-	  	    <a href="./create-red-flag.html?action=edit&id=${data.id}" class="action blue"><i class="fa fa-pencil"></i> Edit</a>
-	  	    <a href="#" class="action red" onClick="deleteIncident(${index})"><i class="fa fa-trash"></i> Delete</a>`;
-	  	}
-	  	row += '</td></tr>';
-	  	return row;
-	  });
-
-	  http.api('red-flags').get((data) => {
-	  	incidentTable.setDataSet(data).draw();
-	  }, (error) => {
-        console.log(error);
-	  });
+	  loadIncidents(http, 'red-flag');
 	});
 	app.start();
 	</script>
