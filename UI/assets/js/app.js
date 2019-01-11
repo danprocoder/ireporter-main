@@ -52,6 +52,12 @@ class DOMSelector {
     });
   }
 
+  click(callback) {
+    this._iter(e => {
+      e.onclick = callback;
+    });
+  }
+
   addClass(cl) {
     this._iter(e => {
       e.classList.add(cl);
@@ -227,6 +233,11 @@ const app = {
 
   logout() {
     cookieManager.delete('token');
+    (new Http()).redirect('./index.html');
+  },
+
+  setTitle(title) {
+    document.title = title;
   },
 
   ready(callback) {
