@@ -267,7 +267,15 @@ const app = {
     return new Form(id);
   },
 
+  tables: {},
+
   table(id) {
-    return new Table(id);
+    if (typeof this.tables[id] !== 'undefined') {
+      return this.tables[id];
+    } else {
+      const table = new Table(id);
+      this.tables[id] = table;
+      return table;
+    }
   },
 };
