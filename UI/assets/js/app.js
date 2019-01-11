@@ -223,6 +223,8 @@ const app = {
     }
   },
 
+  http: new Http(),
+
   setAuthRequired(required, redirect=false) {
     this.auth = { required, redirect };
   },
