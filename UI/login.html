@@ -84,7 +84,8 @@
             password: form.elements['password'].value
 	      }).post((data) => {
             app.setAuthToken(data[0].token);
-            http.redirect('./dashboard.html');
+
+            http.redirect(data[0].user.isAdmin ? './admin' : './dashboard.html');
 	      }, (error) => {
 	      	loginBtn.disabled = false;
 

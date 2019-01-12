@@ -41,6 +41,7 @@ export default class {
                   username: row.username,
                   email: row.email,
                   phoneNumber: row.phonenumber,
+                  isAdmin: row.isadmin
                 },
               }));
             } else {
