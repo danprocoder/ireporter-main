@@ -65,6 +65,24 @@ class DOMSelector {
     return this;
   }
 
+  hide() {
+    this._iter((e) => {
+      e.style.display = 'none';
+    });
+  }
+
+  show() {
+    this._iter((e) => {
+      e.style.display = 'block';
+    });
+  }
+
+  showInline() {
+    this._iter((e) => {
+      e.style.display = 'inline';
+    });
+  }
+
   _iter(callback) {
     for (let i = 0; i < this.elements.length; i++) {
       callback(this.elements[i]);

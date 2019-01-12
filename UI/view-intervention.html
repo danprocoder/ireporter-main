@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Lots of pot holes on the road in some place | iReporter</title>
+	<title>...loading | iReporter</title>
 
 	<link rel="stylesheet" type="text/css" href="assets/css/ireporter.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/navbar2.css" />
@@ -10,6 +10,18 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/user.css" />
 
 	<script src="assets/js/ireporter.js"></script>
+	<script src="assets/js/api.js"></script>
+	<script src="assets/js/app.js"></script>
+	<script src="assets/js/view-incident.js"></script>
+	<script>
+	app.setAuthRequired(true);
+	app.ready((http, dom) => {
+      dom.selector('.auth-logout').click(app.logout);
+
+      viewIncident('intervention');
+    });
+    app.start();
+	</script>
 </head>
 <body>
 	<div class="red-bg">
@@ -24,7 +36,7 @@
 							<a href="#">Account <i class="fa fa-caret-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="profile.html">My Profile</a></li>
-								<li><a href="index.html">Log out</a></li>
+								<li><a href="#" class="auth-logout">Log out</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -33,43 +45,48 @@
 			</div>
 		</div>
 	</div>
-	<div>
-		<div class="container">
-			<div>
-				<div class="navigation"><a href="interventions.html">Interventions</a> / Lots of pot holes on the road in some place</div>
-				<div class="title">Lots of pot holes on the road in some place</div>
-				<div class="info-wrapper"><span class="info date">Created 11:08PM 14 Nov, 2018</span> <span class="info record-status under-investigation">Under Investigation</span></div>
-			</div>
-			<div class="record-content has-map">
-				<div class="comment">
-					Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit. Lorem ipsum dolor amet sit.
-				</div>
-				<div class="map-wrapper">
-					<div><i class="fa fa-map-marker"></i> Lat: 50, Long: 75</div>
-					<div id="map-container"><img src="assets/images/map.png"></div>
-				</div>
-				<!-- <div class="media-section">
-					<div class="section-header"><i class="fa fa-image"></i> Media</div>
-					<div class="media-wrapper">
-						<a class="media pull-left">
-							<img src="#" alt="media" />
-							<div class="download"><i class="fa fa-arrow-down fa-2x"></i></div>
-						</a>
-						<a class="media pull-left">
-							<img src="#" alt="media" />
-							<div class="download"><i class="fa fa-arrow-down fa-2x"></i></div>
-						</a>
-						<a class="media pull-left">
-							<img src="#" alt="media" />
-							<div class="download"><i class="fa fa-arrow-down fa-2x"></i></div>
-						</a>
-						<a class="media pull-left">
-							<img src="#" alt="media" />
-							<div class="download"><i class="fa fa-arrow-down fa-2x"></i></div>
-						</a>
-						<div class="clearfix"></div>
+	<div class="main-content">
+		<div class="container preload">
+			<div class="loader"><i class="fa fa-ellipsis-h fa-2x"></i></div>
+			<div class="on-load">
+				<div>
+					<div class="title js-title-text"></div>
+					<div class="info-wrapper">
+						<span class="info date">Created <span class="js-time-text"></span></span>
+						<span class="info map"><a href="#map-area" title="View map"><i class="fa fa-map"></i></a></span>
+						<span class="info record-status no-select"></span>
+						<div class="clearifix"></div>
 					</div>
-				</div> -->
+				</div>
+				<div class="record-content">
+					<div class="comment"></div>
+					<div class="map-wrapper">
+						<div class="location-text"><i class="fa fa-map-marker"></i> <span class="js-coords-text"></span></div>
+						<div id="map-container"><img src="assets/images/map.png" /></div>
+					</div>
+					<!-- <div class="media-section">
+						<div class="section-header"><i class="fa fa-image"></i> Media</div>
+						<div class="media-wrapper">
+							<a class="media pull-left">
+								<img src="#" alt="media" />
+								<div class="download"><i class="fa fa-arrow-down fa-2x"></i></div>
+							</a>
+							<a class="media pull-left">
+								<img src="#" alt="media" />
+								<div class="download"><i class="fa fa-arrow-down fa-2x"></i></div>
+							</a>
+							<a class="media pull-left">
+								<img src="#" alt="media" />
+								<div class="download"><i class="fa fa-arrow-down fa-2x"></i></div>
+							</a>
+							<a class="media pull-left">
+								<img src="#" alt="media" />
+								<div class="download"><i class="fa fa-arrow-down fa-2x"></i></div>
+							</a>
+							<div class="clearfix"></div>
+						</div>
+					</div> -->
+				</div>
 			</div>
 		</div>
 	</div>

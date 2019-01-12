@@ -34,12 +34,13 @@ table td {
 	border-radius: 30px;
 	border-style: solid;
 	padding: 4px 8px;
-	font-size: 12px;
 	white-space: nowrap;
+	font-weight: 700;
+    font-size: 12px!important;
 }
 
 .record-status.in-draft {
-	border-color: gray;
+	border-color: #d4d4d4;
 	color: gray;
 }
 
