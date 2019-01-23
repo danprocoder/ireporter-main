@@ -12,10 +12,6 @@ body {
 	color: #bbb;
 }
 
-.js-time-text {
-	color: #494949;
-}
-
 .navigation {
 	margin-top: 6px;
 	font-size: 13px;
@@ -41,7 +37,7 @@ body {
 }
 
 .info-wrapper .info.map {
-	margin-right: 20px;
+	margin-left: 20px;
 	display: none;
 }
 

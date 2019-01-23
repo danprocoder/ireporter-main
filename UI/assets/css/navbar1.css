@@ -7,12 +7,11 @@
 	border: 1px solid #f77;
 	height: 37px;
 	padding: 0 11px;
-	transition: border-color 0.2s, border-bottom-width 0.33s;
+	transition: border-color 0.2s;
 	box-sizing: border-box;
 }
 
 #navbar .navbar-menu li a:hover {
-	border-bottom-width: 4px;
 	border-color: #fff;
 }
 

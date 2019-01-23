@@ -51,12 +51,11 @@
   text-transform: uppercase;
   display: inline-block;
   border: 1px solid yellow;
-  transition: background 0.3s, color 0.3s;
+  transition: background 0.3s;
 }
 
 .button-area .reporter-signup-btn:hover {
-  background: #ff5757;
-  color: yellow;
+  background: #ffff28;
 }
 
 @media screen and (max-width:768px) {
