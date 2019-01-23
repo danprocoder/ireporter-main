@@ -15,12 +15,19 @@ function onReady(type) {
 
 const statusList = ['in-draft', 'under-investigation', 'resolved', 'rejected'];
 
+function formatStatus(status) {
+  status = status.split('-');
+  return status.join(' ');
+}
+
 function status(data) {
+  const dropdownText = formatStatus(data.status).toUpperCase();
+
   let dropdown = `<span class="record-status ${data.status} no-select dropdown" id="status-${data.id}">
-    ${data.status} <i class="fa fa-caret-down"></i>
+    <span>${dropdownText} <i class="fa fa-caret-down"></i></span>
     <ul class="dropdown-menu">`;
     for (let i = 0; i < statusList.length; i++) {
-      dropdown += `<li><a href="#">${statusList[i]}</a></li>`;
+      dropdown += '<li><a href="#">' + formatStatus(statusList[i]); + '</a></li>';
     }
   return dropdown + '</ul></span>';
 }
