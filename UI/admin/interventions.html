@@ -10,6 +10,14 @@
 	<link rel="stylesheet" type="text/css" href="assets/admin.css" />
 
 	<script src="../assets/js/ireporter.js"></script>
+	<script src="../assets/js/app.js"></script>
+	<script>
+	app.setAuthRequired(true);
+	app.ready((http, dom) => {
+		dom.selector('.auth-logout').click(app.logout);
+	});
+	app.start();
+	</script>
 </head>
 <body>
 	<div class="sidenav">
@@ -35,7 +43,7 @@
 					<a href="#">Admin <i class="fa fa-caret-down"></i></a>
 					<div class="dropdown-menu">
 						<ul>
-							<li><a href="../index.html">Logout</a></li>
+							<li><a href="#" class="auth-logout">Logout</a></li>
 						</ul>
 					</div>
 				</li>

@@ -150,6 +150,11 @@ class Http {
   redirect(url) {
     window.location = url;
   }
+
+  baseUrl(path=null) {
+    let baseUrl = window.location.protocol.concat('//').concat(window.location.host);
+    return path ? baseUrl.concat('/').concat(path) : baseUrl;
+  }
 }
 
 const cookieManager = {
@@ -253,7 +258,7 @@ const app = {
 
   logout() {
     cookieManager.delete('token');
-    (new Http()).redirect('./index.html');
+    app.http.redirect(app.http.baseUrl());
   },
 
   setTitle(title) {
@@ -268,11 +273,11 @@ const app = {
     const token = cookieManager.get('token');
     if (this.auth.required) {
       if (!token) {
-      	window.location = './login.html';
+      	window.location = this.http.baseUrl('login.html');
       	return;
       }
     } else if (token && this.auth.redirect) {
-      	window.location = './dashboard.html';
+      	window.location = this.http.baseUrl('dashboard.html');
       	return;
     }
 
