@@ -11,10 +11,16 @@
 
 	<script src="../assets/js/ireporter.js"></script>
 	<script src="../assets/js/app.js"></script>
+	<script src="../assets/js/api.js"></script>
+	<script src="assets/js/incidents.js"></script>
 	<script>
 	app.setAuthRequired(true);
 	app.ready((http, dom) => {
-		dom.selector('.auth-logout').click(app.logout);
+	  dom.selector('.auth-logout').click(app.logout);
+
+	  onReady('red-flag');
+
+	  loadIncidents('red-flag');
 	});
 	app.start();
 	</script>
@@ -55,7 +61,7 @@
 				<div>
 					<div style="margin-top:15px;">
 						<ul class="tab f-left">
-							<li><a href="#">Pending</a></li>
+							<li><a href="#">In Draft</a></li>
 							<li><a href="#">Resolved</a></li>
 							<li><a href="#">Under Investigation</a></li>
 							<li><a href="#">Rejected</a></li>
@@ -63,7 +69,7 @@
 						</ul>
 
 						<div class="f-right">
-							<span>Showing 1 - 5 of 5</span>
+							<!-- <span>Showing 1 - 5 of 5</span> -->
 							<div class="search-box">
 								<input type="text" placeholder="Search title" name="q" class="text-field" />
 								<button><i class="fa fa-search"></i></button>
@@ -72,7 +78,7 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="table-wrapper">
-						<table>
+						<table id="incident-table">
 							<thead>
 								<th>#</th>
 								<th>Title</th>
@@ -80,103 +86,7 @@
 								<th>Status</th>
 								<th>Action</th>
 							</thead>
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Snake ate &#8358;10m</td>
-									<td>11:08:45 11-12-2018</td>
-									<td>
-										<span class="record-status pending no-select dropdown">
-											IN DRAFT <i class="fa fa-caret-down"></i>
-											<ul class="dropdown-menu">
-												<li><a href="#">In Draft</a></li>
-												<li><a href="#">Under Investigation</a></li>
-												<li><a href="#">Resolved</a></li>
-												<li><a href="#">Rejected</a></li>
-											</ul>
-										</span>
-									</td>
-									<td>
-										<a href="view-red-flag.html" class="action blue"><i class="fa fa-eye"></i> View</a>
-									</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Snake ate &#8358;10m</td>
-									<td>11:08:45 11-12-2018</td>
-									<td>
-										<span class="record-status pending no-select dropdown">
-											IN DRAFT <i class="fa fa-caret-down"></i>
-											<ul class="dropdown-menu">
-												<li><a href="#">In Draft</a></li>
-												<li><a href="#">Under Investigation</a></li>
-												<li><a href="#">Resolved</a></li>
-												<li><a href="#">Rejected</a></li>
-											</ul>
-										</span>
-									</td>
-									<td>
-										<a href="view-red-flag.html" class="action blue"><i class="fa fa-eye"></i> View</a>
-									</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>Snake ate &#8358;10m</td>
-									<td>11:08:45 11-12-2018</td>
-									<td>
-										<span class="record-status pending no-select dropdown">
-											IN DRAFT <i class="fa fa-caret-down"></i>
-											<ul class="dropdown-menu">
-												<li><a href="#">In Draft</a></li>
-												<li><a href="#">Under Investigation</a></li>
-												<li><a href="#">Resolved</a></li>
-												<li><a href="#">Rejected</a></li>
-											</ul>
-										</span>
-									</td>
-									<td>
-										<a href="view-red-flag.html" class="action blue"><i class="fa fa-eye"></i> View</a>
-									</td>
-								</tr>
-								<tr>
-									<td>4</td>
-									<td>Snake ate &#8358;10m</td>
-									<td>11:08:45 11-12-2018</td>
-									<td>
-										<span class="record-status pending no-select dropdown">
-											IN DRAFT <i class="fa fa-caret-down"></i>
-											<ul class="dropdown-menu">
-												<li><a href="#">In Draft</a></li>
-												<li><a href="#">Under Investigation</a></li>
-												<li><a href="#">Resolved</a></li>
-												<li><a href="#">Rejected</a></li>
-											</ul>
-										</span>
-									</td>
-									<td>
-										<a href="view-red-flag.html" class="action blue"><i class="fa fa-eye"></i> View</a>
-									</td>
-								</tr>
-								<tr>
-									<td>5</td>
-									<td>Snake ate &#8358;10m</td>
-									<td>11:08:45 11-12-2018</td>
-									<td>
-										<span class="record-status rejected no-select dropdown">
-											REJECTED <i class="fa fa-caret-down"></i>
-											<ul class="dropdown-menu">
-												<li><a href="#">In Draft</a></li>
-												<li><a href="#">Under Investigation</a></li>
-												<li><a href="#">Resolved</a></li>
-												<li><a href="#">Rejected</a></li>
-											</ul>
-										</span>
-									</td>
-									<td>
-										<a href="view-red-flag.html" class="action blue"><i class="fa fa-eye"></i> View</a>
-									</td>
-								</tr>
-							</tbody>
+							<tbody></tbody>
 						</table>
 					</div>
 					<!-- <div class="pagination-wrapper">
