@@ -8,12 +8,22 @@ body {
     line-height: 100%;
 }
 
-body, input, textarea, h2, h4, p, div, ul, li, p {
+body,
+input,
+textarea,
+h2,
+h4,
+p,
+div,
+ul,
+li,
+p {
     padding: 0;
     margin: 0;
 }
 
 a {
+    color: #0d6da2;
     text-decoration: none;
 }
 
@@ -265,29 +275,37 @@ form .form-section .form-section-body {
 }
 
 .modal-container .modal-btn-area {
-    background: #f9f9f9;
     padding: 7px 10px;
 }
 
 .modal-container .modal-btn {
     display: inline-block;
-    background: #dfdfdf;
     padding: 9px 11px;
     font-size: 13px;
     text-transform: uppercase;
     font-weight: 700;
     float: right;
     margin-left: 5px;
+    color: #bfbfbf;
+    transition: color 0.25s, background 0.25s;
+}
+
+.modal-container .modal-btn:hover {
+    background: #dfdfdf;
     color: #333;
 }
 
 .modal-container .modal-btn.red {
+    color: #ef3b3b;
+}
+
+.modal-container .modal-btn.red:hover {
     background: #ef3b3b;
-    color: #fff;
+    color: #ffffff;
 }
 
 .modal-container .modal-body {
-    padding: 10px;
+    padding: 20px;
 }
 
 /* Toast/snackbar */
