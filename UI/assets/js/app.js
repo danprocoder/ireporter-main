@@ -213,6 +213,17 @@ class Toast {
   }
 }
 
+class Preloader {
+  constructor(id) {
+    this.container = document.querySelector(`.preload#${id}`);
+  }
+
+  hideLoadingAnimation() {
+    this.container.querySelector('.loader').style.display = 'none';
+    this.container.querySelector('.on-load').style.display = 'block';
+  }
+}
+
 const app = {
   auth: {
     required: false,
@@ -303,4 +314,8 @@ const app = {
       return table;
     }
   },
+
+  preloader(id) {
+    return new Preloader(id);
+  }
 };
