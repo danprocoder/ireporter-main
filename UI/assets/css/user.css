@@ -10,6 +10,11 @@
 	margin-top: 15px;
 }
 
+.table-wrapper {
+	width: 100%;
+	overflow-y: auto;
+}
+
 table {
 	width: 100%;
 	border-spacing: 0;
