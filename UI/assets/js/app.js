@@ -1,3 +1,7 @@
+/**
+ * @author Daniel Austin
+ */
+
 class Form {
   constructor(id) {
     this.form = document.getElementById(id);
@@ -218,13 +222,30 @@ class Preloader {
     this.container = document.querySelector(`.preload#${id}`);
   }
 
-  hideLoadingAnimation() {
+  hideLoadingAnimation(callback=null) {
     this.container.querySelector('.loader').style.display = 'none';
     this.container.querySelector('.on-load').style.display = 'block';
+
+    if (typeof callback == 'function') {
+      callback();
+    }
   }
 }
 
 const app = {
+
+  externals: {
+    'mapbox': {
+      js: 'https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js',
+      css: 'https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css'
+    }
+  },
+  using: [],
+  
+  use(library) {
+    this.using.push(library);
+  },
+  
   auth: {
     required: false,
     redirect: false,
@@ -292,6 +313,26 @@ const app = {
       	return;
     }
 
+    // Load externals
+    for (let i = 0; i < this.using.length; i++) {
+      const ext = this.externals[this.using[i]];
+
+      if (typeof ext['js'] !== 'undefined') {
+        const js = document.createElement('script');
+        js.async = false;
+        js.setAttribute('src', ext['js']);
+        document.head.appendChild(js);
+      }
+      
+      if (typeof ext['css'] !== 'undefined') {
+        const css = document.createElement('link');
+        css.setAttribute('href', ext['css']);
+        css.setAttribute('rel', 'stylesheet');
+        css.setAttribute('type', 'text/css');
+        document.head.appendChild(css);
+      }
+    }
+
     if (typeof app.readyCallback === 'function') {
   	  window.addEventListener('load', (e) => {
   	    app.readyCallback(new Http(), app.dom);
@@ -318,4 +359,36 @@ const app = {
   preloader(id) {
     return new Preloader(id);
   }
+};
+
+
+/**
+ * Mapbox
+ */
+class Mapbox {
+  /**
+   * {string} id The id of the container to display the map.
+   * {array} coords The coordinates in the format [lng, lat].
+   */
+  constructor(id, coords) {
+    this.coords = coords;
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZGFubnltYXBzIiwiYSI6ImNqbGh4cDFnczA3dDUzcG15N2lybDczYWMifQ.g4l-gTR_N48LYnFcevdw0A';
+    this.map = new mapboxgl.Map({
+      container: id,
+      style: 'mapbox://styles/mapbox/streets-v9',
+      center: coords,
+      zoom: 9
+    });
+
+    this.addMarker();
+  }
+
+  addMarker() {
+    new mapboxgl.Marker().setLngLat(this.coords).addTo(this.map);
+  }
+}
+
+app.mapbox = (id, coords) => {
+  new Mapbox(id, coords);
 };

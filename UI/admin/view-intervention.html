@@ -2,18 +2,22 @@
 <html>
 <head>
 	<title>... | iReporter</title>
+	
+	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
 	<link rel="stylesheet" type="text/css" href="../assets/css/ireporter.css" />
 	<link rel="stylesheet" type="text/css" href="../assets/css/user.css" />
 	<link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="../assets/css/view-record.css" />
 	<link rel="stylesheet" type="text/css" href="assets/admin.css" />
-
+	
 	<script src="../assets/js/ireporter.js"></script>
 	<script src="../assets/js/app.js"></script>
 	<script src="../assets/js/api.js"></script>
 	<script src="assets/js/incident.js"></script>
 	<script>
+    app.use('mapbox');
+
 	app.setAuthRequired(true);
 	app.ready((http, dom) => {
 	  dom.selector('.auth-logout').click(app.logout);
@@ -79,7 +83,7 @@
 						<div class="comment js-text-comment"></div>
 						<div class="map-wrapper">
 							<div class="location-text"><i class="fa fa-map-marker"></i> <span class="js-coords-text"></span></div>
-							<div id="map-container"><img src="../assets/images/map.png" /></div>
+							<div id="map-container"></div>
 						</div>
 						<!-- <div class="media-section">
 							<div class="section-header"><i class="fa fa-image"></i> Media</div>
