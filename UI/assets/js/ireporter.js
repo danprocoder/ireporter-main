@@ -5,10 +5,57 @@ class Dropdown {
 
     const o = this;
     this.element.addEventListener('click', (ev) => {
-      o.menus.style.display = 'block';
+      if (!o.disabled) {
+        o.menus.style.display = 'block';
+      }
 
       return false;
     });
+
+    this.class = {
+      add(className) {
+        element.classList.add(className);
+        return this;
+      },
+
+      remove(className) {
+        if (!(className instanceof Array)) {
+          className = [className];
+        }
+
+        for (let i = 0; i < className.length; i++) {
+          element.classList.remove(className[i]);
+        }
+        return this;
+      }
+    };
+
+    this.disabled = false;
+  }
+
+  onMenuClicked(callback) {
+    const menus = this.menus.querySelectorAll('ul li a');
+    for (let i = 0; i < menus.length; i++) {
+      menus[i].onclick = (e) => {
+        callback(i);
+
+        e.stopPropagation();
+        e.preventDefault();
+      };
+    }
+  }
+
+  child(query) {
+    return new DOMSelector(this.element, query);
+  }
+
+  disable(disabled) {
+    this.disabled = disabled;
+    return this;
+  }
+
+  getId() {
+    return this.element.id;
   }
 
   close() {
@@ -22,6 +69,8 @@ class Dropdown {
 
 class Modal {
   constructor(id) {
+    this.id = id;
+
     this.container = document.querySelector('.modal-container');
     this.modal = this.container.querySelector(`.modal#${id}`);
 
@@ -40,6 +89,10 @@ class Modal {
     this.modal.style.display = 'none';
     this.container.style.display = 'none';
   }
+
+  getId() {
+    return this.id;
+  }
 }
 
 class QuestionModal extends Modal {
@@ -48,19 +101,32 @@ class QuestionModal extends Modal {
   }
 }
 
-const elements = [];
+let elements = [];
+function $(id) {
+  for (let i = 0; i < elements.length; i++) {
+    if (elements[i].getId() == id) {
+      return elements[i];
+    }
+  }
+}
 
 const classMap = {
   dropdown: Dropdown,
 };
 
-window.addEventListener('load', () => {
+initElements = () => {
+  elements = [];
+
   for (const k in classMap) {
     const r = document.getElementsByClassName(k);
     for (let i = 0; i < r.length; i++) {
       elements.push(new classMap[k](r[i]));
     }
   }
+};
+
+window.addEventListener('load', () => {
+  initElements();
 });
 
 // Close opened elements on click outside.
@@ -72,3 +138,4 @@ document.addEventListener('click', (ev) => {
     }
   }
 });
+

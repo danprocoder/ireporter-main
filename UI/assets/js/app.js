@@ -390,5 +390,7 @@ class Mapbox {
 }
 
 app.mapbox = (id, coords) => {
-  new Mapbox(id, coords);
+  if (typeof mapboxgl != 'undefined') {
+    new Mapbox(id, coords);
+  }
 };
