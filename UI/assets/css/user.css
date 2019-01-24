@@ -95,6 +95,7 @@ table td {
 table .action {
 	font-size: 14px;
 	margin-right: 14px;
+	white-space: nowrap;
 }
 
 table .action.red {

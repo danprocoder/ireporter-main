@@ -319,10 +319,20 @@ form .form-section .form-section-body {
     }
 }
 
+@keyframes slideUpRes {
+    0% {
+        bottom: -40px;
+    }
+
+    100% {
+        bottom: 0;
+    }
+}
+
 .toast {
     position: fixed;
     right: 20px;
-    font-size: 13px;
+    font-size: 14px;
     padding: 15px;
     border-radius: 3px;
     animation-name: slideUp;
@@ -330,6 +340,7 @@ form .form-section .form-section-body {
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     box-shadow: 0 6px 14px #bebebe;
+    z-index: 99999999;
 }
 
 .toast.red {
@@ -344,8 +355,10 @@ form .form-section .form-section-body {
 
 @media screen and (max-width:768px) {
     .toast {
-        bottom: 0;
         left: 0;
         right: 0;
+        animation-name: slideUpRes;
+        box-shadow: none;
+        border-radius: 0;
     }
 }
