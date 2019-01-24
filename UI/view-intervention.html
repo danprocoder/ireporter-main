@@ -14,6 +14,8 @@
 	<script src="assets/js/app.js"></script>
 	<script src="assets/js/view-incident.js"></script>
 	<script>
+	app.use('mapbox');
+
 	app.setAuthRequired(true);
 	app.ready((http, dom) => {
       dom.selector('.auth-logout').click(app.logout);
@@ -46,7 +48,7 @@
 		</div>
 	</div>
 	<div class="main-content">
-		<div class="container preload">
+		<div class="container preload" id="incident">
 			<div class="loader"><i class="fa fa-ellipsis-h fa-2x"></i></div>
 			<div class="on-load">
 				<div>
@@ -62,7 +64,7 @@
 					<div class="comment"></div>
 					<div class="map-wrapper">
 						<div class="location-text"><i class="fa fa-map-marker"></i> <span class="js-coords-text"></span></div>
-						<div id="map-container"><img src="assets/images/map.png" /></div>
+						<div id="map-container"></div>
 					</div>
 					<!-- <div class="media-section">
 						<div class="section-header"><i class="fa fa-image"></i> Media</div>
