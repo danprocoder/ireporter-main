@@ -1,30 +1,3 @@
-const map = {
-  setCoordinates(lat, long) {
-    this.position = {
-      lat,
-      lng: long
-    }
-  },
-
-  showMap() {
-    const map = new google.maps.Map(
-      document.getElementById('map-container'),
-      {
-        zoom: 4,
-        center: this.position
-      });
-    const marker = new google.maps.Marker({
-      position: this.position,
-      map
-    });
-  }
-};
-
-function hideLoadingAnimation() {
-  app.dom.selector('.preload .loader').hide();
-  app.dom.selector('.preload .on-load').show();
-}
-
 function viewIncident(type) {
   const id = app.http.params['id'];
   if (typeof id == 'undefined') {
@@ -50,22 +23,21 @@ function viewIncident(type) {
       // Comment
       app.dom.selector('.record-content .comment').html(incident.comment);
 
-        // Add map
+      // Add map
+      let onContentShown = null;
       if (incident.latitude && incident.longitude) {
         app.dom.selector('.record-content').addClass('has-map');
         app.dom.selector('.info.map').showInline();
 
         app.dom.selector('.js-coords-text').html(`(${incident.latitude}&deg;, ${incident.longitude}&deg;)`);
         
-        // Google maps.
-        map.setCoordinates(incident.latitude, incident.longitude);
-
-        var googleMapApi = document.createElement('script');
-        googleMapApi.setAttribute('src', `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=map.showMap()`);
-        document.head.appendChild(googleMapApi);
+        // Mapbox
+        onContentShown = () => {
+          app.mapbox('map-container', [incident.longitude, incident.latitude]);
+        };
       }
 
-      hideLoadingAnimation();
+      app.preloader('incident').hideLoadingAnimation(onContentShown);
     }, (error) => {
       if (error.status == 404) {
         app.setTitle('Not found | iReporter');
