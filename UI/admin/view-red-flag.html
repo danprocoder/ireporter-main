@@ -13,6 +13,7 @@
 
 	<script src="../assets/js/ireporter.js"></script>
 	<script src="../assets/js/app.js"></script>
+	<script src="assets/js/admin.js"></script>
 	<script src="../assets/js/api.js"></script>
 	<script src="assets/js/incident.js"></script>
 	<script>
@@ -29,7 +30,7 @@
 </head>
 <body>
 	<div id="top">
-		<div class="sitename pull-left"><a href="index.html"><h2>iReporter</h2></a></div>
+		<div class="sitename pull-left"><a href="index.html"><h2>i<span class="hide-responsive">Reporter</span></h2></a></div>
 		<a href="#" class="pull-left responsive-toggle"><i class="fa fa-bars"></i></a>
 		<ul class="navbar-menu pull-right">
 			<li class="dropdown">
@@ -49,18 +50,18 @@
 			<div class="sidenav-menus">
 				<ul>
 					<li>
-						<a href="index.html">Dashboard</a>
+						<a href="index.html"><span class="icon-wrapper"><i class="fa fa-dashboard"></i></span> <span class="text-wrapper">Dashboard</span></a>
 					</li>
 					<li class="active">
-						<a href="red-flags.html">Red-Flags</a>
+						<a href="red-flags.html"><span class="icon-wrapper"><i class="fa fa-flag"></i></span> <span class="text-wrapper">Red-Flags</span></a>
 					</li>
 					<li>
-						<a href="interventions.html">Interventions</a>
+						<a href="interventions.html"><span class="icon-wrapper"><i class="fa fa-question"></i></span> <span class="text-wrapper">Interventions</span></a>
 					</li>
 				</ul>
 			</div>
 		</div>
-		
+
 		<div class="content">
 			<div class="inner preload" id="incident">
 				<div class="loader"><i class="fa fa-ellipsis-h fa-2x"></i></div>

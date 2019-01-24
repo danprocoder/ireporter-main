@@ -69,6 +69,16 @@ class DOMSelector {
     return this;
   }
 
+  toggleClass(cl) {
+    this._iter(e => {
+      if (e.classList.contains(cl)) {
+        e.classList.remove(cl);
+      } else {
+        e.classList.add(cl);
+      }
+    });
+  }
+
   hide() {
     this._iter((e) => {
       e.style.display = 'none';

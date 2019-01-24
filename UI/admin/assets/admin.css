@@ -49,11 +49,22 @@
 	top: 50px;
 	bottom: 0;
 	background: #af2a2a;
+	z-index: 999;
+	transition: width 0.28s;
 }
 
 .sidenav .sidenav-menus {
 	font-size: 16px;
 	margin-top: 18px;
+}
+
+.sidenav-menus .icon-wrapper {
+	display: inline-block;
+	width: 11px;
+}
+
+.sidenav-menus .text-wrapper {
+	margin-left: 20px;
 }
 
 .sidenav .sidenav-menus li {
@@ -67,6 +78,7 @@
 	padding: 15px 10px;
 	border-radius: 3px;
 	transition: background 0.15s;
+	white-space: nowrap;
 }
 
 .sidenav .sidenav-menus a:hover {
@@ -112,4 +124,39 @@ body {
 
 table td .status {
 	cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+	#top .hide-responsive {
+		display: none;
+	}
+
+	#top .sitename a {
+		width: 30px;
+		text-align: center;
+	}
+
+	.sidenav {
+		width: 50px;
+	}
+
+	.sidenav .sidenav-menus .text-wrapper {
+		display: none;
+	}
+
+	.main-content {
+		margin-left: 50px;
+	}
+
+	.sidenav.expanded {
+		width: 210px;
+	}
+
+	.sidenav a {
+		overflow: hidden;
+	}
+
+	.sidenav.expanded .text-wrapper {
+		display: inline;
+	}
 }
