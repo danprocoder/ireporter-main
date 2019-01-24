@@ -12,14 +12,15 @@ async function setStatusChangeListener(type, id) {
   
   const dropdown = $('status-dd');
   dropdown.onMenuClicked((i) => {
+    dropdown.disable(true).close();
     dropdown.class.add('loading');
-    dropdown.close();
 
     app.http.api(`${type}s/${id}/status`).body({
       status: status[i],
     }).patch((data) => {
       dropdown.class.remove(status).remove('loading').add(status[i]);
       dropdown.child('.selected').html(status[i].replace('-', ' ').toUpperCase());
+      dropdown.disable(false);
 
       app.toast.success(data[0].message);
     }, (error) => {
