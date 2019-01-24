@@ -9,6 +9,44 @@ class Dropdown {
 
       return false;
     });
+
+    this.class = {
+      add(className) {
+        element.classList.add(className);
+        return this;
+      },
+
+      remove(className) {
+        if (!(className instanceof Array)) {
+          className = [className];
+        }
+        
+        for (let i = 0; i < className.length; i++) {
+          element.classList.remove(className[i]);
+        }
+        return this;
+      }
+    };
+  }
+
+  onMenuClicked(callback) {
+    const menus = this.menus.querySelectorAll('ul li a');
+    for (let i = 0; i < menus.length; i++) {
+      menus[i].onclick = (e) => {
+        callback(i);
+
+        e.stopPropagation();
+        e.preventDefault();
+      };
+    }
+  }
+
+  child(query) {
+    return new DOMSelector(this.element, query);
+  }
+
+  getId() {
+    return this.element.id;
   }
 
   close() {
@@ -22,6 +60,8 @@ class Dropdown {
 
 class Modal {
   constructor(id) {
+    this.id = id;
+
     this.container = document.querySelector('.modal-container');
     this.modal = this.container.querySelector(`.modal#${id}`);
 
@@ -40,6 +80,10 @@ class Modal {
     this.modal.style.display = 'none';
     this.container.style.display = 'none';
   }
+
+  getId() {
+    return this.id;
+  }
 }
 
 class QuestionModal extends Modal {
@@ -49,6 +93,13 @@ class QuestionModal extends Modal {
 }
 
 const elements = [];
+function $(id) {
+  for (let i = 0; i < elements.length; i++) {
+    if (elements[i].getId() == id) {
+      return elements[i];
+    }
+  }
+}
 
 const classMap = {
   dropdown: Dropdown,

@@ -7,6 +7,27 @@ function onReady(type, http) {
   }
 }
 
+async function setStatusChangeListener(type, id) {
+  const status = ['in-draft', 'under-investigation', 'resolved', 'rejected'];
+  
+  const dropdown = $('status-dd');
+  dropdown.onMenuClicked((i) => {
+    dropdown.class.add('loading');
+    dropdown.close();
+
+    app.http.api(`${type}s/${id}/status`).body({
+      status: status[i],
+    }).patch((data) => {
+      dropdown.class.remove(status).remove('loading').add(status[i]);
+      dropdown.child('.selected').html(status[i].replace('-', ' ').toUpperCase());
+
+      app.toast.success(data[0].message);
+    }, (error) => {
+      app.toast.error('Failed to change status at this time.');
+    });
+  });
+}
+
 function loadIncident(type, id) {
   app.http.api(`${type}s/${id}`).get((data) => {
     const incident = data[0];
@@ -21,6 +42,7 @@ function loadIncident(type, id) {
     // Status
     app.dom.selector('.record-status .selected').html(incident.status.replace('-', ' ').toUpperCase());
     app.dom.selector('.record-status').addClass(incident.status);
+    setStatusChangeListener(type, id);
 
     // Comment
     app.dom.selector('.js-text-comment').html(incident.comment);

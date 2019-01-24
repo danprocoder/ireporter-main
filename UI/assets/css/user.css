@@ -44,9 +44,19 @@ table td {
 	color: gray;
 }
 
+.record-status.in-draft.loading {
+	border-color: #f0f0f0;
+	color: #f0f0f0;
+}
+
 .record-status.under-investigation {
 	border-color: blue;
 	color: blue;
+}
+
+.record-status.under-investigation.loading {
+	border-color: lightblue;
+	color: lightblue;
 }
 
 .record-status.resolved {
@@ -54,9 +64,19 @@ table td {
 	color: green;
 }
 
+.record-status.resolved.loading {
+	border-color: lightgreen;
+	color: lightgreen;
+}
+
 .record-status.rejected {
 	border-color: red;
 	color: red;
+}
+
+.record-status.rejected.loading {
+	border-color: #ff7a7a;
+	color: #ff7a7a;
 }
 
 .record-status .dropdown-menu {
