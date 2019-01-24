@@ -10,6 +10,11 @@
 	margin-top: 15px;
 }
 
+.table-wrapper {
+	width: 100%;
+	overflow-y: auto;
+}
+
 table {
 	width: 100%;
 	border-spacing: 0;
@@ -20,12 +25,13 @@ table th {
 	font-size: 14px;
 	border-top: 1px solid #dfdfdf;
 	border-bottom: 1px solid #dfdfdf;
-	padding: 9px 0;
+	padding: 9px 2px;
 }
 
 table td {
 	border-top: 1px solid #dfdfdf;
-	padding: 9px 0;
+	padding: 9px 2px;
+	vertical-align: top;
 }
 
 .record-status {

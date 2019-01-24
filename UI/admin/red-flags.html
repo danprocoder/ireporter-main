@@ -3,6 +3,8 @@
 <head>
 	<title>Red Flags | iReporter</title>
 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 	<link rel="stylesheet" type="text/css" href="../assets/css/ireporter.css" />
 	<link rel="stylesheet" type="text/css" href="../assets/css/user.css" />
 	<link rel="stylesheet" type="text/css" href="../assets/css/records.css" />
@@ -11,6 +13,7 @@
 
 	<script src="../assets/js/ireporter.js"></script>
 	<script src="../assets/js/app.js"></script>
+	<script src="assets/js/admin.js"></script>
 	<script src="../assets/js/api.js"></script>
 	<script src="assets/js/incidents.js"></script>
 	<script>
@@ -26,35 +29,39 @@
 	</script>
 </head>
 <body>
-	<div class="sidenav">
-		<div class="sitename"><a href="index.html"><h2>iReporter</h2></a></div>
-		<div class="sidenav-menus">
-			<ul>
-				<li>
-					<a href="index.html">Dashboard</a>
-				</li>
-				<li class="active">
-					<a href="red-flags.html">Red-Flags</a>
-				</li>
-				<li>
-					<a href="interventions.html">Interventions</a>
-				</li>
-			</ul>
-		</div>
+	<div id="top">
+		<div class="sitename pull-left"><a href="index.html"><h2>i<span class="hide-responsive">Reporter</span></h2></a></div>
+		<a href="#" class="pull-left responsive-toggle"><i class="fa fa-bars"></i></a>
+		<ul class="navbar-menu pull-right">
+			<li class="dropdown">
+				<a href="#">Admin <i class="fa fa-caret-down"></i></a>
+				<div class="dropdown-menu">
+					<ul>
+						<li><a href="#" class="auth-logout">Logout</a></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+		<div class="clearfix"></div>
 	</div>
+
 	<div class="main-content">
-		<div class="navbar">
-			<ul class="nav pull-right">
-				<li class="dropdown">
-					<a href="#">Admin <i class="fa fa-caret-down"></i></a>
-					<div class="dropdown-menu">
-						<ul>
-							<li><a href="#" class="auth-logout">Logout</a></li>
-						</ul>
-					</div>
-				</li>
-			</ul>
+		<div class="sidenav">
+			<div class="sidenav-menus">
+				<ul>
+					<li>
+						<a href="index.html"><span class="icon-wrapper"><i class="fa fa-dashboard"></i></span> <span class="text-wrapper">Dashboard</span></a>
+					</li>
+					<li class="active">
+						<a href="red-flags.html"><span class="icon-wrapper"><i class="fa fa-flag"></i></span> <span class="text-wrapper">Red-Flags</span></a>
+					</li>
+					<li>
+						<a href="interventions.html"><span class="icon-wrapper"><i class="fa fa-question"></i></span> <span class="text-wrapper">Interventions</span></a>
+					</li>
+				</ul>
+			</div>
 		</div>
+
 		<div class="content">
 			<div class="inner">
 				<div class="navigation header">Red Flags</div>
