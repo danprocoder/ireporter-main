@@ -21,10 +21,11 @@ body {
 .title {
 	font-size: 35px;
 	margin-top: 35px;
+	line-height: 106%;
 }
 
 .info-wrapper {
-	margin-top: 15px;
+	margin-top: 10px;
 }
 
 .info-wrapper .info {
@@ -54,10 +55,12 @@ body {
 .map-wrapper {
 	margin-top: 50px;
 	background: #ffffff;
+	border: 1px solid #eaeaea;
+    border-radius: 2px;
 }
 
 .map-wrapper .location-text {
-	padding: 7px;
+	padding: 10px 7px;
 }
 
 .map-wrapper .location-text .fa-map-marker {
@@ -65,16 +68,12 @@ body {
 }
 
 #map-container {
+	width: 100%;
 	height: 410px;
 }
 
-#map-container img {
-	width: 100%;
-	height: 100%;
-}
-
 .record-content {
-	margin-top: 40px;
+	margin-top: 30px;
 	padding-bottom: 58px;
 }
 
