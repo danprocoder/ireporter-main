@@ -26,6 +26,7 @@ table th {
 table td {
 	border-top: 1px solid #dfdfdf;
 	padding: 9px 0;
+	vertical-align: top;
 }
 
 .record-status {

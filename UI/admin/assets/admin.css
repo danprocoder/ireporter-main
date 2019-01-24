@@ -1,12 +1,11 @@
 .sidenav {
-	width: 220px;
+	width: 210px;
 	position: fixed;
 	left: 0;
 	top: 0;
 	bottom: 0;
 	background: #af2a2a;
 }
-
 
 .sidenav .sitename a {
 	height: 50px;
@@ -23,22 +22,32 @@
 	margin-top: 18px;
 }
 
+.sidenav .sidenav-menus li {
+	padding: 0 5px;
+	margin-bottom: 1px;
+}
+
 .sidenav .sidenav-menus a {
-	color: #ffffff;
+	color: #ffaba3;
 	display: block;
 	padding: 15px 10px;
+	border-radius: 3px;
+	transition: background 0.15s;
 }
 
 .sidenav .sidenav-menus a:hover {
 	background-color: #a22727;
+	color: #ffffff;
 }
 
 .sidenav .sidenav-menus li.active a {
 	background: #901a1a;
+	color: #ffffff;
+	box-shadow: 0 1px 2px #63180e;
 }
 
 .main-content {
-	margin-left: 220px;
+	margin-left: 210px;
 	padding-top: 50px;
 }
 
@@ -50,7 +59,7 @@
 	top: 0;
 	right: 0;
 	z-index: 999999;
-	left: 220px;
+	left: 210px;
 }
 
 .main-content .navbar .dropdown-menu {
