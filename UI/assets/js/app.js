@@ -368,6 +368,14 @@ const app = {
 
   preloader(id) {
     return new Preloader(id);
+  },
+
+  dateFormat(dateString) {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    const date = new Date(dateString);
+    let formatted = months[date.getMonth()] + ' ' + date.getDay() + ', ' + date.getFullYear() + ' at ' + date.getHours() + ':' + date.getMinutes();
+    return formatted;
   }
 };
 

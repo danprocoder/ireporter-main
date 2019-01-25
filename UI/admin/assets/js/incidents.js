@@ -4,7 +4,7 @@ function onReady(type) {
     return `<tr>
       <td>${serial}</td>
       <td><a href="${viewUrl}">${data.title}</a></td>
-      <td>${data.createdon}</td>
+      <td>${app.dateFormat(data.createdon)}</td>
       <td>`+status(data)+`</td>
       <td>
         <a href="${viewUrl}"><i class="fa fa-eye"></i> View</a>

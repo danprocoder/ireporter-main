@@ -38,7 +38,7 @@ function loadIncident(type, id) {
     app.dom.selector('.js-text-title').html(incident.title);
 
     // Date
-    app.dom.selector('.js-text-date').html(incident.createdon);
+    app.dom.selector('.js-text-date').html(app.dateFormat(incident.createdon));
 
     // Status
     app.dom.selector('.record-status .selected').html(incident.status.replace('-', ' ').toUpperCase());

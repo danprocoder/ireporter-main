@@ -8,7 +8,7 @@ function initTable(type) {
   	let row = `<tr>
   	  <td>${serial}</td>
   	  <td><a href="${viewUrl}?id=${data.id}">${data.title}</a></td>
-  	  <td>${data.createdon}</td>
+  	  <td>${app.dateFormat(data.createdon)}</td>
   	  <td><span class="record-status no-select ${data.status}">${status}</span></td>
   	  <td>
   	    <a href="${viewUrl}?id=${data.id}" class="action blue"><i class="fa fa-eye"></i> View</a>`;
@@ -25,7 +25,7 @@ function initTable(type) {
 function loadIncidents(http, type) {
   http.api(type + 's').get((data) => {
   	app.table('incident-table').setDataSet(data).draw();
-    
+
     app.preloader('incident').hideLoadingAnimation();
   }, (error) => {
     app.toast.error('Failed to load ' + type + 's');

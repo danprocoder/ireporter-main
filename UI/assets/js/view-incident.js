@@ -18,7 +18,7 @@ function viewIncident(type) {
       app.dom.selector('.record-status').addClass(incident.status).html(status);
 
       // Date
-      app.dom.selector('.js-time-text').html(new Date(incident.createdon));
+      app.dom.selector('.js-time-text').html(app.dateFormat(incident.createdon));
 
       // Comment
       app.dom.selector('.record-content .comment').html(incident.comment);
