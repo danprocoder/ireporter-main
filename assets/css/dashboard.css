@@ -1,0 +1,23 @@
+.content .grid-50 {
+  display: table;
+}
+
+.gray-bg {
+  background: #f5f5f5;
+  padding: 33px;
+  border-radius: 3px;
+  height: 123px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.gray-bg .button {
+  margin-top: 15px;
+}
+
+.gray-bg p {
+  line-height: 125%;
+  font-size: 18px;
+}

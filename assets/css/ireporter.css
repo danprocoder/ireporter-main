@@ -1,0 +1,409 @@
+@font-face {
+    src: url('../fonts/karla.ttf');
+    font-family: 'karla';
+}
+
+body {
+    font-family: 'karla';
+    line-height: 100%;
+}
+
+body,
+input,
+textarea,
+h2,
+h4,
+p,
+div,
+ul,
+li,
+p {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    color: #0d6da2;
+    text-decoration: none;
+}
+
+ul, li {
+    list-style: none;
+}
+
+input,
+textarea {
+    font-family: inherit;
+}
+
+/* Navbar */
+
+#navbar {
+    padding: 15px 0;
+}
+
+#navbar .sitename {
+    display: inline-block;
+    color: yellow;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 23px;
+}
+
+#navbar .sitename {
+    float: left;
+}
+
+.header {
+    font-weight: 700;
+    font-size: 24px;
+    color: #555;
+}
+
+#navbar .navbar-menu {
+    float: right;
+}
+
+#navbar .navbar-menu li,
+#navbar .navbar-menu a {
+    display: inline-block;
+}
+
+#navbar .navbar-menu li {
+    margin-left: 10px;
+}
+
+#navbar .navbar-menu li a {
+    color: #fff;
+}
+
+.nav-toggle-responsive {
+    float: right;
+    background: none;
+    color: #fff;
+    border: none;
+    outline: none;
+    display: none;
+    font-size: 20px;
+    height: 37px;
+    padding: 0 11px;
+}
+
+@media screen and (max-width:768px) {
+    #navbar .navbar-menu {
+        display: none;
+    }
+
+    #navbar .nav-toggle-responsive {
+        display: block;
+    }
+
+    #navbar.expanded {
+        position: relative;
+        background: #000;
+    }
+
+    #navbar.expanded .navbar-menu {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #000;
+    }
+
+    #navbar.expanded .navbar-menu.horizontal {
+        padding: 30px 0;
+        text-align: center;
+    }
+
+    #navbar.expanded .navbar-menu.vertical {
+
+    }
+}
+
+.red-bg {
+    background: #ef3b3b;
+}
+
+.container {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width:1024px) {
+    .container {
+        width: 900px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .container {
+        width: auto;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+/* Floats */
+.f-left {
+    float: left;
+}
+
+.f-right {
+    float: right;
+}
+
+.clearfix {
+    clear: both;
+}
+
+/* Text alignments */
+.t-center {
+    text-align: center;
+}
+
+/* Grid container */
+.grid-container {
+    margin-left: -15px;
+    margin-right: -15px;
+    box-sizing: border-box;
+}
+
+.grid-container .grid-50,
+.grid-container .grid-10 {
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
+}
+
+.grid-container .grid-50 {
+    width: 50%;
+}
+
+.grid-container .grid-10 {
+    width: 10%;
+}
+
+
+/* Dropdowns */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    display: none;
+    background: #ffffff !important;
+    box-shadow: 0 2px 3px #ccc;
+    z-index: 999999999999999;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 9px;
+    color: #777!important;
+}
+
+.dropdown-menu li a:hover {
+    background: #ededed!important;
+    color: #333!important;
+}
+
+/* button */
+.button {
+    display: inline-block;
+    padding: 12px 17px;
+    background: #ef3b3b;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.button.small {
+    padding: 8px 13px;
+    font-size: 13px;
+}
+
+.button:hover {
+    background: #ca2745;
+}
+
+.button:disabled {
+    background: #fda0a0;
+}
+
+form label {
+    font-weight: 700;
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 3px;
+    display: inline-block;
+}
+
+form .error {
+    color: red;
+    font-size: 11px;
+    margin-top: 4px;
+    background: #fdf3f3;
+    padding: 0 4px;
+    border-radius: 4px;
+    display: none;
+}
+
+form .error.show {
+    display: inline-block;
+}
+
+.required {
+    font-weight: normal;
+    color: #f00;
+}
+
+.text-field {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px;
+    border: 1px solid #dcdcdc;
+    outline: none;
+}
+
+.text-field:focus {
+    border-color: #9f9f9f;
+}
+
+form .field-section {
+    margin-top: 20px;
+}
+
+form .form-section {
+    margin-top: 20px;
+}
+
+form .form-section .form-section-header {
+    color: #777;
+}
+
+form .form-section .form-section-body {
+    margin-top: 10px;
+}
+
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999999999999999999;
+    background: rgb(0,0,0,0.25);
+    display: none;
+}
+
+.modal-container .modal {
+    background: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 5px 8px #929292;
+}
+
+.modal-container .modal.medium {
+    width: 400px;
+    margin-top: 10%;
+}
+
+.modal-container .modal-btn-area {
+    padding: 7px 10px;
+}
+
+.modal-container .modal-btn {
+    display: inline-block;
+    padding: 9px 11px;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 700;
+    float: right;
+    margin-left: 5px;
+    color: #bfbfbf;
+    transition: color 0.25s, background 0.25s;
+}
+
+.modal-container .modal-btn:hover {
+    background: #dfdfdf;
+    color: #333;
+}
+
+.modal-container .modal-btn.red {
+    color: #ef3b3b;
+}
+
+.modal-container .modal-btn.red:hover {
+    background: #ef3b3b;
+    color: #ffffff;
+}
+
+.modal-container .modal-body {
+    padding: 20px;
+}
+
+/* Toast/snackbar */
+@keyframes slideUp {
+    0% {
+        bottom: -40px;
+    }
+
+    100% {
+        bottom: 20px;
+    }
+}
+
+@keyframes slideUpRes {
+    0% {
+        bottom: -40px;
+    }
+
+    100% {
+        bottom: 0;
+    }
+}
+
+.toast {
+    position: fixed;
+    right: 20px;
+    font-size: 14px;
+    padding: 15px;
+    border-radius: 3px;
+    animation-name: slideUp;
+    animation-duration: 0.4s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    box-shadow: 0 6px 14px #bebebe;
+    z-index: 99999999;
+}
+
+.toast.red {
+    background: red;
+    color: #ffffff;
+}
+
+.toast.green {
+    background: green;
+    color: #ffffff;
+}
+
+@media screen and (max-width:768px) {
+    .toast {
+        left: 0;
+        right: 0;
+        animation-name: slideUpRes;
+        box-shadow: none;
+        border-radius: 0;
+    }
+}

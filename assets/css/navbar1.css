@@ -1,0 +1,21 @@
+.navbar-inner {
+	height: 37px;
+    line-height: 37px;
+}
+
+#navbar .navbar-menu li a {
+	border: 1px solid #f77;
+	height: 37px;
+	padding: 0 11px;
+	transition: border-color 0.2s;
+	box-sizing: border-box;
+}
+
+#navbar .navbar-menu li a:hover {
+	border-color: #fff;
+}
+
+.navbar-container {
+    width: auto;
+    padding: 0 6%;
+}

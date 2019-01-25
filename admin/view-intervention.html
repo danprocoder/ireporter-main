@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>... | iReporter</title>
+	
+	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+	<link rel="stylesheet" type="text/css" href="../assets/css/ireporter.css" />
+	<link rel="stylesheet" type="text/css" href="../assets/css/user.css" />
+	<link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="../assets/css/view-record.css" />
+	<link rel="stylesheet" type="text/css" href="assets/admin.css" />
+	
+	<script src="../assets/js/ireporter.js"></script>
+	<script src="../assets/js/app.js"></script>
+	<script src="assets/js/admin.js"></script>
+	<script src="../assets/js/api.js"></script>
+	<script src="assets/js/incident.js"></script>
+	<script>
+    app.use('mapbox');
+
+	app.setAuthRequired(true);
+	app.ready((http, dom) => {
+	  dom.selector('.auth-logout').click(app.logout);
+      
+      onReady('intervention', http);
+	});
+	app.start();
+	</script>
+</head>
+<body>
+	<div id="top">
+		<div class="sitename pull-left">
+			<a href="index.html">
+				<h2><i class="fa fa-bullhorn"></i> <span class="hide-responsive">iReporter</span></h2>
+			</a>
+		</div>
+		<a href="#" class="pull-left responsive-toggle"><i class="fa fa-bars"></i></a>
+		<ul class="navbar-menu pull-right">
+			<li class="dropdown">
+				<a href="#">Admin <i class="fa fa-caret-down"></i></a>
+				<div class="dropdown-menu">
+					<ul>
+						<li><a href="#" class="auth-logout">Logout</a></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+		<div class="clearfix"></div>
+	</div>
+
+	<div class="main-content">
+		<div class="sidenav">
+			<div class="sidenav-menus">
+				<ul>
+					<li>
+						<a href="index.html"><span class="icon-wrapper"><i class="fa fa-dashboard"></i></span> <span class="text-wrapper">Dashboard</span></a>
+					</li>
+					<li>
+						<a href="red-flags.html"><span class="icon-wrapper"><i class="fa fa-flag"></i></span> <span class="text-wrapper">Red-Flags</span></a>
+					</li>
+					<li class="active">
+						<a href="interventions.html"><span class="icon-wrapper"><i class="fa fa-question"></i></span> <span class="text-wrapper">Interventions</span></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="content">
+			<div class="inner preload" id="incident">
+				<div class="loader"><i class="fa fa-ellipsis-h fa-2x"></i></div>
+				<div class="on-load">
+					<div>
+						<div class="navigation"><a href="interventions.html">Interventions</a> / <span class="js-text-title"></span></div>
+						<div class="title js-text-title"></div>
+						<div class="info-wrapper" id="map-area">
+							<span class="info date js-text-date"></span>
+							<span class="info map"><a href="#map-area" title="View map"><i class="fa fa-map"></i> Map</a></span>
+							<span class="info record-status dropdown" id="status-dd">
+								<span class="selected"></span> <i class="fa fa-caret-down"></i>
+								<ul class="dropdown-menu">
+									<li><a href="#">In Draft</a></li>
+									<li><a href="#">Under Investigation</a></li>
+									<li><a href="#">Resolved</a></li>
+									<li><a href="#">Rejected</a></li>
+								</ul>
+							</span>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+					<div class="record-content">
+						<div class="comment js-text-comment"></div>
+						<div class="map-wrapper">
+							<div class="location-text"><i class="fa fa-map-marker"></i> <span class="js-coords-text"></span></div>
+							<div id="map-container"></div>
+						</div>
+						<!-- <div class="media-section">
+							<div class="section-header"><i class="fa fa-image"></i> Media</div>
+							<div class="media-wrapper">
+								<a class="media pull-left">
+									<img src="#" alt="media" />
+									<div class="download"><i class="fa fa-arrow-down fa-2x"></i></div>
+								</a>
+								<a class="media pull-left">
+									<img src="#" alt="media" />
+									<div class="download"><i class="fa fa-arrow-down fa-2x"></i></div>
+								</a>
+								<a class="media pull-left">
+									<img src="#" alt="media" />
+									<div class="download"><i class="fa fa-arrow-down fa-2x"></i></div>
+								</a>
+								<a class="media pull-left">
+									<img src="#" alt="media" />
+									<div class="download"><i class="fa fa-arrow-down fa-2x"></i></div>
+								</a>
+								<div class="clearfix"></div>
+							</div>
+						</div> -->
+					</div>
+				</div>
+			</div>	
+		</div>
+	</div>
+</body>
+</html>

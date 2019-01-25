@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Red Flags | iReporter</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<link rel="stylesheet" type="text/css" href="../assets/css/ireporter.css" />
+	<link rel="stylesheet" type="text/css" href="../assets/css/user.css" />
+	<link rel="stylesheet" type="text/css" href="../assets/css/records.css" />
+	<link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="assets/admin.css" />
+
+	<script src="../assets/js/ireporter.js"></script>
+	<script src="../assets/js/app.js"></script>
+	<script src="assets/js/admin.js"></script>
+	<script src="../assets/js/api.js"></script>
+	<script src="assets/js/incidents.js"></script>
+	<script>
+	app.setAuthRequired(true);
+	app.ready((http, dom) => {
+	  dom.selector('.auth-logout').click(app.logout);
+
+	  onReady('red-flag');
+
+	  loadIncidents('red-flag');
+	});
+	app.start();
+	</script>
+</head>
+<body>
+	<div id="top">
+		<div class="sitename pull-left">
+			<a href="index.html">
+				<h2><i class="fa fa-bullhorn"></i> <span class="hide-responsive">iReporter</span></h2>
+			</a>
+		</div>
+		<a href="#" class="pull-left responsive-toggle"><i class="fa fa-bars"></i></a>
+		<ul class="navbar-menu pull-right">
+			<li class="dropdown">
+				<a href="#">Admin <i class="fa fa-caret-down"></i></a>
+				<div class="dropdown-menu">
+					<ul>
+						<li><a href="#" class="auth-logout">Logout</a></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+		<div class="clearfix"></div>
+	</div>
+
+	<div class="main-content">
+		<div class="sidenav">
+			<div class="sidenav-menus">
+				<ul>
+					<li>
+						<a href="index.html"><span class="icon-wrapper"><i class="fa fa-dashboard"></i></span> <span class="text-wrapper">Dashboard</span></a>
+					</li>
+					<li class="active">
+						<a href="red-flags.html"><span class="icon-wrapper"><i class="fa fa-flag"></i></span> <span class="text-wrapper">Red-Flags</span></a>
+					</li>
+					<li>
+						<a href="interventions.html"><span class="icon-wrapper"><i class="fa fa-question"></i></span> <span class="text-wrapper">Interventions</span></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="content">
+			<div class="inner">
+				<div class="navigation header">Red Flags</div>
+				<div>
+					<div style="margin-top:15px;">
+						<ul class="tab f-left">
+							<li><a href="#">In Draft</a></li>
+							<li><a href="#">Resolved</a></li>
+							<li><a href="#">Under Investigation</a></li>
+							<li><a href="#">Rejected</a></li>
+							<li class="active"><a href="#">All</a></li>
+						</ul>
+
+						<div class="f-right">
+							<!-- <span>Showing 1 - 5 of 5</span> -->
+							<div class="search-box">
+								<input type="text" placeholder="Search title" name="q" class="text-field" />
+								<button><i class="fa fa-search"></i></button>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="preload" id="incident">
+						<div class="loader"><i class="fa fa-ellipsis-h fa-2x"></i></div>
+						<div class="table-wrapper on-load">
+							<table id="incident-table">
+								<thead>
+									<th>#</th>
+									<th>Title</th>
+									<th>Created At</th>
+									<th>Status</th>
+									<th>Action</th>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+					</div>
+					<!-- <div class="pagination-wrapper">
+						<ul class="pagination f-right">
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li>...</li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+						</ul>
+						<div class="clearfix"></div>
+					</div> -->
+				</div>
+			</div>	
+		</div>
+	</div>
+</body>
+</html>

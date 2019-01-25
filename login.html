@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Log In | iReporter</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/ireporter.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/navbar1.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/a.css" />
+
+	<script src="assets/js/app.js"></script>
+	<script src="assets/js/nav.js"></script>
+</head>
+<body>
+	<div class="red-bg">
+		<div id="navbar">
+			<div class="navbar-container">
+				<div class="navbar-inner">
+					<a href="index.html" class="sitename">iReporter</a>
+					<div class="navbar-menu horizontal">
+						<ul>
+							<li><a href="login.html">Log In</a></li>
+							<li><a href="signup.html">Sign Up</a></li>
+						</ul>
+					</div>
+					<button class="nav-toggle-responsive"><i class="fa fa-bars"></i></button>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<form role="form" class="login" id="login-form" method="post">
+			<div class="header-container">
+				<div class="header t-center">Log In</div>
+			</div>
+			<div class="field-section">
+				<label>Your Email</label>
+				<input type="text" name="email" class="text-field" />
+				<div class="error email"></div>
+			</div>
+			<div class="field-section">
+				<label>Your Password</label>
+				<input type="password" name="password" class="text-field" />
+				<div class="error password"></div>
+			</div>
+			<div class="field-section t-center button-section">
+				<input type="submit" class="button" id="login-btn" value="Log In" />
+			</div>
+		</form>
+	</div>
+
+	<script src="assets/js/validator.js"></script>
+	<script src="assets/js/api.js"></script>
+	<script>
+	app.setAuthRequired(false, true);
+	app.ready(http => {
+      const loginBtn = document.getElementById('login-btn');
+
+      const form = document.getElementById('login-form');
+      form.onsubmit = (event) => {
+      	event.preventDefault();
+      	loginBtn.disabled = true;
+
+      	// Clear all error messages.
+      	var errors = document.querySelectorAll('#login-form .error');
+		for (let i = 0; i < errors.length; i++) {
+		  errors[i].innerHTML = '';
+		  errors[i].classList.remove('show');
+		}
+
+	    const validator = new FormValidator('login-form'),
+  		  rules = {
+  		    'email': {
+  		      'required': 'Your email address is required',
+  		      valid_email: 'Email address is not valid',
+  		    },
+  		    'password': {
+  		      'required': 'Please provide your password',
+  		    }
+  		  };
+	    if (validator.validate(rules)) {
+	      http.api('auth/login').body({
+            email: form.elements['email'].value,
+            password: form.elements['password'].value
+	      }).post((data) => {
+            app.setAuthToken(data[0].token);
+
+            http.redirect(data[0].user.isAdmin ? './admin' : './dashboard.html');
+	      }, (error) => {
+	      	loginBtn.disabled = false;
+
+	      	if (typeof error.error == 'string') {
+	      	  app.toast.error(error.error);
+	      	}
+	      });
+	    } else {
+	      const errors = validator.getErrors();
+	      for (const name in errors) {
+	      	const errMessage = document.querySelector('#login-form .error.' + name);
+	      	errMessage.innerHTML = errors[name];
+	      	errMessage.classList.add('show');
+	      }
+
+	      loginBtn.disabled = false;
+	    }
+      }
+	});
+	app.start();
+	</script>
+</body>
+</html>
