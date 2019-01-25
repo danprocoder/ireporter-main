@@ -25,6 +25,8 @@ function initTable(type) {
 function loadIncidents(http, type) {
   http.api(type + 's').get((data) => {
   	app.table('incident-table').setDataSet(data).draw();
+    
+    app.preloader('incident').hideLoadingAnimation();
   }, (error) => {
     app.toast.error('Failed to load ' + type + 's');
     console.log(error);

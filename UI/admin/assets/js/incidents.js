@@ -63,6 +63,8 @@ function loadIncidents(type) {
 
     initElements();
     setStatusChangeListener(type, data);
+
+    app.preloader('incident').hideLoadingAnimation();
   }, (error) => {
     app.toast.error(`Failed to load ${type}s`);
   });
