@@ -16,6 +16,19 @@
 	<script src="assets/js/app.js"></script>
 	<script src="assets/js/nav.js"></script>
 	<script>
+	function loadIncidents(type) {
+	  app.preloader(`${type}s`).showLoadingAnimation();
+
+	  app.http.api(`${type}s`).get((data) => {
+	  	app.table(`${type}s-table`).setDataSet(data).draw();
+
+	  	app.preloader(`${type}s`).hideLoadingAnimation();
+	  }, (error) => {
+	  	app.toast.error('Failed to load ' + type);
+	  });
+	}
+	</script>
+	<script>
 	app.setAuthRequired(true);
 	app.ready((http, dom) => {
 	  dom.selector('.auth-logout').click(app.logout);
@@ -24,6 +37,15 @@
 	  dom.selector('.js-text-name').html(user.firstname + ' ' + user.lastname);
 	  dom.selector('.js-text-email').html(user.email);
 	  dom.selector('.js-text-mobile').html(user.phoneNumber);
+
+	  // Load red-flags by default.
+	  loadIncidents('red-flag');
+
+	  $('incident-tab').onTabChanged((index) => {
+	  	const selected = ['red-flag', 'intervention'][index];
+
+	  	loadIncidents(selected);
+	  });
 	});
 	app.start();
 	</script>
@@ -104,83 +126,80 @@
 						<div class="clearfix"></div>
 					</div>
 				</div>
-				<div class="tab-wrapper">
-					<ul class="tab">
-						<li class="active"><a href="#">Red Flag</a></li>
-						<li><a href="#">Intervention</a></li>
-					</ul>
-				</div>
-				<div class="table-wrapper">
-					<table>
-						<thead>
-							<th>#</th>
-							<th>Title</th>
-							<th>Created At</th>
-							<th>Status</th>
-							<th>Action</th>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Snake ate &#8358;10m</td>
-								<td>11:08:45 11-12-2018</td>
-								<td><span class="record-status pending no-select">IN DRAFT</span></td>
-								<td>
-									<a href="view-red-flag.html" class="action blue"><i class="fa fa-eye"></i> View</a>
-									<a href="#" class="action blue"><i class="fa fa-pencil"></i> Edit</a>
-									<a href="#" class="action red"><i class="fa fa-trash"></i> Delete</a>
-								</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>Snake ate &#8358;10m</td>
-								<td>11:08:45 11-12-2018</td>
-								<td><span class="record-status pending no-select">IN DRAFT</span></td>
-								<td>
-									<a href="view-red-flag.html" class="action blue"><i class="fa fa-eye"></i> View</a>
-									<a href="#" class="action blue"><i class="fa fa-pencil"></i> Edit</a>
-									<a href="#" class="action red"><i class="fa fa-trash"></i> Delete</a>
-								</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>Snake ate &#8358;10m</td>
-								<td>11:08:45 11-12-2018</td>
-								<td><span class="record-status resolved no-select">RESOLVED</span></td>
-								<td>
-									<a href="view-red-flag.html" class="action blue"><i class="fa fa-eye"></i> View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>Snake ate &#8358;10m</td>
-								<td>11:08:45 11-12-2018</td>
-								<td><span class="record-status under-investigation no-select">UNDER INVESTIGATION</span></td>
-								<td>
-									<a href="view-red-flag.html" class="action blue"><i class="fa fa-eye"></i> View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td>Snake ate &#8358;10m</td>
-								<td>11:08:45 11-12-2018</td>
-								<td><span class="record-status rejected no-select">REJECTED</span></td>
-								<td>
-									<a href="view-red-flag.html" class="action blue"><i class="fa fa-eye"></i> View</a>
-								</td>
-							</tr>
-							<tr>
-								<td>5</td>
-								<td>Snake ate &#8358;10m</td>
-								<td>11:08:45 11-12-2018</td>
-								<td><span class="record-status rejected no-select">REJECTED</span></td>
-								<td>
-									<a href="view-red-flag.html" class="action blue"><i class="fa fa-eye"></i> View</a>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+
+				<div class="tab-container" id="incident-tab">
+
+					<div class="tab-wrapper">
+						<ul class="tab">
+							<li class="active"><a href="#">Red Flag</a></li>
+							<li><a href="#">Intervention</a></li>
+						</ul>
+					</div>
+
+					<div class="tab-content">
+
+						<!-- Red flags tab -->
+						<div class="tab-pane preload" id="red-flags">
+							<div class="loader"><i class="fa fa-ellipsis-h fa-2x"></i></div>
+							<div class="table-wrapper on-load">
+								<table>
+									<thead>
+										<th>#</th>
+										<th>Title</th>
+										<th>Created At</th>
+										<th>Status</th>
+										<th>Action</th>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>Snake ate &#8358;10m</td>
+											<td>11:08:45 11-12-2018</td>
+											<td><span class="record-status pending no-select">IN DRAFT</span></td>
+											<td>
+												<a href="view-red-flag.html" class="action blue"><i class="fa fa-eye"></i> View</a>
+												<a href="#" class="action blue"><i class="fa fa-pencil"></i> Edit</a>
+												<a href="#" class="action red"><i class="fa fa-trash"></i> Delete</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<!-- Interventions tab -->
+						<div class="tab-pane preload" id="interventions">
+							<div class="loader"><i class="fa fa-ellipsis-h fa-2x"></i></div>
+							<div class="table-wrapper on-load">
+								<table>
+									<thead>
+										<th>#</th>
+										<th>Title</th>
+										<th>Created At</th>
+										<th>Status</th>
+										<th>Action</th>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>Snake ate &#8358;10m</td>
+											<td>11:08:45 11-12-2018</td>
+											<td><span class="record-status pending no-select">IN DRAFT</span></td>
+											<td>
+												<a href="view-red-flag.html" class="action blue"><i class="fa fa-eye"></i> View</a>
+												<a href="#" class="action blue"><i class="fa fa-pencil"></i> Edit</a>
+												<a href="#" class="action red"><i class="fa fa-trash"></i> Delete</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+					</div> <!-- End of tab content. -->
+
+				</div> <!-- End of tab container. -->
+
 			</div>
 		</div>
 	</div>

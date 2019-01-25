@@ -1,6 +1,25 @@
-class Dropdown {
+class Element {
   constructor(element) {
     this.element = element;
+  }
+
+  getId() {
+    return this.element.id;
+  }
+
+  child(query) {
+    return new DOMSelector(this.element, query);
+  }
+
+  isClicked(src) {
+    return src.isEqualNode(this.element) || this.element.contains(src);
+  }
+}
+
+class Dropdown extends Element {
+  constructor(element) {
+    super(element);
+
     this.menus = element.getElementsByClassName('dropdown-menu')[0] || null;
 
     const o = this;
@@ -45,25 +64,72 @@ class Dropdown {
     }
   }
 
-  child(query) {
-    return new DOMSelector(this.element, query);
-  }
-
   disable(disabled) {
     this.disabled = disabled;
     return this;
   }
 
-  getId() {
-    return this.element.id;
-  }
-
   close() {
     this.menus.style.display = 'none';
   }
+}
 
-  isClicked(src) {
-    return src.isEqualNode(this.element) || this.element.contains(src);
+class Tab extends Element {
+  constructor(element) {
+    super(element);
+
+    this.tabMenus = element.querySelectorAll('.tab li a');
+    this.tabPanes = element.querySelectorAll('.tab-content .tab-pane');
+
+    this.currentTabIndex = -1;
+
+    this.initTabs();
+  }
+
+  initTabs() {
+    for (let i = 0; i < this.tabMenus.length; i++) {
+      // Set tab menu click listener.
+      const menu = this.tabMenus[i];
+      const o = this;
+      menu.addEventListener('click', (e) => {
+        // Remove existing active class.
+        for (let j = 0; j < o.tabMenus.length; j++) {
+          o.tabMenus[j].parentNode.classList.remove('active');
+        }
+
+        menu.parentNode.classList.add('active');
+
+        o.showTabContent(i);
+
+        // Fire tab changed listener.
+        if (o.currentTabIndex !== i && typeof o.tabChangedCallback === 'function') {
+          o.tabChangedCallback(i);
+        }
+        o.currentTabIndex = i;
+
+        e.preventDefault();
+      });
+
+      // Default active tab.
+      if (menu.parentNode.classList.contains('active')) {
+        this.showTabContent(i);
+        
+        this.currentTabIndex = i;
+      }
+    }
+  }
+
+  showTabContent(index) {
+    // Hide all tab panes
+    for (let i = 0; i < this.tabPanes.length; i++) {
+      this.tabPanes[i].style.display = 'none';
+    }
+
+    this.tabPanes[index].style.display = 'block';
+  }
+
+  onTabChanged(callback) {
+    this.tabChangedCallback = callback;
   }
 }
 
@@ -112,6 +178,7 @@ function $(id) {
 
 const classMap = {
   dropdown: Dropdown,
+  'tab-container': Tab,
 };
 
 initElements = () => {
@@ -133,7 +200,7 @@ window.addEventListener('load', () => {
 document.addEventListener('click', (ev) => {
   for (let i = 0; i < elements.length; i++) {
     const e = elements[i];
-    if (!e.isClicked(ev.target)) {
+    if (!e.isClicked(ev.target) && typeof e.close === 'function') {
       e.close();
     }
   }

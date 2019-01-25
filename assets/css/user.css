@@ -165,12 +165,29 @@ table .action.blue {
 }
 
 /* Preload */
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
 .preload .on-load {
 	display: none;
+	animation: fadeIn 0.5s forwards;
+	animation-iteration-count: 1;
 }
 
 .preload .loader {
 	text-align: center;
 	margin-top: 30px;
 	color: #bbb;
+}
+
+/* Tabs & Menus */
+.tab-container .tab-content .tab-pane {
+	display: none;
 }

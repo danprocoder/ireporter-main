@@ -240,6 +240,11 @@ class Preloader {
       callback();
     }
   }
+
+  showLoadingAnimation() {
+    this.container.querySelector('.on-load').style.display = 'none';
+    this.container.querySelector('.loader').style.display = 'block';
+  }
 }
 
 const app = {
