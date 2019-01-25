@@ -8,7 +8,7 @@
 }
 
 .user-bio .meta {
-	margin-top: 20px;
+	margin-top: 30px;
 }
 
 .user-bio span {
@@ -19,6 +19,13 @@
 	color: #107ca7;
 	vertical-align: middle;
 	margin-right: 3px;
+}
+
+@media screen and (max-width:768px) {
+	.user-bio span {
+		display: block;
+		margin-bottom: 8px;
+	}
 }
 
 .counters {
