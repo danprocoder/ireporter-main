@@ -3,14 +3,18 @@
 <head>
 	<title>Dashboard | iReporter</title>
 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/navbar2.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/ireporter.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/navbar2.css" />
-	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/user.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/dashboard.css" />
 
 	<script src="assets/js/ireporter.js"></script>
 	<script src="assets/js/app.js"></script>
+	<script src="assets/js/nav.js"></script>
 	<script>
 	app.setAuthRequired(true);
 	app.ready((http, dom) => {
@@ -37,6 +41,7 @@
 						</li>
 					</ul>
 				</div>
+				<button class="nav-toggle-responsive"><i class="fa fa-bars"></i></button>
 				<div class="clearfix"></div>
 			</div>
 		</div>

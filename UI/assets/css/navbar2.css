@@ -35,3 +35,7 @@
 #navbar .dropdown-menu a:hover {
 	background: #efefef;
 }
+
+#navbar .nav-toggle-responsive {
+	margin-top: 12px;
+}

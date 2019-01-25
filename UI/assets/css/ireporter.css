@@ -77,6 +77,51 @@ textarea {
     color: #fff;
 }
 
+.nav-toggle-responsive {
+    float: right;
+    background: none;
+    color: #fff;
+    border: none;
+    outline: none;
+    display: none;
+    font-size: 20px;
+    height: 37px;
+    padding: 0 11px;
+}
+
+@media screen and (max-width:768px) {
+    .navbar-menu {
+        display: none;
+    }
+
+    .nav-toggle-responsive {
+        display: block;
+    }
+
+    #navbar.expanded {
+        position: relative;
+        background: #000;
+    }
+
+    #navbar.expanded .navbar-menu {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #000;
+    }
+
+    #navbar.expanded .navbar-menu.horizontal {
+        padding: 30px 0;
+        text-align: center;
+    }
+
+    #navbar.expanded .navbar-menu.vertical {
+
+    }
+}
+
 .red-bg {
     background: #ef3b3b;
 }

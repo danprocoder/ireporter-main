@@ -19,25 +19,3 @@
     width: auto;
     padding: 0 6%;
 }
-
-.nav-toggle-responsive {
-	float: right;
-	background: none;
-	color: #fff;
-	border: none;
-	outline: none;
-	display: none;
-	font-size: 20px;
-	height: 37px;
-	padding: 0 11px;
-}
-
-@media screen and (max-width:768px) {
-	.navbar-menu {
-		display: none;
-	}
-
-	.nav-toggle-responsive {
-		display: block;
-	}
-}
