@@ -1,0 +1,85 @@
+.user-bio {
+	padding: 40px 0;
+	background: #fbfafa
+}
+
+.user-bio .name {
+	font-size: 33px;
+}
+
+.user-bio .meta {
+	margin-top: 30px;
+}
+
+.user-bio .meta-data {
+	margin-right: 40px;
+}
+
+.user-bio .meta-data .fa {
+	color: #107ca7;
+	vertical-align: middle;
+	margin-right: 3px;
+}
+
+@media screen and (max-width:768px) {
+	.user-bio .meta-data {
+		display: block;
+		margin-bottom: 8px;
+	}
+}
+
+.counters {
+	margin-top: 35px;
+}
+
+.counters .header {
+	font-size: 15px;
+}
+
+.tab-wrapper {
+	margin-top: 40px;
+}
+
+.table-wrapper {
+	margin-top: 14px;
+}
+
+.counters .counter {
+	float: left;
+	margin-right: 60px;
+}
+
+.counters .counter .num {
+	font-weight: 700;
+	font-size: 24px;
+}
+
+.counters .counter .text {
+	font-size: 13px;
+	margin-top: 9px;
+	color: #696969;
+}
+
+.counters .body {
+	margin-top: 19px;
+}
+
+.record-status.pending {
+	border-color: gray;
+	color: gray;
+}
+
+.counter.in-draft .num {
+	border-color: blue;
+	color: blue;
+}
+
+.counter.resolved .num {
+	border-color: green;
+	color: green;
+}
+
+.counter.rejected .num {
+	border-color: red;
+	color: red;
+}

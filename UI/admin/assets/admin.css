@@ -1,0 +1,166 @@
+#top {
+	position: fixed;
+	left: 0;
+	right: 0;
+	z-index: 9999999999999;
+	background: #f54343;
+	height: 50px;
+	line-height: 50px;
+	padding-right: 20px;
+	box-shadow: 0 1px 12px #0000007d;
+}
+
+#top .sitename a {
+	width: 190px;
+	height: 49px;
+    line-height: 50px;
+    background: #de3838;
+    display: block;
+    color: yellow;
+    padding: 0 10px;
+    border-bottom: 1px solid #e8e802;
+}
+
+#top .responsive-toggle {
+	margin-left: 20px;
+}
+
+#top a {
+	color: #ffffff;
+}
+
+#top .dropdown-menu {
+	width: 180px;
+	padding: 5px 0;
+}
+
+#top .dropdown-menu a {
+	line-height: 100%;
+}
+
+#top .fa-caret-down {
+	color: #ff9589;
+}
+
+.sidenav {
+	width: 210px;
+	position: fixed;
+	left: 0;
+	top: 50px;
+	bottom: 0;
+	background: #af2a2a;
+	z-index: 999;
+	transition: width 0.28s;
+}
+
+.sidenav .sidenav-menus {
+	font-size: 15px;
+	margin-top: 18px;
+}
+
+.sidenav-menus .icon-wrapper {
+	display: inline-block;
+	width: 11px;
+}
+
+.sidenav-menus .text-wrapper {
+	margin-left: 20px;
+}
+
+.sidenav .sidenav-menus li {
+	padding: 0 5px;
+	margin-bottom: 1px;
+}
+
+.sidenav .sidenav-menus a {
+	color: #ffaba3;
+	display: block;
+	padding: 15px 10px;
+	border-radius: 3px;
+	transition: background 0.15s;
+	white-space: nowrap;
+}
+
+.sidenav .sidenav-menus a:hover {
+	background-color: #a22727;
+	color: #ffffff;
+}
+
+.sidenav .sidenav-menus li.active a {
+	background: #901a1a;
+	color: #ffffff;
+	box-shadow: 0 1px 2px #63180e;
+}
+
+.sidenav .sidenav-menus li .fa {
+	font-size: 20px;
+}
+
+.main-content {
+	margin-left: 210px;
+	padding-top: 50px;
+	position: relative;
+}
+
+body {
+	background: #fdfdfd !important;
+}
+
+.main-content .navbar {
+	padding: 0 20px;
+}
+
+.main-content .content {
+	padding: 0px 20px;
+}
+
+.main-content .content .p {
+	margin-top: 30px;
+}
+
+.main-content .content .navigation.header {
+	font-size: 17px;
+}
+
+.search-box {
+	display: inline-block;
+}
+
+table td .status {
+	cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+	#top .hide-responsive {
+		display: none;
+	}
+
+	#top .sitename a {
+		width: 30px;
+		text-align: center;
+	}
+
+	.sidenav {
+		width: 50px;
+	}
+
+	.sidenav .sidenav-menus .text-wrapper {
+		display: none;
+	}
+
+	.main-content {
+		margin-left: 50px;
+	}
+
+	.sidenav.expanded {
+		width: 210px;
+	}
+
+	.sidenav a {
+		overflow: hidden;
+	}
+
+	.sidenav.expanded .text-wrapper {
+		display: inline;
+	}
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Interventions | iReporter</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<link rel="stylesheet" type="text/css" href="assets/css/ireporter.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/navbar2.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/user.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/records.css" />
+
+	<script src="assets/js/ireporter.js"></script>
+	<script src="assets/js/api.js"></script>
+	<script src="assets/js/app.js"></script>
+	<script src="assets/js/nav.js"></script>
+	<script src="assets/js/incidents.js"></script>
+	<script src="assets/js/delete-incident.js"></script>
+	<script>
+	app.setAuthRequired(true);
+	app.ready((http, dom) => {
+      dom.selector('.auth-logout').click(app.logout);
+
+      initTable('intervention');
+
+      loadIncidents(http, 'intervention');
+	});
+	app.start();
+	</script>
+</head>
+<body>
+	<div class="red-bg">
+		<div id="navbar">
+			<div class="container">
+				<a href="dashboard.html" class="sitename">iReporter</a>
+				<div class="navbar-menu">
+					<ul>
+						<li><a href="red-flags.html">Red Flags</a></li>
+						<li><a href="interventions.html">Interventions</a></li>
+						<li class="dropdown">
+							<a href="#">Account <i class="fa fa-caret-down"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="profile.html">My Profile</a></li>
+								<li><a href="#" class="auth-logout">Log out</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<button class="nav-toggle-responsive"><i class="fa fa-bars"></i></button>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="container">
+			<div class="header-container">
+				<div class="f-left">
+					<span class="header">Interventions</span>
+					<a href="create-intervention.html" class="button small" style="margin-left:20px;"><i class="fa fa-plus"></i> Create an Intervention</a>
+				</div>
+				<div class="f-right"></div>
+				<div class="clearfix"></div>
+			</div>
+			<div>
+				<ul class="tab f-left">
+					<li><a href="#">Pending</a></li>
+					<li><a href="#">Resolved</a></li>
+					<li><a href="#">Under Investigation</a></li>
+					<li><a href="#">Rejected</a></li>
+					<li class="active"><a href="#">All</a></li>
+				</ul>
+				<div class="f-right">
+					<!-- Showing 1 - 5 of 5 -->
+					<div class="search-box">
+						<input type="text" placeholder="Search title" name="q" class="text-field" />
+						<button><i class="fa fa-search"></i></button>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="content preload" id="incident">
+				<div class="loader"><i class="fa fa-ellipsis-h fa-2x"></i></div>
+				<div class="table-wrapper on-load">
+					<table id="incident-table">
+						<thead>
+							<th>#</th>
+							<th>Title</th>
+							<th>Created At</th>
+							<th>Status</th>
+							<th>Action</th>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+				<!-- <div class="pagination-wrapper">
+					<ul class="pagination f-right">
+						<li class="active"><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li>...</li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+					</ul>
+					<div class="clearfix"></div>
+				</div> -->
+			</div>	
+		</div>
+	</div>
+
+	<div class="modal-container">
+		<div class="modal medium" id="delete-modal">
+			<div class="modal-body">Do you want to delete this incident?</div>
+			<div class="modal-btn-area">
+				<a href="#" class="modal-btn close">Close</a>
+				<a href="#" class="modal-btn red yes">Yes</a>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

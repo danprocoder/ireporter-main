@@ -1,0 +1,41 @@
+#navbar {
+	padding: 0;
+	height: 60px;
+	line-height: 60px;
+}
+
+#navbar .navbar-menu li {
+	margin-left: 20px;
+}
+
+#navbar .dropdown-menu {
+	width: 150px;
+	border: 1px solid #dfdfdf;
+	border-radius: 3px;
+	padding: 0;
+	background: #fff;
+}
+
+#navbar .dropdown-menu li {
+	display: block;
+	margin: 0;
+}
+
+#navbar .dropdown-menu a {
+	display: block;
+	width: 100%;
+	color: #333 !important;
+	padding: 0 10px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 14px;
+	box-sizing: border-box;
+}
+
+#navbar .dropdown-menu a:hover {
+	background: #efefef;
+}
+
+#navbar .nav-toggle-responsive {
+	margin-top: 12px;
+}

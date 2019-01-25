@@ -1,0 +1,176 @@
+.header-container {
+	padding: 20px 0;
+}
+
+.header-container .header {
+	font-size: 20px;
+}
+
+.content {
+	margin-top: 15px;
+}
+
+.table-wrapper {
+	width: 100%;
+	overflow-y: auto;
+}
+
+table {
+	width: 100%;
+	border-spacing: 0;
+}
+
+table th {
+	text-align: left;
+	font-size: 14px;
+	border-top: 1px solid #dfdfdf;
+	border-bottom: 1px solid #dfdfdf;
+	padding: 9px 2px;
+}
+
+table td {
+	border-top: 1px solid #dfdfdf;
+	padding: 9px 2px;
+	vertical-align: top;
+}
+
+.record-status {
+	display: inline-block;
+	border-width: 1px;
+	border-radius: 30px;
+	border-style: solid;
+	padding: 3px 7px;
+	white-space: nowrap;
+    font-size: 10px!important;
+}
+
+.record-status.in-draft {
+	border-color: #d4d4d4;
+	color: gray;
+}
+
+.record-status.in-draft.loading {
+	border-color: #f0f0f0;
+	color: #f0f0f0;
+}
+
+.record-status.under-investigation {
+	border-color: blue;
+	color: blue;
+}
+
+.record-status.under-investigation.loading {
+	border-color: lightblue;
+	color: lightblue;
+}
+
+.record-status.resolved {
+	border-color: green;
+	color: green;
+}
+
+.record-status.resolved.loading {
+	border-color: lightgreen;
+	color: lightgreen;
+}
+
+.record-status.rejected {
+	border-color: red;
+	color: red;
+}
+
+.record-status.rejected.loading {
+	border-color: #ff7a7a;
+	color: #ff7a7a;
+}
+
+.record-status .dropdown-menu {
+	background: #ffffff;
+	border: 1px solid #dfdfdf;
+	border-radius: 3px;
+	top: 103%;
+	width: 180px;
+}
+
+table .action {
+	font-size: 14px;
+	margin-right: 14px;
+	white-space: nowrap;
+}
+
+table .action.red {
+	color: red;
+}
+
+table .action.blue {
+	color: blue;
+}
+
+.no-select {
+	user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-wekbit-user-select: none;
+	-o-user-select: none;
+}
+
+.pagination li,
+.pagination li a {
+	display: inline-block;
+	box-sizing: border-box;
+}
+
+.pagination li a {
+	background: #e7e7e7;
+	color: blue;
+	padding: 5px 9px;
+	border-radius: 3px;
+}
+
+.pagination li.active a {
+	border: 1px solid blue;
+	color: blue;
+	background: #ffffff;
+}
+
+.pagination li a:hover {
+	background: blue;
+	color: #ffffff;
+}
+
+.pagination li {
+	margin-left: 3px;
+}
+
+.tab li,
+.tab li a {
+	display: inline-block;
+	padding: 0 0 4px 0;
+}
+
+.tab li.active a {
+	background: #429ed4;
+    color: #fff;
+    padding: 3px 9px;
+    border-radius: 30px;
+}
+
+.tab li {
+	margin-right: 10px;
+}
+
+.tab li a {
+	color: #444;
+	font-size: 13px;
+}
+
+/* Preload */
+.preload .on-load {
+	display: none;
+}
+
+.preload .loader {
+	text-align: center;
+	margin-top: 30px;
+	color: #bbb;
+}
