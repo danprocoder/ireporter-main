@@ -15,20 +15,50 @@
 	<script src="assets/js/api.js"></script>
 	<script src="assets/js/app.js"></script>
 	<script src="assets/js/nav.js"></script>
+
 	<script>
+	function getTableRowView(type) {
+	  const viewUrl = app.http.baseUrl(`view-${type}.html`);
+	  const editUrl = app.http.baseUrl(`create-${type}.html?action=edit`);
+
+	  return (data, serial, index) => {
+	  	let view = `<tr>
+          <td>${serial}</td>
+          <td>${xssClean(data.title)}</td>
+          <td>${dateFormat(data.createdon)}</td>
+          <td><span class="no-select record-status ${data.status}">${data.status.replace('-', ' ').toUpperCase()}</span></td>
+          <td>
+            <a href="${viewUrl}?id=${data.id}" class="action blue"><i class="fa fa-eye"></i> View</a>`;
+        if (data.status == 'in-draft') {
+        	view += `<a href="${editUrl}&id=${data.id}" class="action blue"><i class="fa fa-pencil"></i> Edit</a>`;
+        }
+
+        return view + `</td></tr>`;
+	  };
+	}
+
 	function loadIncidents(type) {
 	  app.preloader(`${type}s`).showLoadingAnimation();
+
+	  // Set table row views.
+	  app.table('red-flags-table').setRowView(getTableRowView('red-flag'));
+	  app.table('interventions-table').setRowView(getTableRowView('intervention'));
 
 	  app.http.api(`${type}s`).get((data) => {
 	  	app.table(`${type}s-table`).setDataSet(data).draw();
 
 	  	app.preloader(`${type}s`).hideLoadingAnimation();
 	  }, (error) => {
+	  	console.log(error);
+
 	  	app.toast.error('Failed to load ' + type);
 	  });
 	}
 	</script>
+
 	<script>
+	const loadedFirstTime = [0];
+
 	app.setAuthRequired(true);
 	app.ready((http, dom) => {
 	  dom.selector('.auth-logout').click(app.logout);
@@ -42,6 +72,11 @@
 	  loadIncidents('red-flag');
 
 	  $('incident-tab').onTabChanged((index) => {
+	  	if (loadedFirstTime.indexOf(index) !== -1) {
+	  	  return;
+	  	}
+	  	loadedFirstTime.push(index);
+
 	  	const selected = ['red-flag', 'intervention'][index];
 
 	  	loadIncidents(selected);
@@ -131,8 +166,8 @@
 
 					<div class="tab-wrapper">
 						<ul class="tab">
-							<li class="active"><a href="#">Red Flag</a></li>
-							<li><a href="#">Intervention</a></li>
+							<li class="active"><a href="#">Red Flags</a></li>
+							<li><a href="#">Interventions</a></li>
 						</ul>
 					</div>
 
@@ -142,7 +177,7 @@
 						<div class="tab-pane preload" id="red-flags">
 							<div class="loader"><i class="fa fa-ellipsis-h fa-2x"></i></div>
 							<div class="table-wrapper on-load">
-								<table>
+								<table id="red-flags-table">
 									<thead>
 										<th>#</th>
 										<th>Title</th>
@@ -171,7 +206,7 @@
 						<div class="tab-pane preload" id="interventions">
 							<div class="loader"><i class="fa fa-ellipsis-h fa-2x"></i></div>
 							<div class="table-wrapper on-load">
-								<table>
+								<table id="interventions-table">
 									<thead>
 										<th>#</th>
 										<th>Title</th>
