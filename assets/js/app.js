@@ -1,6 +1,34 @@
 /**
  * @author Daniel Austin
+ *
+ *
+ * Global functions: 8 - 16
  */
+
+/**
+ * Converts special html characters to entities.
+ *
+ * @param {string} str The string to encode.
+ * @return {string} Returns the encoded string.
+ */
+function xssClean(str) {
+  return str.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/&/g, '&amp;');
+}
+
+/**
+ * Converts a datetime string in format yyyy-mm-dd HH:mm:ss to a readable date/time format.
+ *
+ * @param {string} dateString The string in yyyy-mm-dd HH:mm:ss format.
+ * @return {string} Returns the new date/time format.
+ */
+function dateFormat(dateString) {
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  const date = new Date(dateString);
+  let formatted = months[date.getMonth()] + ' ' + date.getDay() + ', ' + date.getFullYear() + ' at ' + date.getHours() + ':' + date.getMinutes();
+  return formatted;
+}
+
 
 class Form {
   constructor(id) {
