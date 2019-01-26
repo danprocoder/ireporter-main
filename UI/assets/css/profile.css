@@ -29,7 +29,7 @@
 }
 
 .counters {
-	margin-top: 35px;
+	margin-top: 45px;
 }
 
 .counters .header {
@@ -37,7 +37,9 @@
 }
 
 .tab-container {
-	margin-top: 70px;
+	margin-top: 50px;
+	padding-top: 15px;
+	border-top: 1px solid #f9f9f9;
 }
 
 .tab-container .tab {

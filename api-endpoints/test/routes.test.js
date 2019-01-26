@@ -83,6 +83,16 @@ describe('API endpoints tests', () => {
     });
   });
 
+  // Get red flag stats
+  describe('# Get all red flag stats', () => {
+    it ('should return red-flag stats for the particular user', (done) => {
+      supertest(app).get('/api/v1/red-flags/stats').set('x-access-token', token).end((err, res) => {
+        expect(res.body.status).to.equal(200);
+        done();
+      });
+    });
+  });
+
   // Edit the created red flag record.
   describe('# Edit the created red flag record', () => {
     it('should edit the title of the created red-flag record', (done) => {

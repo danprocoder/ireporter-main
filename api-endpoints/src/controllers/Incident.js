@@ -173,4 +173,22 @@ export default class Incident {
       }
     });
   }
+
+  getStats(req, res) {
+    const userId = !req.loggedInUser.isAdmin ? req.loggedInUser.id : null;
+
+    this.model.getStats((rows) => {
+      const stats = {
+        'in-draft': 0,
+        'under-investigation': 0,
+        resolved: 0,
+        rejected: 0,
+      };
+      for (let i = 0; i < rows.length; i++) {
+        stats[rows[i].status] = rows[i].count;
+      }
+
+      res.status(200).json(response.success(stats));
+    }, this.type, userId);
+  }
 }

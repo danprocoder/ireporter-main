@@ -15,6 +15,10 @@ router.get('/api/v1/interventions', (req, res) => {
   controller.getAll(req, res);
 });
 
+router.get('/api/v1/interventions/stats', (req, res) => {
+  controller.getStats(req, res);
+});
+
 // Get a specific intervention record.
 router.get('/api/v1/interventions/:id', (req, res) => {
   controller.get(req, res);

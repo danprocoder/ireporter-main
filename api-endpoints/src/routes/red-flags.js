@@ -15,6 +15,10 @@ router.get('/api/v1/red-flags', (req, res) => {
   controller.getAll(req, res);
 });
 
+router.get('/api/v1/red-flags/stats', (req, res) => {
+  controller.getStats(req, res);
+});
+
 // Get a specific red flag record.
 router.get('/api/v1/red-flags/:id', (req, res) => {
   controller.get(req, res);

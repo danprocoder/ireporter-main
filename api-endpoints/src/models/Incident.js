@@ -77,4 +77,26 @@ export default class IncidentModel {
       }
     });
   }
+
+  /**
+   * @param {function} callback Database result callback function
+   * @param {int} userId Database id of the user. If set to null will return stats for all users
+   *                     else if will return stats for the specific user.
+   */
+  getStats(callback, type, userId=null) {
+    let sql = `SELECT status, COUNT(id) FROM ${this.table} WHERE type=%L`;
+    const params = [type];
+
+    if (userId) {
+      sql += ` AND createdby=%L`;
+      params.push(userId.toString());
+    }
+
+    params.unshift(sql + ' GROUP BY status');
+    db.query(escape(...params), (err, res) => {
+      if (!err) {
+        callback(res.rows);
+      }
+    });
+  }
 }
