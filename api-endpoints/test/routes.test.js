@@ -45,6 +45,32 @@ describe('API endpoints tests', () => {
     });
   });
 
+  describe('GET /api/v1/admin/users/count', () => {
+    let adminToken = null;
+
+    it('should return admin token', (done) => {
+      supertest(app).post('/api/v1/auth/login').send({
+        email: 'webadmin@ireporter.com',
+        password: 'webadmin123',
+      }).end((err, res) => {
+        adminToken = res.body.data[0].token;
+
+        done();
+      });
+    });
+
+    it('should return the total number of users. It should be at least 1', (done) => {
+      supertest(app).get('/api/v1/admin/users/count').set('x-access-token', adminToken)
+        .end((err, res) => {
+          expect(res.body.status).to.equal(200);
+          expect(res.body.data.length).to.equal(1);
+          expect(res.body.data[0].count).to.be.at.least(1);
+
+          done();
+        });
+    });
+  });
+
   let recordId = null;
 
   // Create a new red flag record.
