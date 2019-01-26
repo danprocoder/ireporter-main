@@ -12,12 +12,39 @@
 	<link rel="stylesheet" type="text/css" href="assets/dashboard.css" />
 
 	<script src="../assets/js/ireporter.js"></script>
+	<script src="../assets/js/api.js"></script>
 	<script src="../assets/js/app.js"></script>
 	<script src="assets/js/admin.js"></script>
+
+	<script>
+	const loadNumUsers = (http, dom) => {
+	  http.api('admin/users/count').get((data) => {
+	    dom.selector('.total-users .num').html(data[0].count);
+	  }, (error) => {
+	  });
+	};
+
+	const loadNumIncidents = (http, dom, type) => {
+	  http.api(`${type}s/stats`).get((data) => {
+	  	console.log(data);
+	  	for (const status in data[0]) {
+          dom.selector(`.${type}s .${status} .num`).html(data[0][status]);
+	  	}
+	  }, (error) => {
+
+	  });
+	};
+	</script>
+
 	<script>
 	app.setAuthRequired(true);
 	app.ready((http, dom) => {
 	  dom.selector('.auth-logout').click(app.logout);
+
+	  loadNumUsers(http, dom);
+
+	  loadNumIncidents(http, dom, 'red-flag');
+	  loadNumIncidents(http, dom, 'intervention');
 	});
 	app.start();
 	</script>
@@ -64,18 +91,27 @@
 			<div class="inner">
 				<div class="navigation header">Dashboard</div>
 				<div class="p">
-					<div class="label">Red Flags</div>
 					<div class="widget-container">
-						<div class="widget counter gray">
-							<div class="num">2</div>
+						<div class="widget counter gray total-users">
+							<div class="num"></div>
+							<div class="text">Total Users</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<div class="p">
+					<div class="label">Red Flags</div>
+					<div class="widget-container red-flags">
+						<div class="widget counter gray in-draft">
+							<div class="num"></div>
 							<div class="text">In Draft</div>
 						</div>
-						<div class="widget counter blue">
-							<div class="num">4</div>
+						<div class="widget counter blue under-investigation">
+							<div class="num"></div>
 							<div class="text">Under Investigation</div>
 						</div>
-						<div class="widget counter green">
-							<div class="num">10</div>
+						<div class="widget counter green resolved">
+							<div class="num"></div>
 							<div class="text">Total Cases Resolved</div>
 						</div>
 						<div class="clearfix"></div>
@@ -83,17 +119,17 @@
 				</div>
 				<div class="p">
 					<div class="label">Interventions</div>
-					<div class="widget-container">
-						<div class="widget counter gray">
-							<div class="num">2</div>
+					<div class="widget-container interventions">
+						<div class="widget counter gray in-draft">
+							<div class="num"></div>
 							<div class="text">In Draft</div>
 						</div>
-						<div class="widget counter blue">
-							<div class="num">4</div>
+						<div class="widget counter blue under-investigation">
+							<div class="num"></div>
 							<div class="text">Under Investigation</div>
 						</div>
-						<div class="widget counter green">
-							<div class="num">10</div>
+						<div class="widget counter green resolved">
+							<div class="num"></div>
 							<div class="text">Total Cases Resolved</div>
 						</div>
 						<div class="clearfix"></div>
