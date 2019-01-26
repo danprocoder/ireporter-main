@@ -194,7 +194,7 @@ class Http {
   }
 
   baseUrl(path=null) {
-    let baseUrl = window.location.protocol.concat('//').concat(window.location.host);
+    let baseUrl = 'https://danprocoder.github.io/ireporter-main';
     return path ? baseUrl.concat('/').concat(path) : baseUrl;
   }
 }

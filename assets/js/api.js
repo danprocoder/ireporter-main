@@ -32,7 +32,7 @@ class API {
   }
 
   _fetch(method, success, error) {
-    this.fetch = fetch(`/api/v1/${this.endpoint}`, {
+    this.fetch = fetch(`https://daniel-ireporter.herokuapp.com/api/v1/${this.endpoint}`, {
       method,
       headers: this.headers,
       body: JSON.stringify(this.body),
