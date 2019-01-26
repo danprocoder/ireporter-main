@@ -54,6 +54,21 @@
 	  	app.toast.error('Failed to load ' + type);
 	  });
 	}
+
+	function loadStats(type) {
+	  app.http.api(`${type}s/stats`).get((data) => {
+	  	let total = 0;
+
+	  	for (const status in data[0]) {
+	  	  app.dom.selector(`.${type} .${status} .num`).html(data[0][status]);
+	  	  total += parseInt(data[0][status]);
+	  	}
+
+	  	app.dom.selector(`.${type} .total`).html(total);
+	  }, (error) => {
+	  	console.log(error);
+	  });
+	}
 	</script>
 
 	<script>
@@ -67,6 +82,10 @@
 	  dom.selector('.js-text-name').html(user.firstname + ' ' + user.lastname);
 	  dom.selector('.js-text-email').html(user.email);
 	  dom.selector('.js-text-mobile').html(user.phoneNumber);
+
+	  // Load number of incident records.
+	  loadStats('red-flag');
+	  loadStats('intervention');
 
 	  // Load red-flags by default.
 	  loadIncidents('red-flag');
@@ -122,8 +141,8 @@
 			<div>
 				<div class="counters">
 					<div class="grid-container">
-						<div class="grid-50">
-							<div class="header">Red Flags<span class="f-right">2.7k</span></div>
+						<div class="red-flag grid-50">
+							<div class="header">Red Flags<span class="f-right total">...</span></div>
 							<div class="body">
 								<div class="counter in-draft">
 									<div class="num">...</div>
@@ -140,8 +159,8 @@
 								<div class="clearfix"></div>
 							</div>	
 						</div>
-						<div class="grid-50">
-							<div class="header">Interventions<span class="f-right">2.7k</span></div>
+						<div class="intervention grid-50">
+							<div class="header">Interventions<span class="f-right total">...</span></div>
 							<div class="body">
 								<div class="counter in-draft">
 									<div class="num">...</div>
