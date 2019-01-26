@@ -175,7 +175,7 @@ export default class Incident {
   }
 
   getStats(req, res) {
-    const userId = !req.loggedInUser.isAdmin ? req.loggedInUser.id : null;
+    const userId = !req.loggedInUser.isadmin ? req.loggedInUser.id : null;
 
     this.model.getStats((rows) => {
       const stats = {
