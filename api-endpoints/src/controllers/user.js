@@ -122,4 +122,12 @@ export default class {
       isAdmin: user.isadmin,
     }));
   }
+
+  getTotalUsers(req, res) {
+    this.model.getTotalUsers((count) => {
+      res.status(200).json(response.success({
+        count
+      }));
+    });
+  }
 }

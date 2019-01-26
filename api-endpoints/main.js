@@ -3,6 +3,7 @@ import path from 'path';
 import userRouter from './src/routes/users';
 import redFlagRouter from './src/routes/red-flags';
 import interventionRouter from './src/routes/interventions';
+import adminRouter from './src/routes/admin';
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, '../UI')));
 app.use(userRouter);
 app.use(redFlagRouter);
 app.use(interventionRouter);
+app.use(adminRouter);
 
 const port = process.env.PORT || 8001;
 app.listen(port, () => {

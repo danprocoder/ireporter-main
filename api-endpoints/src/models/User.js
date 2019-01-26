@@ -39,4 +39,13 @@ export default class {
       }
     });
   }
+
+  getTotalUsers(callback) {
+    const sql = escape('SELECT COUNT(id) FROM users WHERE isadmin=False');
+    db.query(sql, (err, res) => {
+      if (!err) {
+        callback(parseInt(res.rows[0].count));
+      }
+    });
+  }
 }
