@@ -187,6 +187,31 @@ table .action.blue {
 	color: #bbb;
 }
 
+@keyframes expand-circle {
+	0% {
+		background: #d00;
+		box-shadow: 0 0 0 0 #d00;
+	}
+
+	50% {
+		box-shadow: 0 0 40px 0 yellow;
+	}
+
+	100% {
+		background: yellow;
+		box-shadow: 0 0 50px 0 yellow;
+	}
+}
+
+.preload .loader .dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	display: inline-block;
+	animation: expand-circle 0.9s;
+	animation-iteration-count: infinite;
+}
+
 /* Tabs & Menus */
 .tab-container .tab-content .tab-pane {
 	display: none;
