@@ -48,4 +48,13 @@ export default class {
       }
     });
   }
+
+  getAllUsers(callback) {
+    const sql = escape('SELECT firstname, lastname, username, email, phonenumber FROM users WHERE isadmin=False');
+    db.query(sql, (err, res) => {
+      if (!err) {
+        callback(res.rows);
+      }
+    });
+  }
 }
