@@ -45,8 +45,9 @@ describe('API endpoints tests', () => {
     });
   });
 
+  let adminToken = null;
+
   describe('GET /api/v1/admin/users/count', () => {
-    let adminToken = null;
 
     it('should return admin token', (done) => {
       supertest(app).post('/api/v1/auth/login').send({
@@ -65,6 +66,18 @@ describe('API endpoints tests', () => {
           expect(res.body.status).to.equal(200);
           expect(res.body.data.length).to.equal(1);
           expect(res.body.data[0].count).to.be.at.least(1);
+
+          done();
+        });
+    });
+  });
+
+  describe('GET /api/v1/admin/users', () => {
+    it('should return all users registered on the platform', (done) => {
+      supertest(app).get('/api/v1/admin/users').set('x-access-token', adminToken)
+        .end((err, res) => {
+          expect(res.body.status).to.equal(200);
+          expect(res.body.data.length).to.be.at.least(1);
 
           done();
         });

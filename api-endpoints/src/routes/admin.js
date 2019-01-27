@@ -21,4 +21,9 @@ router.get('/api/v1/admin/users/count', (req, res) => {
   userController.getTotalUsers(req, res);
 });
 
+// Returns all users registered on the platform
+router.get('/api/v1/admin/users', (req, res) => {
+	userController.getAllUsers(req, res);
+});
+
 export default router;

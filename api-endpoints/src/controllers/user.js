@@ -130,4 +130,10 @@ export default class {
       }));
     });
   }
+
+  getAllUsers(req, res) {
+    this.model.getAllUsers((rows) => {
+      res.status(200).json(response.success(rows));
+    });
+  }
 }
