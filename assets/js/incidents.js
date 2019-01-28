@@ -7,7 +7,7 @@ function initTable(type) {
 
   	let row = `<tr>
   	  <td>${serial}</td>
-  	  <td><a href="${viewUrl}?id=${data.id}">${data.title}</a></td>
+  	  <td><a href="${viewUrl}?id=${data.id}">${xssClean(data.title)}</a></td>
   	  <td>${app.dateFormat(data.createdon)}</td>
   	  <td><span class="record-status no-select ${data.status}">${status}</span></td>
   	  <td>
