@@ -3,7 +3,7 @@ function onReady(type) {
     const viewUrl = app.http.baseUrl(`admin/view-${type}.html?id=${data.id}`);
     return `<tr>
       <td>${serial}</td>
-      <td><a href="${viewUrl}">${data.title}</a></td>
+      <td><a href="${viewUrl}">${xssClean(data.title)}</a></td>
       <td>${app.dateFormat(data.createdon)}</td>
       <td>`+status(data)+`</td>
       <td>

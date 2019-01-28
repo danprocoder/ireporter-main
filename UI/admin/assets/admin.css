@@ -103,7 +103,7 @@
 }
 
 body {
-	background: #fdfdfd !important;
+	background: #fafafa !important;
 }
 
 .main-content .navbar {
@@ -130,7 +130,15 @@ table td .status {
 	cursor: pointer;
 }
 
+#top .responsive-toggle {
+	display: none;
+}
+
 @media screen and (max-width: 768px) {
+	#top .responsive-toggle {
+		display: block;
+	}
+
 	#top .hide-responsive {
 		display: none;
 	}
@@ -168,8 +176,4 @@ table td .status {
 
 table {
 	background: #ffffff;
-}
-
-.main-content .content {
-	padding-bottom: 50px;
 }
