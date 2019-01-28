@@ -21,3 +21,11 @@
   line-height: 125%;
   font-size: 18px;
 }
+
+@media screen and (max-width:768px) {
+  .grid-50 {
+    width: 100%!important;
+    float: none;
+    margin-bottom: 30px;
+  }
+}
