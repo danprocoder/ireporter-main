@@ -105,7 +105,7 @@
 
 @media screen and (max-width: 500px) {
 	.overview .body .c {
-		display: block;
+		/*display: block;*/
 	}
 }
 
@@ -113,8 +113,9 @@
 	font-size: 10px;
 	margin-top: 6px;
 	border-radius: 10px;
-	padding: 1px 8px;
+	padding: 0 8px;
 	color: #fff;
+	display: inline-block;
 }
 
 .overview .body .c.in-draft .label {
@@ -122,7 +123,7 @@
 }
 
 .overview .body .c.under-investigation .label {
-	background: blue;
+	background: #0078ff;
 }
 
 .overview .body .c.resolved .label {
