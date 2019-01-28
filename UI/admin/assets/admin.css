@@ -130,7 +130,15 @@ table td .status {
 	cursor: pointer;
 }
 
+#top .responsive-toggle {
+	display: none;
+}
+
 @media screen and (max-width: 768px) {
+	#top .responsive-toggle {
+		display: block;
+	}
+
 	#top .hide-responsive {
 		display: none;
 	}
