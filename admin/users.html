@@ -37,7 +37,7 @@
 	  http.api('admin/users').get((data) => {
 	  	app.table('users-table').setDataSet(data).draw();
 
-	  	//app.preloader('users').hideLoadingAnimation();
+	  	app.preloader('users').hideLoadingAnimation();
 	  }, (error) => {
 	  	app.toast.error('Failed to load users.');
 	  });
