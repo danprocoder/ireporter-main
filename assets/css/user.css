@@ -25,7 +25,7 @@ table th {
 	font-size: 14px;
 	border-top: 1px solid #dfdfdf;
 	border-bottom: 1px solid #dfdfdf;
-	padding: 11px 7px;
+	padding: 15px 8px;
 	text-transform: uppercase;
 	font-size: 11px;
 	white-space: nowrap;
@@ -34,7 +34,7 @@ table th {
 
 table td {
 	border-top: 1px solid #dfdfdf;
-	padding: 11px 7px;
+	padding: 15px 8px;
 	vertical-align: top;
 }
 
@@ -193,23 +193,26 @@ table .action.blue {
 
 @keyframes expand-circle {
 	0% {
-		background: #d00;
-		box-shadow: 0 0 0 0 #d00;
+		box-shadow: 0 0 0 0 #f00;
 	}
 
 	50% {
-		box-shadow: 0 0 40px 0 yellow;
+		box-shadow:
+		  0 0 2px 2px    #f9f9f9,
+		  0 0 4px 10px #f00;
 	}
 
 	100% {
-		background: yellow;
-		box-shadow: 0 0 50px 0 yellow;
+		box-shadow:
+		  0 0 7px 16px #f9f9f9,
+		  0 0 8px 8px #f00;
 	}
 }
 
 .preload .loader .dot {
-	width: 10px;
-	height: 10px;
+	width: 1px;
+	height: 1px;
+	background: #f9f9f9;
 	border-radius: 50%;
 	display: inline-block;
 	animation: expand-circle 0.9s;
