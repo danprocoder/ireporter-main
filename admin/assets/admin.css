@@ -164,3 +164,106 @@ table td .status {
 		display: inline;
 	}
 }
+
+.overview {
+	background: #ffffff;
+    box-shadow: 0 5px 7px #efefef;
+    border-radius: 2px;
+    width: 50%;
+    float: left;
+    box-sizing: border-box;
+}
+
+.overview .top {
+	position: relative;
+    padding: 10px 10px 10px 10px;
+}
+
+.overview .top .fa {
+	position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 30px;
+    color: #e5e5e5;
+}
+
+.overview .top .header {
+	font-size: 15px;
+	color: #333;
+}
+
+.overview .top .total {
+	color: #c00;
+	font-size: 12px;
+	margin-top: 5px;
+}
+
+.overview .body {
+	border-top: 1px solid #f0f0f0;
+	text-align: center;
+}
+
+.overview .body .c {
+	padding: 20px 0;
+	margin-right: 30px;
+	display: inline-block;
+}
+
+.overview .body .c .num {
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.overview .body .c .label {
+	font-size: 12px;
+	color: #777;
+	margin-top: 4px;
+	/*text-transform: uppercase;*/
+}
+
+.overview .body .c.in-draft .num {
+	color: #333;
+}
+
+.overview .body .c.under-investigation .num {
+	color: blue;
+}
+
+.overview .body .c.resolved .num {
+	color: green;
+}
+
+@media screen and (max-width: 768px) {
+	.overview {
+		width: 100%;
+		float: none;
+		margin-top: 10px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.overview .body .c {
+		display: block;
+	}
+}
+
+/*.overview .body .f-left .label {
+	font-size: 10px;
+	color: #777;
+	margin-top: 6px;
+	border-radius: 10px;
+	padding: 1px 8px;
+	color: #fff;
+}
+
+.overview .body .f-left.in-draft .label {
+	background: #333;
+}
+
+.overview .body .f-left.under-investigation .label {
+	background: blue;
+}
+
+.overview .body .f-left.resolved .label {
+	background: green;
+}*/
