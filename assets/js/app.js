@@ -279,8 +279,8 @@ const app = {
 
   externals: {
     'mapbox': {
-      js: 'https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js',
-      css: 'https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css'
+      js: 'https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js',
+      css: 'https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css'
     }
   },
   using: [],
@@ -444,6 +444,9 @@ class Mapbox {
       center: coords,
       zoom: 9
     });
+
+    // Add zoom and rotation controls to the map.
+    this.map.addControl(new mapboxgl.NavigationControl());
 
     this.addMarker();
   }

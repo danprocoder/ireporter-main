@@ -8,9 +8,11 @@ function viewIncident(type) {
     app.http.api(endpoint).get((data) => {
       const incident = data[0];
 
+      const title = xssClean(incident.title);
+
       // Title
-      app.setTitle(`${incident.title} | iReporter`);
-      app.dom.selector('.js-title-text').html(incident.title);
+      app.setTitle(`${title} | iReporter`);
+      app.dom.selector('.js-title-text').html(title);
 
       // Status
       let status = incident.status.split('-');
@@ -21,7 +23,7 @@ function viewIncident(type) {
       app.dom.selector('.js-time-text').html(app.dateFormat(incident.createdon));
 
       // Comment
-      app.dom.selector('.record-content .comment').html(incident.comment);
+      app.dom.selector('.record-content .comment').html(xssClean(incident.comment));
 
       // Add map
       let onContentShown = null;
