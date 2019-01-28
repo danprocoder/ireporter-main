@@ -1,51 +1,145 @@
-.widget-container {
-	margin-top: 10px;
+.margin-top {
+	margin-top: 30px;
 }
 
 .widget {
-	float: left;
-	border: 2px solid #f4f4f4;
-	border-radius: 6px;
-	background: #fff;
+	background: #ffffff;
+    box-shadow: 0 4px 8px #efefef;
+    border-radius: 2px;
 }
 
-.widget.right {
-	float: right;
-}
 
 .widget.counter {
-	width: 180px;
-	padding: 26px;
-	margin-right: 26px;
+	width: 190px;
+	padding: 20px 25px;
+	float: left;
+	margin-right: 10px;
+	position: relative;
+}
+
+.widget.counter .fa {
+	position: absolute;
+	top: 20px;
+	right: 25px;
+	font-size: 28px;
+	color: #dfdfdf;
+}
+
+@media screen and (max-width: 768px) {
+	.widget.counter {
+		float: none;
+		margin-top: 10px;
+		width: 100%;
+	}
 }
 
 .widget.counter .num {
-	font-size: 38px;
-	position: relative;
-	top: 3px;
+	font-size: 22px;
 	font-weight: bold;
 }
 
-.widget.counter .text {
-	margin-top: 18px;
-	color: #777;
-	font-size: 14px;
-}
-
-.widget.counter.gray .num {
-	color: gray;
-}
-
-.widget.counter.blue .num {
-	color: #005ec1;
-}
-
-.widget.counter.green .num {
-	color: #69ca69;
-}
-
-.p .label {
-	font-weight: bold;
-	color: #777;
+.widget.counter .label {
+	margin-top: 7px;
 	font-size: 13px;
+	color: #888;
 }
+
+.overview {
+    width: 50%;
+    float: left;
+    box-sizing: border-box;
+}
+
+.overview .top {
+	position: relative;
+    padding: 10px 10px 10px 10px;
+}
+
+.overview .top .fa {
+	position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 30px;
+    color: #e5e5e5;
+}
+
+.overview .top .header {
+	font-size: 15px;
+	color: #333;
+}
+
+.overview .top .total {
+	color: #c00;
+	font-size: 12px;
+	margin-top: 5px;
+}
+
+.overview .body {
+	border-top: 1px solid #f0f0f0;
+	text-align: center;
+}
+
+.overview .body .c {
+	padding: 20px 0;
+	margin-right: 30px;
+	display: inline-block;
+}
+
+.overview .body .c .num {
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.overview .body .c .label {
+	font-size: 12px;
+	color: #777;
+	margin-top: 4px;
+	/*text-transform: uppercase;*/
+}
+
+.overview .body .c.in-draft .num {
+	color: #333;
+}
+
+.overview .body .c.under-investigation .num {
+	color: blue;
+}
+
+.overview .body .c.resolved .num {
+	color: green;
+}
+
+@media screen and (max-width: 768px) {
+	.overview {
+		width: 100%;
+		float: none;
+		margin-top: 10px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.overview .body .c {
+		display: block;
+	}
+}
+
+/*.overview .body .f-left .label {
+	font-size: 10px;
+	color: #777;
+	margin-top: 6px;
+	border-radius: 10px;
+	padding: 1px 8px;
+	color: #fff;
+}
+
+.overview .body .f-left.in-draft .label {
+	background: #333;
+}
+
+.overview .body .f-left.under-investigation .label {
+	background: blue;
+}
+
+.overview .body .f-left.resolved .label {
+	background: green;
+}*/
