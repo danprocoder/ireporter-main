@@ -154,6 +154,7 @@ table td .status {
 
 	.sidenav.expanded {
 		width: 210px;
+		box-shadow: 1px 0 15px #e0e0e0;
 	}
 
 	.sidenav a {

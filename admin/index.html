@@ -42,6 +42,8 @@
 	</script>
 
 	<script>
+	app.use('mapbox');
+
 	app.setAuthRequired(true);
 	app.ready((http, dom) => {
 	  dom.selector('.auth-logout').click(app.logout);
@@ -50,6 +52,13 @@
 
 	  loadNumIncidents(http, dom, 'red-flag');
 	  loadNumIncidents(http, dom, 'intervention');
+
+	  // Load map
+	  if (navigator.geolocation) {
+	  	navigator.geolocation.getCurrentPosition((position) => {
+	  	  app.mapbox('map-container', [position.coords.longitude, position.coords.latitude]);
+	  	});
+	  }
 	});
 	app.start();
 	</script>
@@ -101,15 +110,15 @@
 
 				<div class="margin-top">
 
-					<div class="widget counter">
-						<div class="num">234,543</div>
+					<div class="widget counter total-users">
+						<div class="num">0</div>
 						<div class="label">Registered Users</div>
 						<i class="fa fa-users"></i>
 					</div>
 
 
 					<div class="widget counter">
-						<div class="num">234,543</div>
+						<div class="num">0</div>
 						<div class="label">Total Incidents</div>
 						<i class="fa fa-bullhorn"></i>
 					</div>
@@ -171,6 +180,15 @@
 
 					<div class="clearfix"></div>
 
+				</div>
+
+				<div class="margin-top">
+					<div class="widget map">
+						<div class="top">
+							<div class="header">Where you are</div>
+						</div>
+						<div id="map-container"></div>
+					</div>
 				</div>
 
 			</div>
