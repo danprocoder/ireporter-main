@@ -165,3 +165,11 @@ table td .status {
 		display: inline;
 	}
 }
+
+table {
+	background: #ffffff;
+}
+
+.main-content .content {
+	padding-bottom: 50px;
+}
