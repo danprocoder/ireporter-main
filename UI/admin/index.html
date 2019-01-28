@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/dashboard.css" />
 
 	<script src="../assets/js/ireporter.js"></script>
+	<script src="../assets/js/chart.min.js"></script>
 	<script src="../assets/js/api.js"></script>
 	<script src="../assets/js/app.js"></script>
 	<script src="assets/js/admin.js"></script>
@@ -24,12 +25,21 @@
 	  });
 	};
 
+	let totalIncidents = 0;
+
 	const loadNumIncidents = (http, dom, type) => {
 	  http.api(`${type}s/stats`).get((data) => {
-	  	console.log(data);
+	  	let total = 0;
 	  	for (const status in data[0]) {
-          dom.selector(`.${type}s .${status} .num`).html(data[0][status]);
+	  	  const count = data[0][status];
+
+          dom.selector(`.${type}s .${status} .num`).html(count);
+          total += parseInt(count);
 	  	}
+	  	dom.selector(`.${type}s .total b`).html(total);
+
+        totalIncidents += total;
+        dom.selector('.total-incidents .num').html(totalIncidents);
 	  }, (error) => {
 
 	  });
@@ -37,6 +47,8 @@
 	</script>
 
 	<script>
+	app.use('mapbox');
+
 	app.setAuthRequired(true);
 	app.ready((http, dom) => {
 	  dom.selector('.auth-logout').click(app.logout);
@@ -45,6 +57,13 @@
 
 	  loadNumIncidents(http, dom, 'red-flag');
 	  loadNumIncidents(http, dom, 'intervention');
+
+	  // Load map
+	  if (navigator.geolocation) {
+	  	navigator.geolocation.getCurrentPosition((position) => {
+	  	  app.mapbox('map-container', [position.coords.longitude, position.coords.latitude]);
+	  	});
+	  }
 	});
 	app.start();
 	</script>
@@ -93,51 +112,90 @@
 		<div class="content">
 			<div class="inner">
 				<div class="navigation header">Dashboard</div>
-				<div class="p">
-					<div class="widget-container">
-						<div class="widget counter gray total-users">
-							<div class="num"></div>
-							<div class="text">Total Users</div>
+
+				<div class="margin-top">
+
+					<div class="widget counter total-users">
+						<div class="num">0</div>
+						<div class="label">Registered Users</div>
+						<i class="fa fa-users"></i>
+					</div>
+
+
+					<div class="widget counter total-incidents">
+						<div class="num">0</div>
+						<div class="label">Total Incidents</div>
+						<i class="fa fa-bullhorn"></i>
+					</div>
+
+					<div class="clearfix"></div>
+
+				</div>
+
+
+				<div class="margin-top">
+				
+					<div class="widget overview red-flags">
+						<div class="top">
+							<i class="fa fa-flag"></i>
+							<div class="header">Red Flags Overview</div>
+							<div class="total"><b>0</b> Total</div>
 						</div>
-						<div class="clearfix"></div>
+						<div class="body">
+							<div>
+								<div class="c in-draft">
+									<div class="num">0</div>
+									<div class="label">In Draft</div>
+								</div>
+								<div class="c under-investigation">
+									<div class="num">0</div>
+									<div class="label">Investigating</div>
+								</div>
+								<div class="c resolved">
+									<div class="num">0</div>
+									<div class="label">Resolved</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="widget overview interventions">
+						<div class="top">
+							<i class="fa fa-question"></i>
+							<div class="header">Interventions Overview</div>
+							<div class="total"><b>0</b> Total</div>
+						</div>
+						<div class="body">
+							<div>
+								<div class="c in-draft">
+									<div class="num">0</div>
+									<div class="label">In Draft</div>
+								</div>
+								<div class="c under-investigation">
+									<div class="num">0</div>
+									<div class="label">Investigating</div>
+								</div>
+								<div class="c resolved">
+									<div class="num">0</div>
+									<div class="label">Resolved</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="clearfix"></div>
+
+				</div>
+
+				<div class="margin-top">
+					<div class="widget map">
+						<div class="top">
+							<div class="header">Where you are</div>
+						</div>
+						<div id="map-container"></div>
 					</div>
 				</div>
-				<div class="p">
-					<div class="label">Red Flags</div>
-					<div class="widget-container red-flags">
-						<div class="widget counter gray in-draft">
-							<div class="num"></div>
-							<div class="text">In Draft</div>
-						</div>
-						<div class="widget counter blue under-investigation">
-							<div class="num"></div>
-							<div class="text">Under Investigation</div>
-						</div>
-						<div class="widget counter green resolved">
-							<div class="num"></div>
-							<div class="text">Total Cases Resolved</div>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<div class="p">
-					<div class="label">Interventions</div>
-					<div class="widget-container interventions">
-						<div class="widget counter gray in-draft">
-							<div class="num"></div>
-							<div class="text">In Draft</div>
-						</div>
-						<div class="widget counter blue under-investigation">
-							<div class="num"></div>
-							<div class="text">Under Investigation</div>
-						</div>
-						<div class="widget counter green resolved">
-							<div class="num"></div>
-							<div class="text">Total Cases Resolved</div>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
+
 			</div>
 		</div>	
 	</div>

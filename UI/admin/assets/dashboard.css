@@ -1,51 +1,140 @@
-.widget-container {
-	margin-top: 10px;
+.margin-top {
+	margin-top: 40px;
 }
 
 .widget {
-	float: left;
-	border: 2px solid #f4f4f4;
-	border-radius: 6px;
-	background: #fff;
+	background: #ffffff;
+    box-shadow: 0 4px 8px #efefef;
+    border-radius: 2px;
+    box-sizing: border-box;
 }
 
-.widget.right {
-	float: right;
+.widget .header {
+	font-size: 15px;
+	color: #333;
 }
 
 .widget.counter {
-	width: 180px;
-	padding: 26px;
-	margin-right: 26px;
+	width: 240px;
+	padding: 20px 25px;
+	float: left;
+	margin-right: 4%;
+	position: relative;
+}
+
+.widget.counter .fa {
+	position: absolute;
+	top: 20px;
+	right: 25px;
+	font-size: 28px;
+	color: #dfdfdf;
+}
+
+@media screen and (max-width: 768px) {
+	.widget.counter {
+		float: none;
+		margin-top: 10px;
+		width: 100%;
+	}
 }
 
 .widget.counter .num {
-	font-size: 38px;
-	position: relative;
-	top: 3px;
+	font-size: 22px;
 	font-weight: bold;
 }
 
-.widget.counter .text {
-	margin-top: 18px;
-	color: #777;
-	font-size: 14px;
-}
-
-.widget.counter.gray .num {
-	color: gray;
-}
-
-.widget.counter.blue .num {
-	color: #005ec1;
-}
-
-.widget.counter.green .num {
-	color: #69ca69;
-}
-
-.p .label {
-	font-weight: bold;
-	color: #777;
+.widget.counter .label {
+	margin-top: 7px;
 	font-size: 13px;
+	color: #888;
+}
+
+.overview {
+    width: 48%;
+    float: left;
+    box-sizing: border-box;
+    margin-right: 4%;
+}
+
+.overview.interventions {
+	margin-right: 0;
+}
+
+.overview .top {
+	position: relative;
+    padding: 10px 17px 10px 17px;
+}
+
+.overview .top .fa {
+	position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 30px;
+    color: #e5e5e5;
+}
+
+.overview .top .total {
+	color: #c00;
+	font-size: 12px;
+	margin-top: 5px;
+}
+
+.overview .body {
+	border-top: 1px solid #f5f5f5;
+	text-align: center;
+}
+
+.overview .body .c {
+	padding: 20px 0;
+	margin-right: 20px;
+	display: inline-block;
+}
+
+.overview .body .c .num {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+	.overview {
+		width: 100%;
+		float: none;
+		margin-top: 10px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.overview .body .c {
+		/*display: block;*/
+	}
+}
+
+.overview .body .c .label {
+	font-size: 10px;
+	margin-top: 6px;
+	border-radius: 10px;
+	padding: 0 8px;
+	color: #fff;
+	display: inline-block;
+}
+
+.overview .body .c.in-draft .label {
+	background: #333;
+}
+
+.overview .body .c.under-investigation .label {
+	background: #0078ff;
+}
+
+.overview .body .c.resolved .label {
+	background: #4fa012;
+}
+
+
+.widget.map .header {
+	padding: 17px;
+}
+
+.widget.map #map-container {
+	height: 380px;
 }
