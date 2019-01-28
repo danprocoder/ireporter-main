@@ -25,6 +25,8 @@
 	  });
 	};
 
+	let totalIncidents = 0;
+
 	const loadNumIncidents = (http, dom, type) => {
 	  http.api(`${type}s/stats`).get((data) => {
 	  	let total = 0;
@@ -35,6 +37,9 @@
           total += parseInt(count);
 	  	}
 	  	dom.selector(`.${type}s .total b`).html(total);
+
+        totalIncidents += total;
+        dom.selector('.total-incidents .num').html(totalIncidents);
 	  }, (error) => {
 
 	  });
@@ -117,7 +122,7 @@
 					</div>
 
 
-					<div class="widget counter">
+					<div class="widget counter total-incidents">
 						<div class="num">0</div>
 						<div class="label">Total Incidents</div>
 						<i class="fa fa-bullhorn"></i>

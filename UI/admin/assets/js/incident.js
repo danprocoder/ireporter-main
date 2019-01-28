@@ -32,10 +32,12 @@ async function setStatusChangeListener(type, id) {
 function loadIncident(type, id) {
   app.http.api(`${type}s/${id}`).get((data) => {
     const incident = data[0];
+
+    const title = xssClean(incident.title)
     
     // Title
-    app.setTitle(`${incident.title} | iReporter`);
-    app.dom.selector('.js-text-title').html(incident.title);
+    app.setTitle(`${title} | iReporter`);
+    app.dom.selector('.js-text-title').html(title);
 
     // Date
     app.dom.selector('.js-text-date').html(app.dateFormat(incident.createdon));
@@ -46,7 +48,7 @@ function loadIncident(type, id) {
     setStatusChangeListener(type, id);
 
     // Comment
-    app.dom.selector('.js-text-comment').html(incident.comment);
+    app.dom.selector('.js-text-comment').html(xssClean(incident.comment));
 
     // Add map
     let onContentShown = null;
