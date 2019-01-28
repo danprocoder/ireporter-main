@@ -4,7 +4,7 @@
 
 .widget {
 	background: #ffffff;
-    box-shadow: 0 4px 8px #efefef;
+    box-shadow: 0 4px 8px #ececec;
     border-radius: 2px;
     box-sizing: border-box;
 }
@@ -92,7 +92,6 @@
 
 .overview .body .c .num {
 	font-size: 18px;
-	font-weight: bold;
 }
 
 @media screen and (max-width: 768px) {
@@ -122,12 +121,24 @@
 	background: #333;
 }
 
+.overview .body .c.in-draft .num {
+	color: #333;
+}
+
 .overview .body .c.under-investigation .label {
 	background: #0078ff;
 }
 
+.overview .body .c.under-investigation .num {
+	color: #0078ff;
+}
+
 .overview .body .c.resolved .label {
 	background: #4fa012;
+}
+
+.overview .body .c.resolved .num {
+	color: #4fa012;
 }
 
 
