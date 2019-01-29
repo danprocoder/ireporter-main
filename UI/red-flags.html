@@ -19,6 +19,7 @@
 	<script src="assets/js/delete-incident.js"></script>
 	<script>
 	app.setAuthRequired(true);
+	app.setRequiredRole('user');
 	app.ready((http, dom) => {
       dom.selector('.auth-logout').click(app.logout);
 

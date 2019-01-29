@@ -28,9 +28,9 @@ function onSubmit(event, form, mode, http, type) {
   if (validator.validate(rules)) {
     let url = (type === 'red-flag' ? 'red-flags' : 'interventions');
     if (mode == 'edit') {
-      url += '/' + http.params.id;
+      url += `/${http.params.id}`;
     }
-    
+
     const endpoint = http.api(url).body({
       title: form.field('title').value(),
       comment: form.field('comment').value(),
@@ -62,7 +62,7 @@ function onSubmit(event, form, mode, http, type) {
 
 function onReady(http, dom, type) {
   submitBtn = document.getElementById('submit-btn');
-  
+
   const mode = http.params.action === 'edit' && typeof http.params.id !== 'undefined' ? 'edit' : 'add';
 
   const incidentForm = app.form('incident-form');

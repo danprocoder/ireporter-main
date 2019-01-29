@@ -50,6 +50,7 @@
 	app.use('mapbox');
 
 	app.setAuthRequired(true);
+	app.setRequiredRole('admin');
 	app.ready((http, dom) => {
 	  dom.selector('.auth-logout').click(app.logout);
 

@@ -69,6 +69,7 @@
 	<script>
 	const loadedFirstTime = [0];
 
+	app.setRequiredRole('user');
 	app.setAuthRequired(true);
 	app.ready((http, dom) => {
 	  dom.selector('.auth-logout').click(app.logout);

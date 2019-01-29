@@ -6,6 +6,11 @@
 body {
     font-family: 'karla';
     line-height: 100%;
+    display: none;
+}
+
+body.revealed {
+    display: block;
 }
 
 body,

@@ -18,6 +18,7 @@
 	<script src="assets/js/incidents.js"></script>
 	<script>
 	app.setAuthRequired(true);
+	app.setRequiredRole('admin');
 	app.ready((http, dom) => {
 	  dom.selector('.auth-logout').click(app.logout);
 
