@@ -153,6 +153,7 @@ footer .newsletter .field-wrapper .text-field {
   padding-right: 90px;
   box-sizing: border-box;
   background: rgba(255,255,255,0.5);
+  padding: 9px;
 }
 
 footer .newsletter .subscribe-btn {
@@ -164,8 +165,8 @@ footer .newsletter .subscribe-btn {
   padding: 0;
   margin: 0;
   position: absolute;
-  right: 13px;
-  top: 13px;
+  right: 9px;
+  top: 9px;
   cursor: pointer;
 }
 
