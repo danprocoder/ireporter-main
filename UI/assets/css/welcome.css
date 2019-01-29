@@ -150,10 +150,9 @@ footer .newsletter .field-wrapper {
 
 footer .newsletter .field-wrapper .text-field {
   width: 300px;
-  padding-right: 90px;
   box-sizing: border-box;
   background: rgba(255,255,255,0.5);
-  padding: 9px;
+  padding: 9px 90px 9px 9px;
 }
 
 footer .newsletter .subscribe-btn {
