@@ -20,6 +20,7 @@
 	app.use('mapbox');
 
 	app.setAuthRequired(true);
+	app.setRequiredRole('user');
 	app.ready((http, dom) => {
       dom.selector('.auth-logout').click(app.logout);
 
@@ -32,7 +33,7 @@
 	<div class="red-bg">
 		<div id="navbar">
 			<div class="container">
-				<a href="dashboard.html" class="sitename">iReporter</a>
+				<a href="dashboard.html" class="sitename"><i class="fa fa-bullhorn"></i> iReporter</a>
 				<div class="navbar-menu">
 					<ul>
 						<li><a href="red-flags.html">Red Flags</a></li>

@@ -6,6 +6,11 @@
 body {
     font-family: 'karla';
     line-height: 100%;
+    display: none;
+}
+
+body.revealed {
+    display: block;
 }
 
 body,
@@ -123,7 +128,7 @@ textarea {
 }
 
 .red-bg {
-    background: #ef3b3b;
+    background: #10af74;
 }
 
 .container {
@@ -219,7 +224,7 @@ textarea {
 .button {
     display: inline-block;
     padding: 12px 17px;
-    background: #ef3b3b;
+    background: #f9872f;
     border: none;
     outline: none;
     color: #fff;
@@ -233,11 +238,11 @@ textarea {
 }
 
 .button:hover {
-    background: #ca2745;
+    background: #ef771a;
 }
 
 .button:disabled {
-    background: #fda0a0;
+    background: #f5c29c;
 }
 
 form label {
@@ -251,9 +256,7 @@ form label {
 form .error {
     color: red;
     font-size: 11px;
-    margin-top: 4px;
-    background: #fdf3f3;
-    padding: 0 4px;
+    margin-top: 5px;
     border-radius: 4px;
     display: none;
 }
@@ -273,11 +276,13 @@ form .error.show {
     box-sizing: border-box;
     padding: 13px;
     border: 1px solid #dcdcdc;
+    color: #7f7f7f;
     outline: none;
 }
 
 .text-field:focus {
     border-color: #9f9f9f;
+    color: #333;
 }
 
 form .field-section {

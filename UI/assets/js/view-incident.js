@@ -1,6 +1,6 @@
 function viewIncident(type) {
-  const id = app.http.params['id'];
-  if (typeof id == 'undefined') {
+  const id = app.http.params.id;
+  if (typeof id === 'undefined') {
     const incidentsUrl = (type == 'red-flag' ? './red-flags.html' : './interventions.html');
     app.http.redirect(incidentsUrl);
   } else {
@@ -32,7 +32,7 @@ function viewIncident(type) {
         app.dom.selector('.info.map').showInline();
 
         app.dom.selector('.js-coords-text').html(`(${incident.latitude}&deg;, ${incident.longitude}&deg;)`);
-        
+
         // Mapbox
         onContentShown = () => {
           app.mapbox('map-container', [incident.longitude, incident.latitude]);
