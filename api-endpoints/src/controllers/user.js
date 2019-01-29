@@ -117,6 +117,7 @@ export default class {
     res.status(200).json(response.success({
       firstname: user.firstname,
       lastname: user.lastname,
+      username: user.username,
       email: user.email,
       phoneNumber: user.phonenumber,
       isAdmin: user.isadmin,

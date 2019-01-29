@@ -25,6 +25,8 @@
 	app.ready((http, dom) => {
 	  dom.selector('.auth-logout').click(app.logout);
 
+	  dom.selector('.js-username').html(app.auth().firstname);
+
 	  app.table('users-table').setRowView((data, serial, index) => {
 	  	return `<tr>
 	  	  <td>${serial}</td>
@@ -56,7 +58,7 @@
 		<a href="#" class="pull-left responsive-toggle"><i class="fa fa-bars"></i></a>
 		<ul class="navbar-menu pull-right">
 			<li class="dropdown">
-				<a href="#">Admin <i class="fa fa-caret-down"></i></a>
+				<a href="#"><span class="js-username"></span> <i class="fa fa-caret-down"></i></a>
 				<div class="dropdown-menu">
 					<ul>
 						<li><a href="#" class="auth-logout">Logout</a></li>
