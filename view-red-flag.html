@@ -24,6 +24,8 @@
 	app.ready((http, dom) => {
       dom.selector('.auth-logout').click(app.logout);
 
+      dom.selector('#navbar .js-username').html(app.auth().username);
+
 	  viewIncident('red-flag');
 	});
 	app.start();
@@ -39,7 +41,7 @@
 						<li><a href="red-flags.html">Red Flags</a></li>
 						<li><a href="interventions.html">Interventions</a></li>
 						<li class="dropdown">
-							<a href="#">Account <i class="fa fa-caret-down"></i></a>
+							<a href="#"><span class="js-username"></span> <i class="fa fa-caret-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="profile.html">My Profile</a></li>
 								<li><a href="#" class="auth-logout">Log out</a></li>
