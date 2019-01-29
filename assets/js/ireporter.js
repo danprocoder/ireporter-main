@@ -46,7 +46,7 @@ class Dropdown extends Element {
           element.classList.remove(className[i]);
         }
         return this;
-      }
+      },
     };
 
     this.disabled = false;
@@ -113,7 +113,7 @@ class Tab extends Element {
       // Default active tab.
       if (menu.parentNode.classList.contains('active')) {
         this.showTabContent(i);
-        
+
         this.currentTabIndex = i;
       }
     }
@@ -205,4 +205,3 @@ document.addEventListener('click', (ev) => {
     }
   }
 });
-

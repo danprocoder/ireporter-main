@@ -5,7 +5,7 @@ class API {
       'Content-Type': 'application/json',
     };
   }
-  
+
   header(key, value) {
   	this.headers[key] = value;
   }

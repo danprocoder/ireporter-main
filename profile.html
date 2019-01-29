@@ -57,14 +57,9 @@
 
 	function loadStats(type) {
 	  app.http.api(`${type}s/stats`).get((data) => {
-	  	let total = 0;
-
 	  	for (const status in data[0]) {
 	  	  app.dom.selector(`.${type} .${status} .num`).html(data[0][status]);
-	  	  total += parseInt(data[0][status]);
 	  	}
-
-	  	app.dom.selector(`.${type} .total`).html(total);
 	  }, (error) => {
 	  	console.log(error);
 	  });
@@ -74,6 +69,7 @@
 	<script>
 	const loadedFirstTime = [0];
 
+	app.setRequiredRole('user');
 	app.setAuthRequired(true);
 	app.ready((http, dom) => {
 	  dom.selector('.auth-logout').click(app.logout);
@@ -108,7 +104,7 @@
 	<div class="red-bg">
 		<div id="navbar">
 			<div class="container">
-				<a href="dashboard.html" class="sitename">iReporter</a>
+				<a href="dashboard.html" class="sitename"><i class="fa fa-bullhorn"></i> iReporter</a>
 				<div class="navbar-menu">
 					<ul>
 						<li><a href="red-flags.html">Red Flags</a></li>
@@ -142,7 +138,7 @@
 				<div class="counters">
 					<div class="grid-container">
 						<div class="red-flag grid-50">
-							<div class="header">Red Flags<span class="f-right total">...</span></div>
+							<div class="header">Red Flags</div>
 							<div class="body">
 								<div class="counter in-draft">
 									<div class="num">...</div>
@@ -160,7 +156,7 @@
 							</div>	
 						</div>
 						<div class="intervention grid-50">
-							<div class="header">Interventions<span class="f-right total">...</span></div>
+							<div class="header">Interventions</div>
 							<div class="body">
 								<div class="counter in-draft">
 									<div class="num">...</div>
