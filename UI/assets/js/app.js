@@ -349,25 +349,48 @@ const app = {
   },
 
   start() {
-    const token = cookieManager.get('token');
-    if (token) {
-      this.http.api('auth').get((data) => {
-        app.userData = data[0];
-      }, (error) => {
-        console.log(error);
-      });
-    }
+    this.loadExternals();
 
-    if (this.authConfig.required) {
-      if (!token) {
-      	window.location = this.http.baseUrl('login.html');
-      	return;
+    window.addEventListener('load', () => {
+      const token = cookieManager.get('token');
+      if (token) {
+        this.initAuth(() => {
+          this.onStart();
+        });
+      } else {
+        this.onStart();
       }
-    } else if (token && this.authConfig.redirect) {
-      	window.location = this.http.baseUrl('dashboard.html');
-      	return;
+    });
+  },
+
+  initAuth(callback) {
+    this.http.api('auth').get((data) => {
+      app.userData = data[0];
+
+      callback.call(app);
+    }, (error) => {
+      console.log(error);
+    });
+  },
+
+  onStart() {
+    const user = this.auth();
+    if (this.authConfig.required) {
+      if (!user) {
+        window.location = this.http.baseUrl('login.html');
+        return;
+      }
+    } else if (user && this.authConfig.redirect) {
+        window.location = this.http.baseUrl(user.isAdmin ? 'admin' : 'dashboard.html');
+        return;
     }
 
+    if (typeof this.readyCallback === 'function') {
+      this.readyCallback(this.http, this.dom);
+    }
+  },
+
+  loadExternals() {
     // Load externals
     for (let i = 0; i < this.using.length; i++) {
       const ext = this.externals[this.using[i]];
@@ -386,12 +409,6 @@ const app = {
         css.setAttribute('type', 'text/css');
         document.head.appendChild(css);
       }
-    }
-
-    if (typeof app.readyCallback === 'function') {
-  	  window.addEventListener('load', (e) => {
-  	    app.readyCallback(new Http(), app.dom);
-  	  });
     }
   },
 
