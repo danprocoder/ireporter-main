@@ -17,57 +17,58 @@
 	<script src="assets/js/nav.js"></script>
 </head>
 <body class="revealed">
-	<div class="red-bg">
-		<div id="navbar">
-			<div class="navbar-container">
-				<div class="navbar-inner">
-					<a href="index.html" class="sitename"><i class="fa fa-bullhorn"></i> iReporter</a>
-					<div class="navbar-menu horizontal">
-						<ul>
-							<li><a href="login.html">Log In</a></li>
-							<li><a href="signup.html">Sign Up</a></li>
-						</ul>
+	<div style="position:relative;">
+		<div class="red-bg">
+			<div id="navbar">
+				<div class="navbar-container">
+					<div class="navbar-inner">
+						<a href="index.html" class="sitename"><i class="fa fa-bullhorn"></i> iReporter</a>
+						<div class="navbar-menu horizontal">
+							<ul>
+								<li><a href="login.html">Log In</a></li>
+								<li><a href="signup.html">Sign Up</a></li>
+							</ul>
+						</div>
+						<button class="nav-toggle-responsive"><i class="fa fa-bars"></i></button>
+						<div class="clearfix"></div>
 					</div>
-					<button class="nav-toggle-responsive"><i class="fa fa-bars"></i></button>
-					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="welcome-text-container section t-center">
+					<div class="large-text">LET&apos;S MAKE NIGERIA A BETTER PLACE!</div>
+					<div class="info-text">Bring any form of corruption to the notice of appropriate authorities and the general public. Also report on things that needs government intervention.</div>
+					<div class="button-area"><a href="signup.html" class="reporter-signup-btn">Become a Reporter</a></div>
 				</div>
 			</div>
 		</div>
-		<div class="container">
-			<div class="welcome-text-container section t-center">
-				<div class="large-text">Let us make Nigeria a better place!</div>
-				<div class="info-text">Bring any form of corruption to the notice of appropriate authorities and the general public. Also report on things that needs government intervention.</div>
-				<div class="button-area"><a href="signup.html" class="reporter-signup-btn">Become a Reporter</a></div>
-			</div>
+		<div class="bg-images-container">
+			<img src="assets/images/protest.jpeg" class="active" />
+			<img src="assets/images/bad-road.jpg" />
 		</div>
 	</div>
 
-	<div class="section report t-center">
+	<div class="section report">
 		<div class="container">
-			<h1>Report an Incident to an Authority!</h1>
+			<!-- <h1>Report an Incident to an Authority!</h1> -->
 			<div class="grid-container">
 				<div class="grid-50">
-					<h3 class="red-flag">Cases linked to corruption</h3>
-					<div style="background:#ffffff;padding: 3px 0 30px 0;border-radius:3px;">
-						<ul>
-							<li><i class="fa fa-times"></i> Bribery</li>
-							<li><i class="fa fa-times"></i> Looted money</li>
-							<li class="etc">etc.</li>
-						</ul>
+					<!-- <div><img src="assets/images/map.png" width="350" /></div> -->
+					<h3 class="red-flag"><i class="fa fa-bullhorn"></i> Report cases linked to <span>corruption</span></h3>
+					<div class="m-top">
+						<div class="examples">Bribery, looted money, etc.</div>
 						<div class="button-area"><a href="#" class="button">Report!</a></div>
 					</div>
 				</div>
+
 				<div class="grid-50">
-					<h3 class="intervention">Things that need government intervention</h3>
-					<div style="background:#ffffff;padding: 3px 0 30px 0;border-radius:3px;">
-						<ul>
-							<li><i class="fa fa-times"></i> Bad roads</li>
-							<li><i class="fa fa-times"></i> Electricity issues</li>
-							<li class="etc">etc.</li>
-						</ul>
+					<h3 class="intervention"><i class="fa fa-bullhorn"></i> Report things that need government <span>intervention</span></h3>
+					<div class="m-top">
+						<div class="examples">Bad roads, electricity issues, etc.</div>
 						<div class="button-area"><a href="#" class="button">Report!</a></div>
 					</div>
 				</div>
+
 				<div class="clearfix"></div>
 			</div>
 		</div>
@@ -76,11 +77,54 @@
 	<footer>
 		<div class="container">
 			<div class="f-left">iReporter &copy; 2019</div>
-			<div class="f-right">
-				<a href="#" class="social"><i class="fa fa-facebook"></i></a>
-				<a href="#" class="social"><i class="fa fa-twitter"></i></a>
+			<div class="f-right m-top-768">
+				<div class="footer-header">Follow Us</div>
+				<div class="m-top">
+					<a href="#" class="social"><i class="fa fa-facebook"></i></a>
+					<a href="#" class="social"><i class="fa fa-twitter"></i></a>
+				</div>
 			</div>
+
+			<div class="f-right newsletter m-top-768">
+				<div class="footer-header">Subscribe to our newsletter</div>
+				<form action="#" class="m-top">
+					<div class="field-wrapper">
+						<input type="text" name="" placeholder="Your email address" class="text-field" />
+						<input type="submit" value="SUBSCRIBE" class="subscribe-btn" />
+					</div>
+				</form>
+			</div>
+
+			<div class="clearfix"></div>
 		</div>
 	</footer>
+
+	<script>
+	let curIndex = 0;
+
+	function imgClass(img) {
+		return {
+			add(cls) {
+				img.classList.add(cls);
+				return this;
+			},
+
+			remove(cls) {
+				img.classList.remove(cls);
+				return this;
+			},
+		}
+	}
+
+	const images = document.querySelectorAll('.bg-images-container img');
+	setInterval(() => {
+      for (let i = 0; i < images.length; i++) {
+      	imgClass(images[i]).remove('active').add('fade-out');
+      }
+
+      curIndex = (curIndex + 1 >= images.length ? 0 : curIndex + 1);
+      imgClass(images[curIndex]).remove('fade-out').add('active');
+	}, 4000);
+	</script>
 </body>
 </html>
