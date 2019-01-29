@@ -11,9 +11,7 @@
  * @param {string} str The string to encode.
  * @return {string} Returns the encoded string.
  */
-const xssClean = (str) => {
-  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
+const xssClean = str => str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 /**
  * Converts a datetime string in format yyyy-mm-dd HH:mm:ss to a readable date/time format.
@@ -25,9 +23,9 @@ const dateFormat = (dateString) => {
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   const date = new Date(dateString);
-  let formatted = months[date.getMonth()] + ' ' + date.getDay() + ', ' + date.getFullYear() + ' at ' + date.getHours() + ':' + date.getMinutes();
+  const formatted = `${months[date.getMonth()]} ${date.getDay()}, ${date.getFullYear()} at ${date.getHours()}:${date.getMinutes()}`;
   return formatted;
-}
+};
 
 class Form {
   constructor(id) {
@@ -35,7 +33,7 @@ class Form {
   }
 
   hideFieldErrors() {
-    var errors = this.form.querySelectorAll('.error');
+    const errors = this.form.querySelectorAll('.error');
     for (let i = 0; i < errors.length; i++) {
       errors[i].innerHTML = '';
       errors[i].classList.remove('show');
@@ -44,7 +42,7 @@ class Form {
 
   showFieldErrors(errors) {
     for (const name in errors) {
-      const errMessage = this.form.querySelector('.error.' + name);
+      const errMessage = this.form.querySelector(`.error.${name}`);
       errMessage.innerHTML = errors[name];
       errMessage.classList.add('show');
     }
@@ -78,26 +76,26 @@ class DOMSelector {
   }
 
   html(html) {
-    this._iter(e => {
+    this._iter((e) => {
       e.innerHTML = html;
     });
   }
 
   click(callback) {
-    this._iter(e => {
+    this._iter((e) => {
       e.onclick = callback;
     });
   }
 
   addClass(cl) {
-    this._iter(e => {
+    this._iter((e) => {
       e.classList.add(cl);
     });
     return this;
   }
 
   toggleClass(cl) {
-    this._iter(e => {
+    this._iter((e) => {
       if (e.classList.contains(cl)) {
         e.classList.remove(cl);
       } else {
@@ -176,7 +174,7 @@ class Http {
     const query = window.location.search.substr(1).split('&');
     for (let i = 0; i < query.length; i++) {
       const param = query[i].split('=');
-      params[ decodeURIComponent(param[0]) ] = decodeURIComponent(param[1]);
+      params[decodeURIComponent(param[0])] = decodeURIComponent(param[1]);
     }
 
     return params;
@@ -192,8 +190,8 @@ class Http {
     window.location = url;
   }
 
-  baseUrl(path=null) {
-    let baseUrl = window.location.protocol.concat('//').concat(window.location.host);
+  baseUrl(path = null) {
+    const baseUrl = window.location.protocol.concat('//').concat(window.location.host);
     return path ? baseUrl.concat('/').concat(path) : baseUrl;
   }
 }
@@ -248,7 +246,7 @@ class Toast {
       clearTimeout(this.timeoutId);
 
       document.body.removeChild(this.toast);
-      
+
       this.isShown = false;
     }
   }
@@ -259,11 +257,11 @@ class Preloader {
     this.container = document.querySelector(`.preload#${id}`);
   }
 
-  hideLoadingAnimation(callback=null) {
+  hideLoadingAnimation(callback = null) {
     this.container.querySelector('.loader').style.display = 'none';
     this.container.querySelector('.on-load').style.display = 'block';
 
-    if (typeof callback == 'function') {
+    if (typeof callback === 'function') {
       callback();
     }
   }
@@ -277,17 +275,17 @@ class Preloader {
 const app = {
 
   externals: {
-    'mapbox': {
+    mapbox: {
       js: 'https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js',
-      css: 'https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css'
-    }
+      css: 'https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css',
+    },
   },
   using: [],
-  
+
   use(library) {
     this.using.push(library);
   },
-  
+
   authConfig: {
     required: false,
     redirect: false,
@@ -301,7 +299,7 @@ const app = {
   dom: {
     selector(selector) {
       return new DOMSelector(document, selector);
-    }
+    },
   },
 
   toast: {
@@ -322,17 +320,21 @@ const app = {
 
       this.current = new Toast(className, text);
       this.current.show();
-    }
+    },
   },
 
   http: new Http(),
 
-  setAuthRequired(required, redirect=false) {
+  setAuthRequired(required, redirect = false) {
     this.authConfig = { required, redirect };
   },
 
   setAuthToken(token) {
   	cookieManager.set('token', token);
+  },
+
+  setRequiredRole(role) {
+    this.requiredRole = role;
   },
 
   logout() {
@@ -381,9 +383,20 @@ const app = {
         return;
       }
     } else if (user && this.authConfig.redirect) {
-        window.location = this.http.baseUrl(user.isAdmin ? 'admin' : 'dashboard.html');
-        return;
+      window.location = this.http.baseUrl(user.isAdmin ? 'admin' : 'dashboard.html');
+      return;
     }
+
+    if (this.requiredRole && user) {
+      const userRole = user.isAdmin ? 'admin' : 'user';
+
+      if (this.requiredRole != userRole) {
+        window.location = this.http.baseUrl(userRole == 'user' ? 'dashboard.html' : 'admin');
+        return;
+      }
+    }
+
+    document.getElementsByTagName('body')[0].style.display = 'block';
 
     if (typeof this.readyCallback === 'function') {
       this.readyCallback(this.http, this.dom);
@@ -395,16 +408,16 @@ const app = {
     for (let i = 0; i < this.using.length; i++) {
       const ext = this.externals[this.using[i]];
 
-      if (typeof ext['js'] !== 'undefined') {
+      if (typeof ext.js !== 'undefined') {
         const js = document.createElement('script');
         js.async = false;
-        js.setAttribute('src', ext['js']);
+        js.setAttribute('src', ext.js);
         document.head.appendChild(js);
       }
-      
-      if (typeof ext['css'] !== 'undefined') {
+
+      if (typeof ext.css !== 'undefined') {
         const css = document.createElement('link');
-        css.setAttribute('href', ext['css']);
+        css.setAttribute('href', ext.css);
         css.setAttribute('rel', 'stylesheet');
         css.setAttribute('type', 'text/css');
         document.head.appendChild(css);
@@ -421,11 +434,10 @@ const app = {
   table(id) {
     if (typeof this.tables[id] !== 'undefined') {
       return this.tables[id];
-    } else {
-      const table = new Table(id);
-      this.tables[id] = table;
-      return table;
     }
+    const table = new Table(id);
+    this.tables[id] = table;
+    return table;
   },
 
   preloader(id) {
@@ -436,9 +448,9 @@ const app = {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
     const date = new Date(dateString);
-    let formatted = months[date.getMonth()] + ' ' + date.getDay() + ', ' + date.getFullYear() + ' at ' + date.getHours() + ':' + date.getMinutes();
+    const formatted = `${months[date.getMonth()]} ${date.getDay()}, ${date.getFullYear()} at ${date.getHours()}:${date.getMinutes()}`;
     return formatted;
-  }
+  },
 };
 
 
@@ -458,7 +470,7 @@ class Mapbox {
       container: id,
       style: 'mapbox://styles/mapbox/streets-v9',
       center: coords,
-      zoom: 9
+      zoom: 9,
     });
 
     // Add zoom and rotation controls to the map.
@@ -473,7 +485,7 @@ class Mapbox {
 }
 
 app.mapbox = (id, coords) => {
-  if (typeof mapboxgl != 'undefined') {
+  if (typeof mapboxgl !== 'undefined') {
     new Mapbox(id, coords);
   }
 };
