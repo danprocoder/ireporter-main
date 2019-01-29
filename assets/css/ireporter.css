@@ -123,7 +123,7 @@ textarea {
 }
 
 .red-bg {
-    background: #ef3b3b;
+    background: #10af74;
 }
 
 .container {
@@ -219,7 +219,7 @@ textarea {
 .button {
     display: inline-block;
     padding: 12px 17px;
-    background: #ef3b3b;
+    background: #f9872f;
     border: none;
     outline: none;
     color: #fff;
@@ -233,11 +233,11 @@ textarea {
 }
 
 .button:hover {
-    background: #ca2745;
+    background: #ef771a;
 }
 
 .button:disabled {
-    background: #fda0a0;
+    background: #f5c29c;
 }
 
 form label {

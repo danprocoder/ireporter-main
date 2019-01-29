@@ -6,7 +6,7 @@
 .welcome-text-container .large-text {
   font-size: 47px;
   font-weight: bold;
-  line-height: 100%;
+  line-height: 130%;
 }
 
 .welcome-text-container .large-text span {
@@ -14,9 +14,10 @@
 }
 
 .welcome-text-container .info-text {
-  margin-top: 30px;
-  line-height: 145%;
-  font-size: 17px;
+    margin-top: 14px;
+    line-height: 145%;
+    font-size: 19px;
+    color: #ffdedb;
 }
 
 .section.features {
@@ -58,9 +59,80 @@
   background: #ffff28;
 }
 
+.section.about {
+    padding: 20px 0 80px 0;
+    line-height: 150%;
+    font-size: 18px;
+}
+
+.section.about .about-text {
+  margin-top: 20px;
+}
+
+.section.report {
+  padding: 30px 0 70px 0;
+}
+
+.section.report h3 {
+  font-weight: normal;
+  font-size: 19px;
+  font-weight: 700;
+  color: #555;
+}
+
+.section.report ul {
+  margin-top: 25px;
+}
+
+.section.report ul li {
+  margin-top: 10px;
+}
+
+.section.report ul li.etc {
+  color: #777;
+}
+
+.section.report .fa-times {
+  color: #c00;
+}
+
+.section.reporter .button-area {
+  margin-top: 5px;
+}
+
+.section.report .grid-container {
+  margin-top: 25px;
+}
+
+/*dtead {
+  background: #fbfbfb;
+  padding: 20px 0 40px 0;
+  border-radius: 4px;
+}*/
+
+h1 {
+  line-height: 150%;
+}
+
+footer {
+  padding: 40px 0;
+  color: #222;
+  border-top: 3px solid #dfdfdf;
+}
+
+footer .social {
+  margin-left: 10px;
+  color: #999;
+
+}
+
+footer .social:hover {
+  color: #5697c7;
+}
+
 @media screen and (max-width:768px) {
   #navbar {
-      border-bottom: 1px solid #fb6767;
+      border-bottom: 1px solid #60bb86;
   }
 
   .welcome-text-container {
@@ -68,18 +140,17 @@
   }
 
   .welcome-text-container .large-text {
-    display: none;
+    font-size: 35px;
   }
 
   .welcome-text-container .info-text {
     margin-top: 10px;
+    font-size: 16px;
   }
 
-  .section.features .grid-50 {
+  .section.report .grid-50 {
     width: 100%;
     float: none;
-    margin-bottom: 50px;
-    padding-bottom: 50px;
-    border-bottom: 1px solid #e3e3e3;
+    margin-top: 50px;
   }
 }
