@@ -44,4 +44,9 @@ router.patch('/api/v1/red-flags/:id/status', adminRequired, (req, res) => {
   controller.updateStatus(req, res);
 });
 
+// Adds uploaded images
+router.patch('/api/v1/red-flags/:id/addImage', adminNotRequired, (req, res) => {
+  controller.uploadEvidences(req, res);
+});
+
 export default router;

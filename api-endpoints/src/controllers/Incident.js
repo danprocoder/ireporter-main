@@ -1,12 +1,14 @@
 import load from '../helpers/loader';
 import response from '../helpers/response';
 import IncidentModel from '../models/Incident';
+import EvidenceModel from '../models/Evidences';
 import Validator from '../helpers/validator';
 
 export default class Incident {
   constructor(type) {
     this.type = type;
     this.model = new IncidentModel();
+    this.evidenceModel = new EvidenceModel();
   }
 
   add(req, res) {
@@ -150,6 +152,24 @@ export default class Incident {
             message: `Updated ${type} record status`,
           }));
         });
+      }
+    });
+  }
+
+  uploadEvidences(req, res) {
+    const type = this.type;
+
+    // Make sure record you are trying to update exists.
+    this.model.readOneById(type, req.params.id, (row) => {
+      if (!row) {
+        res.status(404).json(response.notFound('Record not found'));
+      } else {
+        this.evidenceModel.addEvidences(req.params.id, req.body.url, () => {
+          res.status(200).json(response.success({
+            id: req.params.id,
+            message: `Image added to ${type} record`,
+          }));
+        })
       }
     });
   }
