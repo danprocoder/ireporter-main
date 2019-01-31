@@ -122,6 +122,12 @@ class DOMSelector {
     });
   }
 
+  attribute(attr, value) {
+    this._iter((e) => {
+      e.setAttribute(attr, value);
+    });
+  }
+
   _iter(callback) {
     for (let i = 0; i < this.elements.length; i++) {
       callback(this.elements[i]);
