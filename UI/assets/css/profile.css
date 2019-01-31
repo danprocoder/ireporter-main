@@ -24,7 +24,16 @@
 }
 
 .user-bio .meta-data {
-	margin-right: 70px;
+	margin-right: 40px;
+    border-right: 1px dotted #d2d1d1;
+    padding-right: 40px;
+    position: relative;
+}
+
+.user-bio .meta-data.last {
+	margin-right: 0;
+	padding-right: 0;
+	border-right: none;
 }
 
 .user-bio .meta-data span {
@@ -79,7 +88,7 @@
 }
 
 .tab-wrapper {
-	margin-top: -35px;
+	margin-top: -29px;
 	text-align: center;
 }
 
@@ -88,7 +97,7 @@
 	border: 1px solid #dedede;
     border-radius: 30px;
     background: #ffffff;
-    padding: 9px;
+    padding: 2px;
 }
 
 .tab-container .tab-content {
@@ -148,6 +157,9 @@
 		float: none;
 		display: block;
 		margin-bottom: 20px;
+		padding-right: 0;
+		margin-right: 0;
+		border-right: none;
 	}
 
 	.user-bio .meta-data .value {

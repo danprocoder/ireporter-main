@@ -39,7 +39,7 @@ table td {
 }
 
 table.striped tr:nth-child(even) td {
-  background: #f6f6f6;
+    background: #fafafa;;
 }
 
 .record-status {
