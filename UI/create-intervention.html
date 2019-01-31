@@ -18,6 +18,8 @@
 	<script src="assets/js/nav.js"></script>
 	<script src="assets/js/create-incident.js"></script>
 	<script>
+	app.use('cloudinary');
+
 	app.setAuthRequired(true);
 	app.setRequiredRole('user');
 	app.ready((http, dom) => {
@@ -99,11 +101,14 @@
 							<label>Upload evidence to support your claim</label>
 							<div>
 								<a href="#" class="file-chooser">
-									<i class="fa fa-cloud"></i>
-									<br/>
-									<span>Click to choose image</span>
+									<span class="center-circle">
+										<i class="fa fa-upload"></i>
+										<br/>
+										<span>Choose images</span>
+									</span>
 								</a>
 							</div>
+							<div class="uploaded-evidences"><div class="inner"></div></div>
 						</div>
 					</div>
 

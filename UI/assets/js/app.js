@@ -81,6 +81,12 @@ class DOMSelector {
     });
   }
 
+  append(element) {
+    this.elements.forEach((e) => {
+      e.appendChild(element.getHtml());
+    });
+  }
+
   click(callback) {
     this._iter((e) => {
       e.onclick = callback;
@@ -285,6 +291,9 @@ const app = {
       js: 'https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js',
       css: 'https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css',
     },
+    cloudinary: {
+      js: 'https://widget.cloudinary.com/v2.0/global/all.js',
+    }
   },
   using: [],
 
@@ -495,3 +504,37 @@ app.mapbox = (id, coords) => {
     new Mapbox(id, coords);
   }
 };
+
+/**
+ * Initialize cloudinary file chooser and uploader widget when `fieldName` is clicked.
+ * Make sure to call app.use('cloudinary') to load the library before use
+ */
+app.cloudinary = () => {
+  if (typeof cloudinary !== 'undefined') {
+    return {
+      open(fieldName, onUploaded) {
+        cloudinary.createUploadWidget({
+          cloudName: 'dpcvutcpf',
+          uploadPreset: 'ymigpsga',
+          clientAllowedFormats: ['png', 'jpg', 'jpeg'],
+          maxFiles: 3,
+          maxFileSize: 1024*1024*5, // 5MB
+          fieldName,
+        }, (error, result) => {
+          if (error) {
+            app.toast.error('Failed to upload evidence. Try again.');
+          } else {
+            if (result && result.event === 'success') {
+              onUploaded({
+                secureUrl: result.info.secure_url,
+                thumbnailUrl: result.info.thumbnail_url,
+              });
+            }
+          }
+        }).open();
+      },
+    };
+  } else {
+    return null;
+  }
+}
