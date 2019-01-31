@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/navbar2.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/user.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/create-incident.css" />
 
 	<script src="assets/js/ireporter.js"></script>
 	<script src="assets/js/validator.js"></script>
@@ -65,13 +66,16 @@
 						<input type="text" name="title" class="text-field" />
 						<div class="error title"></div>
 					</div>
+
 					<div class="field-section">
 						<label>Comment <span class="required">*</span></label>
 						<textarea name="comment" class="text-field" rows="14"></textarea>
 						<div class="error comment"></div>
 					</div>
+
+					<!-- Location section -->
 					<div class="form-section">
-						<div class="form-section-header"><i class="fa fa-map-marker"></i> Add Geo Location</div>
+						<div class="form-section-header"><i class="fa fa-map-marker"></i> Where did this happen?</div>
 						<div class="form-section-body">
 							<div class="grid-container">
 								<div class="grid-10">
@@ -89,6 +93,22 @@
 							<div class="error long"></div>
 						</div>
 					</div>
+
+					<!-- Media upload section -->
+					<div class="form-section">
+						<div class="form-section-header"><i class="fa fa-paperclip"></i> Do you have any evidence to support this?</div>
+						<div class="form-section-body">
+							<label>Upload evidence to support your claim</label>
+							<div>
+								<a href="#" class="file-chooser">
+									<i class="fa fa-cloud"></i>
+									<br/>
+									<span>Click to choose image</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
 					<div class="field-section">
 						<input type="submit" class="button" value="Create a Red Flag" id="submit-btn" />
 					</div>

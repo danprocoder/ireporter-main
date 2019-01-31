@@ -1,0 +1,29 @@
+.file-chooser {
+	background: #f5f5f5;
+    border: 1px solid #f5f5f5;
+    border-radius: 3px;
+    width: 100%;
+    padding: 50px 0;
+    text-align: center;
+    color: #a5a5a5;
+    outline: none;
+    cursor: pointer;
+    transition:
+      color 0.11s ease-in,
+      border 0.11s ease-in;
+    display: block;
+}
+
+.file-chooser .fa {
+    font-size: 68px;
+}
+
+.file-chooser span {
+	display: inline-block;
+    margin-top: 4px;
+    font-size: 14px;
+}
+
+.file-chooser:hover {
+	color: #12bf82!important;
+}
