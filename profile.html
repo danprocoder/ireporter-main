@@ -74,7 +74,7 @@
 	app.ready((http, dom) => {
 	  dom.selector('.auth-logout').click(app.logout);
 
-      dom.selector('#navbar .js-username').html(app.auth().username);
+      dom.selector('.js-username').html(app.auth().username);
 
 	  const user = app.auth();
 	  dom.selector('.js-text-name').html(user.firstname + ' ' + user.lastname);
@@ -125,59 +125,90 @@
 			</div>
 		</div>
 	</div>
+
 	<div>
 		<div class="user-bio">
 			<div class="container">
 				<div class="name js-text-name"></div>
 				<div class="meta">
-					<span class="meta-data"><i class="fa fa-at"></i> <span class="js-text-email"></span></span>
-					<span class="meta-data"><i class="fa fa-phone"></i> <span class="js-text-mobile"></span></span>
+					<span class="meta-data f-left">
+						<span class="label">Nickname</span>
+						<span class="value js-username"></span>
+					</span>
+					<span class="meta-data f-left">
+						<span class="label">Email</span>
+						<span class="value js-text-email"></span>
+					</span>
+					<span class="meta-data f-left">
+						<span class="label">Mobile</span>
+						<span class="value js-text-mobile"></span>
+					</span>
 				</div>
 			</div>
 		</div>
+
 		<div class="container">
 			<div>
 				<div class="counters">
-					<div class="grid-container">
+					<div class="grid-container t-center">
 						<div class="red-flag grid-50">
-							<div class="header">Red Flags</div>
-							<div class="body">
-								<div class="counter in-draft">
-									<div class="num">...</div>
-									<div class="text">In Draft</div>
+							<div class="inner">
+								<div class="header">Red Flags<i class="fa fa-bullhorn f-right"></i></div>
+								<div class="body">
+									<div class="counter in-draft">
+										<div class="num">...</div>
+										<div class="text">In Draft</div>
+									</div>
+									<div class="counter under-investigation">
+										<div class="num">...</div>
+										<div class="text">under investigation</div>
+									</div>	
+									<div class="counter resolved">
+										<div class="num">...</div>
+										<div class="text">resolved</div>
+									</div>
+									<div class="counter rejected last">
+										<div class="num">...</div>
+										<div class="text">Rejected</div>
+									</div>
+									<div class="clearfix"></div>
 								</div>
-								<div class="counter resolved">
-									<div class="num">...</div>
-									<div class="text">Resolved</div>
-								</div>	
-								<div class="counter rejected">
-									<div class="num">...</div>
-									<div class="text">Rejected</div>
-								</div>	
-								<div class="clearfix"></div>
-							</div>	
+							</div>
 						</div>
 						<div class="intervention grid-50">
-							<div class="header">Interventions</div>
-							<div class="body">
-								<div class="counter in-draft">
-									<div class="num">...</div>
-									<div class="text">In Draft</div>
+							<div class="inner">
+								<div class="header">Interventions<i class="fa fa-bullhorn f-right"></i></div>
+								<div class="body">
+									<div class="counter in-draft">
+										<div class="num">...</div>
+										<div class="text">In Draft</div>
+									</div>
+									<div class="counter under-investigation">
+										<div class="num">...</div>
+										<div class="text">under investigation</div>
+									</div>
+									<div class="counter resolved">
+										<div class="num">...</div>
+										<div class="text">Resolved</div>
+									</div>
+									<div class="counter rejected last">
+										<div class="num">...</div>
+										<div class="text">Rejected</div>
+									</div>
+									<div class="clearfix"></div>
 								</div>
-								<div class="counter resolved">
-									<div class="num">...</div>
-									<div class="text">Resolved</div>
-								</div>
-								<div class="counter rejected">
-									<div class="num">...</div>
-									<div class="text">Rejected</div>
-								</div>
-								<div class="clearfix"></div>
-							</div>	
+							</div>
 						</div>
 						<div class="clearfix"></div>
 					</div>
 				</div>
+			</div>
+		</div>
+
+		<!-- User incidents records. -->
+		<div>
+
+			<div>
 
 				<div class="tab-container" id="incident-tab">
 
@@ -188,7 +219,7 @@
 						</ul>
 					</div>
 
-					<div class="tab-content">
+					<div class="tab-content container">
 
 						<!-- Red flags tab -->
 						<div class="tab-pane preload" id="red-flags">

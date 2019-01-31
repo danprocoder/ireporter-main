@@ -58,14 +58,20 @@
 	<div>
 		<div class="container">
 			<div class="header-container">
-				<div class="f-left">
+				<div class="clearfix">
 					<span class="header">Interventions</span>
-					<a href="create-intervention.html" class="button small" style="margin-left:20px;"><i class="fa fa-plus"></i> Create an Intervention</a>
+					<a href="create-intervention.html" class="button small f-right" style="margin-left:20px;"><i class="fa fa-pencil"></i> Create an Intervention</a>
 				</div>
-				<div class="f-right"></div>
-				<div class="clearfix"></div>
 			</div>
-			<div>
+
+			<div class="filter-container clearfix">
+				<div class="f-right">
+					<div class="search-box">
+						<input type="text" placeholder="Search title" name="q" class="text-field" />
+						<button><i class="fa fa-search"></i></button>
+					</div>
+				</div>
+
 				<ul class="tab f-left">
 					<li><a href="#">Pending</a></li>
 					<li><a href="#">Resolved</a></li>
@@ -73,15 +79,8 @@
 					<li><a href="#">Rejected</a></li>
 					<li class="active"><a href="#">All</a></li>
 				</ul>
-				<div class="f-right">
-					<!-- Showing 1 - 5 of 5 -->
-					<div class="search-box">
-						<input type="text" placeholder="Search title" name="q" class="text-field" />
-						<button><i class="fa fa-search"></i></button>
-					</div>
-				</div>
-				<div class="clearfix"></div>
 			</div>
+
 			<div class="content preload" id="incident">
 				<div class="loader">
 					<div class="dot"></div>
