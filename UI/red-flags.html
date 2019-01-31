@@ -58,21 +58,14 @@
 	<div>
 		<div class="container">
 			<div class="header-container">
-				<div class="f-left">
+				<div class="clearfix">
 					<span class="header">My Red Flags</span>
-					<a href="create-red-flag.html" class="button small" style="margin-left:20px;"><i class="fa fa-plus"></i> Create a Red Flag</a>
+					<a href="create-red-flag.html" class="button small f-right" style="margin-left:20px;"><i class="fa fa-pencil"></i> Create a Red Flag</a>
 				</div>
-				<div class="f-right"></div>
-				<div class="clearfix"></div>
 			</div>
-			<div>
-				<ul class="tab f-left">
-					<li><a href="#">Pending</a></li>
-					<li><a href="#">Resolved</a></li>
-					<li><a href="#">Under Investigation</a></li>
-					<li><a href="#">Rejected</a></li>
-					<li class="active"><a href="#">All</a></li>
-				</ul>
+
+			<div class="clearfix filter-container">
+				
 				<div class="f-right">
 					<!-- Showing 1 - 5 of 5 -->
 					<div class="search-box">
@@ -80,8 +73,16 @@
 						<button><i class="fa fa-search"></i></button>
 					</div>
 				</div>
-				<div class="clearfix"></div>
+
+				<ul class="tab f-left">
+					<li><a href="#">Pending</a></li>
+					<li><a href="#">Resolved</a></li>
+					<li><a href="#">Under Investigation</a></li>
+					<li><a href="#">Rejected</a></li>
+					<li class="active"><a href="#">All</a></li>
+				</ul>
 			</div>
+
 			<div class="content preload" id="incident">
 				<div class="loader">
 					<div class="dot"></div>

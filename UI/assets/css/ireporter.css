@@ -165,6 +165,12 @@ textarea {
     clear: both;
 }
 
+.clearfix::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
 /* Text alignments */
 .t-center {
     text-align: center;
@@ -278,6 +284,7 @@ form .error.show {
     border: 1px solid #dcdcdc;
     color: #7f7f7f;
     outline: none;
+    transition: border-color 0.16s ease-in;
 }
 
 .text-field:focus {
