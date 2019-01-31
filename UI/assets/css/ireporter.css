@@ -297,15 +297,16 @@ form .field-section {
 }
 
 form .form-section {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 form .form-section .form-section-header {
-    color: #777;
+    color: #9a9a9a;
+    font-size: 22px;
 }
 
 form .form-section .form-section-body {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .modal-container {
