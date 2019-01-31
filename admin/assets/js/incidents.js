@@ -7,7 +7,7 @@ function onReady(type) {
       <td>${app.dateFormat(data.createdon)}</td>
       <td>`+status(data)+`</td>
       <td>
-        <a href="${viewUrl}"><i class="fa fa-eye"></i> View</a>
+        <a href="${viewUrl}" class="action blue"><i class="fa fa-eye"></i> View</a>
       </td>
     </tr>`;
   });
