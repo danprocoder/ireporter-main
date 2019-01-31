@@ -126,6 +126,19 @@ body {
 	display: inline-block;
 }
 
+.table-wrapper {
+	display: block;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12)
+}
+
+.table-wrapper th {
+	border-top: none;
+}
+
 table td .status {
 	cursor: pointer;
 }
