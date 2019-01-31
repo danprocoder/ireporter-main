@@ -18,14 +18,39 @@
     outline: none;
 }
 
-.table-wrapper {
-	margin-top: 20px;
-}
-
 .tab {
 	margin-top: 10px;
 }
 
 .pagination-wrapper {
 	margin-top: 35px;
+}
+
+.filter-container {
+	margin-top: 30px;
+}
+
+#incident.preload {
+	margin-top: 20px;
+}
+
+@media screen and (max-width:768px) {
+	.filter-container .f-left,
+	.filter-container .f-right {
+		float: none;
+	}
+
+	.filter-container .search-box {
+		width: 100%;
+		margin: 0;
+	}
+
+	#incident.preload {
+		margin-top: 40px;
+	}
+
+	.filter-container .tab {
+		text-align: center;
+		margin-top: 20px;
+	}
 }
