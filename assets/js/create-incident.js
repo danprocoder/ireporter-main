@@ -1,6 +1,8 @@
+let uploadedEvidences = [];
+
 let submitBtn = null;
 
-function onSubmit(event, form, mode, http, type) {
+function onSubmit(event, form, mode, http, type) {console.log(uploadedEvidences);
   event.preventDefault();
 
   submitBtn.disabled = true;
@@ -104,4 +106,20 @@ function onReady(http, dom, type) {
       onSubmit(event, form, mode, http, type);
     });
   }
+
+  initializeFileUploader();
 }
+
+const initializeFileUploader = () => {
+  app.dom.selector('.file-chooser').click((event) => {
+    app.cloudinary().open('.file-chooser', onEvidenceUploaded);
+
+    event.preventDefault();
+  });
+};
+
+const onEvidenceUploaded = (data) => {
+  app.dom.selector('.uploaded-evidences .inner').append(new Image(data.secureUrl));
+
+  uploadedEvidences.push(data);
+};
