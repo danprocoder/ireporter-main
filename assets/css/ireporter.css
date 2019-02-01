@@ -115,6 +115,7 @@ textarea {
         left: 0;
         right: 0;
         background: #000;
+        z-index: 99999999999;
     }
 
     #navbar.expanded .navbar-menu.horizontal {

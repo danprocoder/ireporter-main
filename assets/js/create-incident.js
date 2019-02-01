@@ -2,7 +2,21 @@ let uploadedEvidences = [];
 
 let submitBtn = null;
 
-function onSubmit(event, form, mode, http, type) {console.log(uploadedEvidences);
+
+const showUploadStep = () => {
+  const steps = document.querySelectorAll('.steps .step');
+  steps[0].classList.remove('active');
+  steps[1].classList.add('active');
+
+  const body = document.querySelectorAll('.steps-container .step-body');
+  body[0].style.display = 'none';
+  body[1].style.display = 'block';
+
+  initializeFileUploader();
+};
+
+
+function onSubmit(event, form, mode, http, type) {
   event.preventDefault();
 
   submitBtn.disabled = true;
@@ -40,8 +54,16 @@ function onSubmit(event, form, mode, http, type) {console.log(uploadedEvidences)
       long: form.field('long').value(),
     });
     const onApiSuccess = (data) => {
-      const redirectUrl = (type === 'red-flag' ? 'view-red-flag.html' : 'view-intervention.html');
-      http.redirect(`./${redirectUrl}?id=${data[0].id}`);
+      const viewUrl = http.baseUrl(`view-${type}.html?id=${data[0].id}`);
+
+      // If on add, show upload step else redirect to view page
+      if (mode === 'add') {
+        showUploadStep(data[0].id);
+        
+        app.dom.selector('.finish-btn').attribute('href', viewUrl);
+      } else {
+        http.redirect(viewUrl);
+      }
     };
     const onApiError = (error) => {
       submitBtn.disabled = false;
@@ -100,26 +122,27 @@ function onReady(http, dom, type) {
     const pageTitle = (type == 'red-flag' ? 'Create a Red Flag' : 'Create an Intervention');
     app.setTitle(`${pageTitle} | iReporter`);
     dom.selector('.js-text-header').html(pageTitle);
-    submitBtn.value = pageTitle.replace(/ (a|an) /, ' ');
+    submitBtn.value = 'Next';
 
     incidentForm.onsubmit((event, form) => {
       onSubmit(event, form, mode, http, type);
     });
   }
-
-  initializeFileUploader();
 }
 
 const initializeFileUploader = () => {
-  app.dom.selector('.file-chooser').click((event) => {
-    app.cloudinary().open('.file-chooser', onEvidenceUploaded);
+  app.dom.selector('.upload-btn').click((event) => {
+    app.cloudinary().open('.upload-btn', onEvidenceUploaded);
 
     event.preventDefault();
   });
 };
 
 const onEvidenceUploaded = (data) => {
-  app.dom.selector('.uploaded-evidences .inner').append(new Image(data.secureUrl));
+  app.dom.selector('.uploader-container').hide();
+  app.dom.selector('.uploaded-files').show();
+
+  app.dom.selector('.uploaded-files .uploaded-thumbnails').append(new Image(data.secureUrl));
 
   uploadedEvidences.push(data);
 };
