@@ -75,9 +75,27 @@ class DOMSelector {
     this.elements = parent.querySelectorAll(selector);
   }
 
+  disable() {
+    this.elements.forEach((e) => {
+      e.disabled = true;
+    });
+  }
+
+  enable() {
+    this.elements.forEach((e) => {
+      e.disabled = false;
+    });
+  }
+
   html(html) {
     this._iter((e) => {
       e.innerHTML = html;
+    });
+  }
+
+  append(element) {
+    this.elements.forEach((e) => {
+      e.appendChild(element.getHtml());
     });
   }
 
@@ -90,6 +108,13 @@ class DOMSelector {
   addClass(cl) {
     this._iter((e) => {
       e.classList.add(cl);
+    });
+    return this;
+  }
+
+  removeClass(cl) {
+    this.elements.forEach((e) => {
+      e.classList.remove(cl);
     });
     return this;
   }
@@ -126,6 +151,7 @@ class DOMSelector {
     this._iter((e) => {
       e.setAttribute(attr, value);
     });
+    return this;
   }
 
   _iter(callback) {
@@ -286,6 +312,9 @@ const app = {
       js: 'https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js',
       css: 'https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css',
     },
+    cloudinary: {
+      js: 'https://widget.cloudinary.com/v2.0/global/all.js',
+    }
   },
   using: [],
 
@@ -305,6 +334,10 @@ const app = {
 
   dom: {
     selector(selector) {
+      return new DOMSelector(document, selector);
+    },
+
+    $(selector) {
       return new DOMSelector(document, selector);
     },
   },
@@ -496,3 +529,41 @@ app.mapbox = (id, coords) => {
     new Mapbox(id, coords);
   }
 };
+
+/**
+ * Initialize cloudinary file chooser and uploader widget when `fieldName` is clicked.
+ * Make sure to call app.use('cloudinary') to load the library before use
+ */
+app.cloudinary = () => {
+  if (typeof cloudinary !== 'undefined') {
+    return {
+      open(fieldName, listeners) {
+        cloudinary.createUploadWidget({
+          cloudName: 'dpcvutcpf',
+          uploadPreset: 'ymigpsga',
+          clientAllowedFormats: ['png', 'jpg', 'jpeg'],
+          maxFiles: 3,
+          maxFileSize: 1024*1024*5, // 5MB
+          fieldName,
+        }, (error, result) => {
+          if (error) {
+            app.toast.error('Failed to upload evidence. Try again.');
+          } else {
+            if (result.event === 'upload-added') {
+              listeners.onUploadAdded();
+            } else if (result.event === 'queues-start') {
+              listeners.onUploadStart();
+            } else if (result.event === 'success') {
+              listeners.onUploaded({
+                secureUrl: result.info.secure_url,
+                thumbnailUrl: result.info.thumbnail_url,
+              });
+            }
+          }
+        }).open();
+      },
+    };
+  } else {
+    return null;
+  }
+}

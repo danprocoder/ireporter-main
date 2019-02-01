@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/navbar2.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/user.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/create-incident.css" />
 
 	<script src="assets/js/ireporter.js"></script>
 	<script src="assets/js/validator.js"></script>
@@ -17,6 +18,8 @@
 	<script src="assets/js/nav.js"></script>
 	<script src="assets/js/create-incident.js"></script>
 	<script>
+	app.use('cloudinary');
+
 	app.setAuthRequired(true);
 	app.setRequiredRole('user');
 	app.ready((http, dom) => {
@@ -56,44 +59,78 @@
 		<div class="container">
 			<div class="header-container">
 				<div class="header js-text-header"></div>
-				<div style="margin-top:9px;"><small><span class="required">*</span> Required fields</small></div>
+
+				<div class="steps">
+					<span class="step active">&mdash;<span class="num">1</span> <span class="text">Create Record</span></span>
+					<span class="step">&mdash;<span class="num">2</span> <span class="text">Upload Evidence <span class="optional">(optional)</span></span></span>
+				</div>
 			</div>
+
 			<div>
-				<form role="form" id="incident-form">
-					<div class="field-section">
-						<label>Title <span class="required">*</span></label>
-						<input type="text" name="title" class="text-field" />
-						<div class="error title"></div>
-					</div>
-					<div class="field-section">
-						<label>Comment <span class="required">*</span></label>
-						<textarea name="comment" class="text-field" rows="14"></textarea>
-						<div class="error comment"></div>
-					</div>
-					<div class="form-section">
-						<div class="form-section-header"><i class="fa fa-map-marker"></i> Add Geo Location</div>
-						<div class="form-section-body">
-							<div class="grid-container">
-								<div class="grid-10">
-									<label>Lat</label>
-									<input type="text" name="lat" class="text-field" />
-								</div>
-								<div class="grid-10">
-									<label>Long</label>
-									<input type="text" name="long" class="text-field" />
-								</div>
-								<div class="clearfix"></div>
+				<div class="steps-container">
+					<div class="step-body" id="incident-creation-step">
+						<div style="margin-top:9px;color:#868686;"><small><span class="required">*</span> Required fields</small></div>
+						<form role="form" id="incident-form">
+							<div class="field-section">
+								<label>Title <span class="required">*</span></label>
+								<input type="text" name="title" class="text-field" />
+								<div class="error title"></div>
 							</div>
 
-							<div class="error lat"></div>
-							<div class="error long"></div>
+							<div class="field-section">
+								<label>Comment <span class="required">*</span></label>
+								<textarea name="comment" class="text-field" rows="14"></textarea>
+								<div class="error comment"></div>
+							</div>
+
+							<!-- Location section -->
+							<div class="form-section">
+								<div class="form-section-body">
+									<div class="grid-container">
+										<div class="grid-10">
+											<label>Lat</label>
+											<input type="text" name="lat" class="text-field" />
+										</div>
+										<div class="grid-10">
+											<label>Long</label>
+											<input type="text" name="long" class="text-field" />
+										</div>
+										<div class="clearfix"></div>
+									</div>
+
+									<div class="error lat"></div>
+									<div class="error long"></div>
+								</div>
+							</div>
+
+							<div class="field-section">
+								<input type="submit" class="button" value="Create a Red Flag" id="submit-btn" />
+							</div>
+						</form>
+					</div>
+
+					<div class="step-body" id="evidence-upload-step">
+						<div class="uploader-container">
+							<a href="#" class="upload-btn">
+								<i class="fa fa-cloud-upload"></i> Click here to upload evidence
+							</a>
+							<div class="max"><b>3</b> files max</div>
+						</div>
+
+						<div class="uploaded-files">
+							<div class="success-message"><i class="fa fa-check"></i> File(s) uploaded successfully</div>
+							<div class="uploaded-thumbnails"></div>
+						</div>
+
+						<div class="clearfix finish-btn">
+							<a href="" class="button finish-btn">Finish</a>
 						</div>
 					</div>
-					<div class="field-section">
-						<input type="submit" class="button" value="Create a Red Flag" id="submit-btn" />
-					</div>
-				</form>
+
+				</div>
+
 			</div>
+
 		</div>
 	</div>
 </body>
