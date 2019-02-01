@@ -44,4 +44,9 @@ router.patch('/api/v1/interventions/:id/status', adminRequired, (req, res) => {
   controller.updateStatus(req, res);
 });
 
+// Adds uploaded images
+router.patch('/api/v1/interventions/:id/addImage', adminNotRequired, (req, res) => {
+  controller.uploadEvidences(req, res);
+});
+
 export default router;

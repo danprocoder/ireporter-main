@@ -10,7 +10,8 @@ db.query(
     email VARCHAR(200) NOT NULL,
     password VARCHAR(256) NOT NULL,
     phonenumber VARCHAR(16) NOT NULL,
-    isadmin BOOLEAN NOT NULL DEFAULT false
+    isadmin BOOLEAN NOT NULL DEFAULT false,
+    createdon TIMESTAMP DEFAULT NOW()
   );`, (err, res) => {
     if (err) {
       console.log('Failed to create `users` table.');
@@ -47,7 +48,21 @@ db.query(
             console.log('Failed to create `incidents` table');
           }
 
-          process.exit();
+          // Create evidences table.
+          db.query(`CREATE TABLE evidences(
+            id SERIAL PRIMARY KEY,
+            incidentid INTEGER NOT NULL REFERENCES incidents(id),
+            url VARCHAR(500) NOT NULL,
+            createdon TIMESTAMP DEFAULT NOW()
+          );`, (err, res) => {
+            if (!err) {
+              console.log('Table `evidences` created successfully');
+            } else {
+              console.log('Failed to create `evidences` table.');
+            }
+
+            process.exit();
+          });
         },
       );
     });

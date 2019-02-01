@@ -167,6 +167,55 @@ class QuestionModal extends Modal {
   }
 }
 
+class Image {
+  constructor(src) {
+    this.src = src;
+
+    const imgWrapper = document.createElement('div');
+    imgWrapper.classList.add('image');
+    imgWrapper.innerHtml = `<img src="${src}" />
+        <div class="loader"><i class="fa fa-spinner fa-2x fa-spin"></div>`;
+
+    const object = this;
+
+    this.image = this.getImage(src);
+    this.image.onload = () => {
+      object.onImageLoaded();
+    }
+
+    this.loader = this.getLoader();
+
+    imgWrapper.appendChild(this.image);
+    imgWrapper.appendChild(this.loader);
+
+    this.imgWrapper = imgWrapper;
+  }
+
+  getImage(src) {
+    const img = document.createElement('img');
+    img.src = src;
+
+    return img;
+  }
+
+  getLoader() {
+    const loader  = document.createElement('div');
+    loader.classList.add('loader');
+    loader.innerHTML = `<i class="fa fa-spinner fa-2x fa-spin"></i>`;
+
+    return loader;
+  }
+
+  onImageLoaded() {
+    this.loader.style.display = 'none';
+    this.image.style.display = 'block';
+  }
+
+  getHtml() {
+    return this.imgWrapper;
+  }
+}
+
 let elements = [];
 function $(id) {
   for (let i = 0; i < elements.length; i++) {

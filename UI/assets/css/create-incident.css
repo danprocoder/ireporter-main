@@ -1,0 +1,109 @@
+#evidence-upload-step {
+	display: none;
+}
+
+.uploaded-evidences .image {
+	width: 225px;
+    height: 151px;
+    margin-right: 5px;
+}
+
+.uploaded-evidences {
+    margin-top: 10px;
+}
+
+.upload-btn {
+	color: #cecece;
+    display: inline-block;
+    font-size: 19px;
+    transition: color 0.2s ease-in;
+}
+
+.upload-btn:hover {
+    color: #9533b5;
+}
+
+.upload-btn .fa {
+	font-size: 40px;
+	vertical-align: middle;
+}
+
+#evidence-upload-step .max {
+	margin-top: 9px;
+	color: #999;
+	font-size: 13px;
+}
+
+.finish-btn {
+	margin-top: 40px;
+}
+
+.steps-container {
+	margin-top: 20px;
+}
+
+.steps {
+	margin-top: 20px;
+	position: relative;
+    left: -15px;
+    display: none;
+}
+
+.steps .step {
+	color: #ddd;
+	margin-right: 6px;
+}
+
+.steps .step .text {
+	display: none;
+}
+
+.steps .step.active .text {
+	display: inline;
+	margin-left: 3px;
+}
+
+.steps .step .text .optional {
+	font-weight: normal;
+	font-size: 13px;
+}
+
+.steps .num {
+	border: 1px solid #ddd;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	display: inline-block;
+	border-radius: 50%;
+	box-sizing: border-box;
+}
+
+.steps .step.active {
+	color: #18b1bb;
+	font-weight: bold;
+}
+
+.steps .step.active .num {
+	border: none;
+	background: #18b1bb;
+	color: #fff;
+}
+
+.uploaded-files {
+	display: none;
+}
+
+.uploaded-files .success-message {
+	color: #39b76d;
+    font-size: 15px;
+    margin-bottom: 23px;
+    display: none;
+}
+
+.uploaded-files .image {
+	width: 202px;
+    height: 111px;
+    border-radius: 1px;
+    margin-right: 3px;
+}
