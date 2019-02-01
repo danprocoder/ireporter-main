@@ -71,6 +71,12 @@ export default class Incident {
     });
   }
 
+  /**
+   * Get specific red-flag/intervention record
+   *
+   * @param {*} req
+   * @param {*} res
+   */
   get(req, res) {
     this.model.readOneById(this.type, req.params.id, (row) => {
       if (row) {
@@ -78,7 +84,16 @@ export default class Incident {
         if (!req.loggedInUser.isadmin && row.createdby != req.loggedInUser.id) {
           res.status(403).json(response.fail('Record was not created by you'));
         } else {
-          res.status(200).json(response.success(row));
+          // Get evidences.
+          (new EvidenceModel()).getEvidences(req.params.id, (urls) => {
+            row.Images = [];
+            urls.forEach((r) => {
+              row.Images.push(r.url);
+            });
+
+            // Send success record.
+            res.status(200).json(response.success(row));
+          });
         }
       } else {
         res.status(404).json(response.notFound('Record not found'));
