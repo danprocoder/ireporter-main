@@ -59,8 +59,8 @@ const showEvidences = (images) => {
     return;
   }
 
+  app.dom.$('.media-section.images').show();
   const container = app.dom.$('.media-section.images .media-wrapper');
-  container.show();
 
   for (let i = 0; i < images.length; i++) {
     container.append(new Image(images[i]));

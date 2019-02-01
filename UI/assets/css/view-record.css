@@ -104,15 +104,18 @@ body {
 }
 
 .media-section .media-wrapper .image {
-	width: 300px;
-    height: 300px;
+	width: 290px;
+    height: auto;
     margin-right: 8px;
+}
+
+.media-section .media-wrapper .loader {
+	height: 290px;
 }
 
 @media screen and (max-width: 630px) {
   .media-section .media-wrapper .image {
   	width: 100%;
-  	height: auto;
   	margin-right: 0;
   	margin-top: 8px;
   }
