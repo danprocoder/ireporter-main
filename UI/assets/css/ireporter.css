@@ -244,12 +244,39 @@ textarea {
     font-size: 13px;
 }
 
-.button:hover {
+.button:hover,
+.button:focus {
     background: #ef771a;
 }
 
-.button:disabled {
+.button:disabled,
+.button.disabled {
     background: #f5c29c;
+    cursor: default;
+}
+
+
+@keyframes ripple {
+    0% {
+        box-shadow: 0 0 0 0 #f9cca9;
+    }
+
+    50% {
+        box-shadow:
+          0 0 2px 2px    #f9f9f9,
+          0 0 4px 10px #f9cca9;
+    }
+
+    100% {
+        box-shadow:
+          0 0 7px 16px #f9f9f9,
+          0 0 8px 8px #f9cca9;
+    }
+}
+
+.button:active {
+    animation: ripple 0.9s;
+    animation-iteration-count: 1;
 }
 
 form label {

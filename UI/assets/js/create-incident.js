@@ -1,6 +1,8 @@
-let uploadedEvidences = [];
-
 let submitBtn = null;
+
+let incidentType = null;
+
+let newIncidentId = null;
 
 
 const showUploadStep = () => {
@@ -58,7 +60,8 @@ function onSubmit(event, form, mode, http, type) {
 
       // If on add, show upload step else redirect to view page
       if (mode === 'add') {
-        showUploadStep(data[0].id);
+        newIncidentId = data[0].id;
+        showUploadStep();
         
         app.dom.selector('.finish-btn').attribute('href', viewUrl);
       } else {
@@ -85,6 +88,8 @@ function onSubmit(event, form, mode, http, type) {
 }
 
 function onReady(http, dom, type) {
+  incidentType = type;
+
   submitBtn = document.getElementById('submit-btn');
 
   const mode = http.params.action === 'edit' && typeof http.params.id !== 'undefined' ? 'edit' : 'add';
@@ -119,6 +124,8 @@ function onReady(http, dom, type) {
       }
     });
   } else if (mode === 'add') {
+    dom.$('.steps').show();
+
     const pageTitle = (type == 'red-flag' ? 'Create a Red Flag' : 'Create an Intervention');
     app.setTitle(`${pageTitle} | iReporter`);
     dom.selector('.js-text-header').html(pageTitle);
@@ -130,19 +137,45 @@ function onReady(http, dom, type) {
   }
 }
 
+let numUploads = 0;
+
 const initializeFileUploader = () => {
-  app.dom.selector('.upload-btn').click((event) => {
-    app.cloudinary().open('.upload-btn', onEvidenceUploaded);
+  app.dom.$('.upload-btn').click((event) => {
+    app.cloudinary().open('.upload-btn', {
+      onUploadAdded() {
+        numUploads++;
+      },
+
+      onUploadStart() {
+        // Disable button
+        app.dom.$('.finish-btn').attribute('href', 'javascript:void(0);').addClass('disabled');
+      },
+
+      onUploaded: onEvidenceUploaded,
+    });
 
     event.preventDefault();
   });
 };
 
+let numSaved = 0;
+
 const onEvidenceUploaded = (data) => {
-  app.dom.selector('.uploader-container').hide();
-  app.dom.selector('.uploaded-files').show();
+  app.dom.$('.uploader-container').hide();
+  app.dom.$('.uploaded-files').show();
 
-  app.dom.selector('.uploaded-files .uploaded-thumbnails').append(new Image(data.secureUrl));
+  app.dom.$('.uploaded-files .uploaded-thumbnails').append(new Image(data.secureUrl));
 
-  uploadedEvidences.push(data);
+  app.http.api(`${incidentType}s/${newIncidentId}/addImage`).body({
+    url: data.secureUrl,
+  }).patch(() => {
+    numSaved++;
+    if (numSaved == numUploads) {
+      app.dom.$('.finish-btn')
+        .attribute('href', app.http.baseUrl(`view-${incidentType}.html?id=${newIncidentId}`))
+        .removeClass('disabled');
+
+      app.dom.$('.uploaded-files .success-message').show();
+    }
+  });
 };
