@@ -50,6 +50,9 @@ function loadIncident(type, id) {
     // Comment
     app.dom.selector('.js-text-comment').html(xssClean(incident.comment));
 
+    // Show images
+    showEvidences(incident.Images);
+
     // Add map
     let onContentShown = null;
     if (incident.latitude && incident.longitude) {
@@ -74,4 +77,17 @@ function loadIncident(type, id) {
       app.toast.error('Failed to load incident');
     }
   });
+}
+
+const showEvidences = (images) => {
+  if (images.length == 0) {
+    return;
+  }
+
+  app.dom.$('.media-section.images').show();
+  const container = app.dom.$('.media-section.images .media-wrapper');
+  
+  for (let i = 0; i < images.length; i++) {
+    container.append(new Image(images[i]));
+  }
 }

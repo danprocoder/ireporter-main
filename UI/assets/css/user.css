@@ -234,6 +234,7 @@ table .action.blue {
 	display: inline-block;
 	background: #fbfbfb;
 	overflow: hidden;
+    vertical-align: top;
 }
 
 .image img {

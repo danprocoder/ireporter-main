@@ -12,18 +12,21 @@ function viewIncident(type) {
 
       // Title
       app.setTitle(`${title} | iReporter`);
-      app.dom.selector('.js-title-text').html(title);
+      app.dom.$('.js-title-text').html(title);
 
       // Status
       let status = incident.status.split('-');
       status = status.join(' ').toUpperCase();
-      app.dom.selector('.record-status').addClass(incident.status).html(status);
+      app.dom.$('.record-status').addClass(incident.status).html(status);
 
       // Date
-      app.dom.selector('.js-time-text').html(app.dateFormat(incident.createdon));
+      app.dom.$('.js-time-text').html(app.dateFormat(incident.createdon));
 
       // Comment
-      app.dom.selector('.record-content .comment').html(xssClean(incident.comment));
+      app.dom.$('.record-content .comment').html(xssClean(incident.comment));
+
+      // Show Evidences
+      showEvidences(incident.Images);
 
       // Add map
       let onContentShown = null;
@@ -48,5 +51,18 @@ function viewIncident(type) {
       }
       console.log(error);
     });
+  }
+}
+
+const showEvidences = (images) => {
+  if (images.length == 0) {
+    return;
+  }
+
+  app.dom.$('.media-section.images').show();
+  const container = app.dom.$('.media-section.images .media-wrapper');
+
+  for (let i = 0; i < images.length; i++) {
+    container.append(new Image(images[i]));
   }
 }
