@@ -8,7 +8,7 @@ import adminRouter from './src/routes/admin';
 const app = express();
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://danprocoder.github.io');
+  res.header('Access-Control-Allow-Origin', 'https://danprocoder.github.io, http://localhost:8080');
   res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, PATCH');
   res.header('Access-Control-Allow-Headers', '*');
   
