@@ -12,8 +12,10 @@ app.use((req, res, next) => {
     'https://danprocoder.github.io',
     'http://localhost:8080'
   ];
-  if (allowed.indexOf(req.get(host)) > -1) {
-    res.header('Access-Control-Allow-Origin', req.get('host'));
+  const origin = req.headers.origin;
+
+  if (allowed.indexOf(origin) > -1) {
+    res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, PATCH');
     res.header('Access-Control-Allow-Headers', '*');
   }
