@@ -4,14 +4,16 @@ import userRouter from './src/routes/users';
 import redFlagRouter from './src/routes/red-flags';
 import interventionRouter from './src/routes/interventions';
 import adminRouter from './src/routes/admin';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 
 app.use((req, res, next) => {
-  const allowed = [
-    'https://danprocoder.github.io',
-    'http://localhost:8080'
-  ];
+  const allowed = process.env.ALLOWED_ORIGINS.split(',');
+  allowed.map(origin => origin.toString().trim());
+  
   const origin = req.headers.origin;
 
   if (allowed.indexOf(origin) > -1) {
