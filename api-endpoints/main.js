@@ -10,19 +10,25 @@ dotenv.config();
 
 const app = express();
 
+// Handle CORS
 app.use((req, res, next) => {
-  const allowed = process.env.ALLOWED_ORIGINS.split(',');
-  allowed.map(origin => origin.toString().trim());
-  
-  const origin = req.headers.origin;
+  if (process.env.ALLOWED_ORIGINS) {
+    const allowed = process.env.ALLOWED_ORIGINS.split(',').map(origin => origin.toString().trim());
 
-  if (allowed.indexOf(origin) > -1) {
-    res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, PATCH');
-    res.header('Access-Control-Allow-Headers', '*');
+    const origin = req.headers.origin;
+
+    if (allowed.indexOf(origin) > -1) {
+      res.header('Access-Control-Allow-Origin', origin);
+      res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, PATCH');
+      res.header('Access-Control-Allow-Headers', '*');
+    }
   }
-  
-  // Handle preflight requests.
+
+  next();
+});
+
+// Handle preflight requests.
+app.use((req, res, next) => {
   if (req.method == 'OPTIONS') {
   	res.send(200);
   } else {

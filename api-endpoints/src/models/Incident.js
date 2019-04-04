@@ -51,6 +51,7 @@ export default class IncidentModel {
       sql += ' AND createdby=%L';
       params.push(filters.createdBy.toString());
     }
+    sql += ' ORDER BY id DESC';
     params.unshift(sql);
     sql = escape(...params);
     db.query(sql, (err, res) => {
